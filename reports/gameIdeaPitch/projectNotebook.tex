@@ -1,0 +1,146 @@
+\documentclass[12pt, letterpaper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{subfig}
+
+\pagestyle{fancy}
+%\fancyhf{}
+%\rhead{Share\LaTeX}
+%\lhead{Guides and tutorials}
+\lfoot{TUM - Computer Games Laboratory}
+\rfoot{Page \thepage}
+\cfoot{}
+
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+\title{Solve'n Slide}
+\subtitle{Project Notebook}
+\author{Hanieh Arjomand-Fard\\Kevin Sawischa\\Markus Ansorge\\Stefan Aicher}
+\date{30. April 2017}
+
+\begin{document}
+	
+	\begin{titlepage}
+		\maketitle
+	\end{titlepage}
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Proposal}
+	\subsection{Game Description}
+	The goal of the game is to maneuver your character from your starting point to a finish line. The gameplay is divided into two main phases: the Manipulation-Phase and the Action-Phase. During the first phase the player has to manipulate the environment through different means in order to enable a successful playthrough of the level in the second phase. Throughout the Action-Phase the player must use the environment in combination with his sliding equipment to reach the goal. In order to achieve that he has to increase his speed to clear obstacles and avoid certain death.
+	
+	\subsubsection{Manipulation-Phase}
+	This phase is the theoretical phase. The player will look in a top-down perspective on the terrain or fly as a camera through the level. The start and destination points are fixed. The destination point is not reachable in the first place. 
+	The player needs to find the "optimal" path to reach the goal by altering the terrain itself. So the terrain is deformable at certain areas. Hills and valleys can be created by using a skill/gun that can raise or lower terrain parts. There is also the possibility of placing walls to run on or placing jump-pads and speed-boosters for refining speed more precisely. The player also needs to make sure to have enough fuel for his jetpack so there will be fuel tanks provided that can be picked up in the air. A further feature is to place explosives that can be triggered by the player during the action phase.
+	\begin{figure}[ht]
+		\centering
+		\begin{tabular}{ccccc}
+			\subfloat[Scale]{\includegraphics[scale=0.3]{images/HeightScale}}&&
+			\subfloat[Increase and Decrease]{\includegraphics[scale=0.2]{images/Part1IncreaseAndDecreaseCharges}}&
+			\subfloat[Decrease and Increase Combination]{\includegraphics[scale=0.2]{images/Part2DecreaseCharge}}&
+			\subfloat[Undo first Increase]{\includegraphics[scale=0.2]{images/Part3RemoveFirstCharge}}
+	\end{tabular}
+		\caption{Terrain Manipulation Example}
+	\end{figure}
+	
+	\subsubsection{Action-Phase}
+	Now we get to the practical part. After planning out the path by deforming the terrain the player now needs to move. Moving along hills makes us sliding and thus gaining or losing speed flexibly. The hill slopes influence our speed. We are equipped with a jetpack to alter our velocity for further increasing or decreasing our speed. The speed helps us getting further. If we are too slow we might lose. So raising the hills must be carefully considered in the first phase.
+	There will be further obstacles like turrets that are distributed on the map. The player needs to avoid getting shot.
+	\begin{figure}[ht]
+		\centering
+		\begin{tabular}{cccc}
+			\subfloat[Start with no Speed]{\includegraphics[scale=0.35]{images/StoryboardMovementPart1}}&
+			\subfloat[Speed Increase due to Gravity]{\includegraphics[scale=0.35]{images/StoryboardMovementPart2}}&
+			\subfloat[Speed Decrease due to Gravity]{\includegraphics[scale=0.35]{images/StoryboardMovementPart3}}&
+			\subfloat[No Speed after short Jetpack Boost]{\includegraphics[scale=0.35]{images/StoryboardMovementPart4}}
+		\end{tabular}
+		\caption{Terrain Manipulation Example}
+	\end{figure}
+	
+	\subsubsection{Terrain}
+	From the development point of view the level designer not only creates terrains. The level designer must also define several certain areas that can be deformed by the player which will be discussed in the next section. The terrain looks different in each level. Sometimes we got a grassy landscape, or in other cases more rough plateaus. Some scenarios might be even windy and push the player softly around. At some points there will be water in the map as rivers, ponds or lakes. The fall damage is limited to the player's advantage at this point but on the other hand it slows the player down when he slides on it. If the player's speed is too low one might even dive. Grassy areas cause slight frictions so therefore decelerate the player a little bit. Ice causes no friction and rubble areas have very high friction.
+	These areas are firstly flat or already hills or valleys according to the default terrain one gets. The player moves the mouse over the whole terrain in the first gaming phase. Deformable areas will be highlighted by blinking, coloring and or sound effects. Once the player picked an area and clicked on it this area raises up to a hill or lowers down to a valley. The longer one hold the mouse button the more the area gets deformed. And this procedure needs to be done until the player thinks he might be able to reach the goal in the second phase. So the whole process of finding or building the path is like solving a puzzle.
+	What is being actually changed is the y-value of the terrain and the radius.
+	It is possible to change the terrain several times until the player is ready to try it out. Areas that can not be manipulated will be identifiable as colored districts.
+	Then in the next phase the player starts with a default speed value. When he slides along the hill the character we are playing accelerates due to physical laws. These accelerations raise the speed. The gained additional speed is crucial to getting further. Didn't the character gain enough speed the slope of the hill was not well considered first. The other case would be if the character is too fast after passing a hill.
+	In the upcoming levels the player will be more and more restricted of deforming the terrain so reaching the goal will be more and more difficult.
+	
+	\subsubsection{Character}
+	The player's character is a guy wearing a jetpack and riding on skis. The character's health will be displayed as a health bar. The health bar changes in several cases. It includes fall-damage that depends on relative vectors of slope normals and the velocity. Also when undergoing explosive damages or getting hit by turrets. There again different types of turrets causing other amounts of damage, like rocket-based, impulse-based and laser-based turrets. It's jetpack can be loaded by collecting fuel packs during the entire level so fuel bars will be also displayed.
+	The movements of the character changes as the consistencies of different terrains influence the velocity of the character. More on that on the terrain section.
+	According to how much the area the player is sliding on is curved, the player can also slide sideways. Either slightly, fully or also not at all.
+	The player won't be able to shoot unless he finds gadgets that allow him to do so.
+	The player has not infinite trials to deform the terrain. He has for example 5 charges and thus can make 5 changes on the terrain.
+	Also the player can place helpers during the manipulation phase. These helper are mines, fuel tanks or other objects that could help him reach the goal.
+	
+	\subsubsection{Camera}
+	There are two kinds of cameras: Planning Camera and Ingame Camera. The planning camera provides an overview so the player will be able to look down at the whole terrain from the top. Also the camera can be zoomed in and is rotateable so eventually one gets six degrees of freedom to move the camera around.
+	The ingame camera can be switched between ego perspective and third person. It depends on the model quality and shall make the gameplay more comfortable for the player.
+	
+	\subsubsection{Obstacles}
+	Depending on the terrain or the whole scenarios, obstacles could be turrets that try to shoot the character. There are different types of turrets causing other amounts of damage, like rocket-based, impulse-based and laser-based turrets. Or just borders or even gates that stay on the player's way. A further classification of obstacle types are natural background obstacles like wind. Windy areas might push the player softly around and of course influence his speed.
+	
+	\subsubsection{Gadgets}
+	The borders from the obstacles-section can also be doors or gates. During the first phase the player should not only concentrate on the goal itself since the straight path to it might not be necessarily the correct one. Possible gadgets are keys that open gates. Further gadgets are grappling hooks to get to platforms that are not reachable otherwise. In the manipulation phase-section was mentioned that the player can place walls to run on. But to be able to do that one needs to collect special boots first which are positioned somewhere in the terrain. This again depends on the terrain consistency. Metallic grounds give metallic walls. In this case the player needs to collect magnetic boots. Each wall type provides running in each direction.
+	
+	\subsection{Technical Achievement}
+	Our focus on technical achievement is the manipulation of the terrain or level in real time by the player to manipulate the speed he is gaining or losing constantly.
+	To achieve that from the development point of view we get access to the heightmap and modify it. Then the terrain geometry and respective textures can be updated when the player changes the terrain. Changing is done easily as the ingame tool has very few parameters such as radius, amount and changing the +y-value of the terrain for raising and -y-value for lowering.
+	As mentioned at the very beginning of the game description-section modifiable or restricted areas of terrain are highlighted. For example a sound effect starts, the area is colored when hovering the mouse over it or the area blinks.
+	
+	\newpage
+	\subsection{Big Idea Bullseye}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.7]{images/bigIdeaBullseye}
+		\caption{Big Idea Bullseye Image}
+		\label{bigIdeaBullseye}
+	\end{figure}
+	
+	\subsection{Tasks}
+	
+	\subsubsection{Development Schedule}
+	The exploded development schedule for the project can be seen in Figure \ref{developmentSchedule} or in the attached image.
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[height=\textheight]{images/GamesLab2017SS}
+			\caption{Development Schedule}
+			\label{developmentSchedule}
+		\end{figure}
+		
+	\subsubsection{High Target}
+	\begin{itemize}
+		\setlength\itemsep{0.1pt}
+		\item sound effects: rocket, death, goal, taking damage, sliding
+		\item time based obstacles
+		\item different turrets: impulse, plasma
+		\item grappling hook, flying objects
+		\item more levels
+	\end{itemize}
+	
+	\subsubsection{Extras}
+	\begin{itemize}
+		\setlength\itemsep{0.1pt}
+		\item background music
+		\item level designer for player
+		\item target shooting
+		\item manipulation of terrain during action phase (slowmotion)
+		\item other gadgets
+	\end{itemize}
+	
+	\subsection{Assessment}
+	The game is a strategic puzzle game with action elements. The main strength will be the interaction between the manipulation and the action phase. In the manipulation phase you can change the height of several areas of the map in a way that benefits you in the second phase. In the action phase you can slide along hills and use different gadgets to get to your destination and solve the puzzle. The big challenge will be to manipulate the map in a way where you can slide with the right amount of speed to get to your destination.
+	This kind of game will most likely appeal to a puzzle games liking or strategic thinking audience. But casual players could also be interested in such a game because of the fast paced action phase.
+	An important part will be to make interesting puzzles which will be challenging to solve. So that the player has to think about which terrains to manipulate and how. But also be very careful at which point in time he/she uses the available gadgets.
+	
+\end{document}

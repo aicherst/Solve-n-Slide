@@ -28,3 +28,12 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Latex
+*.aux
+*.gz
+*.nav
+*.out
+*.snm
+*.log
+*.toc
