@@ -6,14 +6,15 @@ public class EgoCamera : MonoBehaviour {
     public float sensitivityY = 15F;
 
     float rotationY = 0F;
+    public Camera egoCamera;
 
     void Update() {
-            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+            float rotationX = egoCamera.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationY = Mathf.Clamp(rotationY, -90, 90);
 
-            transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+            egoCamera.transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
     }
 
     void Start() {
