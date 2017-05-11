@@ -39,7 +39,7 @@ public class Jetpack : MonoBehaviour, IJetpack {
 
     public float maxFuel {
         get {
-            return maxFuel;
+            return _maxFuel;
         }
     }
 
@@ -48,7 +48,7 @@ public class Jetpack : MonoBehaviour, IJetpack {
             return _fuel;
         }
         set {
-            _fuel = Mathf.Clamp(value, 0, maxFuel);
+            _fuel = Mathf.Clamp(value, 0, _maxFuel);
         }
     }
 }
