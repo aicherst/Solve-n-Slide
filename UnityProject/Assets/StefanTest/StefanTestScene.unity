@@ -215,6 +215,7 @@ MonoBehaviour:
   healthText: {fileID: 595243759}
   fuelText: {fileID: 1386556784}
   chargesText: {fileID: 335132361}
+  character: {fileID: 1810454719}
 --- !u!114 &423436180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,6 +808,8 @@ GameObject:
   - component: {fileID: 1810454717}
   - component: {fileID: 1810454718}
   - component: {fileID: 1810454719}
+  - component: {fileID: 1810454721}
+  - component: {fileID: 1810454720}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -821,7 +824,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1810454715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 25, z: 50}
+  m_LocalPosition: {x: 50, y: 25, z: 47.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2135941201}
@@ -871,13 +874,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba11cf7705740ba4fae77bd8402a588f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 0}
   health: 100
   maxHealth: 100
-  fuel: 100
-  maxFuel: 100
   charges: 3
   maxCharges: 5
+--- !u!114 &1810454720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810454715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04908e474e2fb0e4aae80c47f348a219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 1
+  _maxFuel: 100
+  fuelConsumptionRate: 10
+--- !u!114 &1810454721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810454715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1744cc136d2060f41970199d6625a99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groudAttributes:
+    friction: 0
 --- !u!1 &1852628516
 GameObject:
   m_ObjectHideFlags: 0
