@@ -1,0 +1,240 @@
+\documentclass[12pt, letterpaper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{subfig}
+\usepackage{float}
+
+\pagestyle{fancy}
+%\fancyhf{}
+%\rhead{Share\LaTeX}
+%\lhead{Guides and tutorials}
+\lfoot{TUM - Computer Games Laboratory}
+\rfoot{Page \thepage}
+\cfoot{}
+
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+\title{Solve'n Slide}
+\subtitle{Project Notebook}
+\author{Hanieh Arjomand-Fard\\Kevin Sawischa\\Markus Ansorge\\Stefan Aicher}
+\date{30. April 2017}
+
+\begin{document}
+	
+	\begin{titlepage}
+		\maketitle
+	\end{titlepage}
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Proposal}
+	\subsection{Game Description}
+	The goal of the game is to maneuver your character from your starting point to a finish line. The gameplay is divided into two main phases: the Manipulation-Phase and the Action-Phase. During the first phase the player has to manipulate the environment through different means in order to enable a successful playthrough of the level in the second phase. Throughout the Action-Phase the player must use the environment in combination with his sliding equipment to reach the goal. In order to achieve that he has to increase his speed to clear obstacles and avoid certain death.
+	
+	\subsubsection{Manipulation-Phase}
+	This phase is the theoretical phase. The player will look in a top-down perspective on the terrain or fly as a camera through the level. The start and destination points are fixed. The destination point is not reachable in the first place. 
+	The player needs to find the "optimal" path to reach the goal by altering the terrain itself. So the terrain is deformable at certain areas. Hills and valleys can be created by using a skill/gun that can raise or lower terrain parts. There is also the possibility of placing walls to run on or placing jump-pads and speed-boosters for refining speed more precisely. The player also needs to make sure to have enough fuel for his jetpack so there will be fuel tanks provided that can be picked up in the air. A further feature is to place explosives that can be triggered by the player during the action phase.
+	\begin{figure}[ht]
+		\centering
+		\begin{tabular}{ccccc}
+			\subfloat[Scale]{\includegraphics[scale=0.3]{images/HeightScale}}&&
+			\subfloat[Increase and Decrease]{\includegraphics[scale=0.2]{images/Part1IncreaseAndDecreaseCharges}}&
+			\subfloat[Decrease and Increase Combination]{\includegraphics[scale=0.2]{images/Part2DecreaseCharge}}&
+			\subfloat[Undo first Increase]{\includegraphics[scale=0.2]{images/Part3RemoveFirstCharge}}
+	\end{tabular}
+		\caption{Terrain Manipulation Example}
+	\end{figure}
+	
+	\subsubsection{Action-Phase}
+	Now we get to the practical part. After planning out the path by deforming the terrain the player now needs to move. Moving along hills makes us sliding and thus gaining or losing speed flexibly. The hill slopes influence our speed. We are equipped with a jetpack to alter our velocity for further increasing or decreasing our speed. The speed helps us getting further. If we are too slow we might lose. So raising the hills must be carefully considered in the first phase.
+	There will be further obstacles like turrets that are distributed on the map. The player needs to avoid getting shot.
+	\begin{figure}[ht]
+		\centering
+		\begin{tabular}{cccc}
+			\subfloat[Start with no Speed]{\includegraphics[scale=0.35]{images/StoryboardMovementPart1}}&
+			\subfloat[Speed Increase due to Gravity]{\includegraphics[scale=0.35]{images/StoryboardMovementPart2}}&
+			\subfloat[Speed Decrease due to Gravity]{\includegraphics[scale=0.35]{images/StoryboardMovementPart3}}&
+			\subfloat[No Speed after short Jetpack Boost]{\includegraphics[scale=0.35]{images/StoryboardMovementPart4}}
+		\end{tabular}
+		\caption{Terrain Manipulation Example}
+	\end{figure}
+	
+	\subsubsection{Terrain}
+	From the development point of view the level designer not only creates terrains. The level designer must also define several certain areas that can be deformed by the player which will be discussed in the next section. The terrain looks different in each level. Sometimes we got a grassy landscape, or in other cases more rough plateaus. Some scenarios might be even windy and push the player softly around. At some points there will be water in the map as rivers, ponds or lakes. The fall damage is limited to the player's advantage at this point but on the other hand it slows the player down when he slides on it. If the player's speed is too low one might even dive. Grassy areas cause slight frictions so therefore decelerate the player a little bit. Ice causes no friction and rubble areas have very high friction.
+	These areas are firstly flat or already hills or valleys according to the default terrain one gets. The player moves the mouse over the whole terrain in the first gaming phase. Deformable areas will be highlighted by blinking, coloring and or sound effects. Once the player picked an area and clicked on it this area raises up to a hill or lowers down to a valley. The longer one hold the mouse button the more the area gets deformed. And this procedure needs to be done until the player thinks he might be able to reach the goal in the second phase. So the whole process of finding or building the path is like solving a puzzle.
+	What is being actually changed is the y-value of the terrain and the radius.
+	It is possible to change the terrain several times until the player is ready to try it out. Areas that can not be manipulated will be identifiable as colored districts.
+	Then in the next phase the player starts with a default speed value. When he slides along the hill the character we are playing accelerates due to physical laws. These accelerations raise the speed. The gained additional speed is crucial to getting further. Didn't the character gain enough speed the slope of the hill was not well considered first. The other case would be if the character is too fast after passing a hill.
+	In the upcoming levels the player will be more and more restricted of deforming the terrain so reaching the goal will be more and more difficult.
+	
+	\subsubsection{Character}
+	The player's character is a guy wearing a jetpack and riding on skis. The character's health will be displayed as a health bar. The health bar changes in several cases. It includes fall-damage that depends on relative vectors of slope normals and the velocity. Also when undergoing explosive damages or getting hit by turrets. There again different types of turrets causing other amounts of damage, like rocket-based, impulse-based and laser-based turrets. It's jetpack can be loaded by collecting fuel packs during the entire level so fuel bars will be also displayed.
+	The movements of the character changes as the consistencies of different terrains influence the velocity of the character. More on that on the terrain section.
+	According to how much the area the player is sliding on is curved, the player can also slide sideways. Either slightly, fully or also not at all.
+	The player won't be able to shoot unless he finds gadgets that allow him to do so.
+	The player has not infinite trials to deform the terrain. He has for example 5 charges and thus can make 5 changes on the terrain.
+	Also the player can place helpers during the manipulation phase. These helper are mines, fuel tanks or other objects that could help him reach the goal.
+	
+	\subsubsection{Camera}
+	There are two kinds of cameras: Planning Camera and Ingame Camera. The planning camera provides an overview so the player will be able to look down at the whole terrain from the top. Also the camera can be zoomed in and is rotateable so eventually one gets six degrees of freedom to move the camera around.
+	The ingame camera can be switched between ego perspective and third person. It depends on the model quality and shall make the gameplay more comfortable for the player.
+	
+	\subsubsection{Obstacles}
+	Depending on the terrain or the whole scenarios, obstacles could be turrets that try to shoot the character. There are different types of turrets causing other amounts of damage, like rocket-based, impulse-based and laser-based turrets. Or just borders or even gates that stay on the player's way. A further classification of obstacle types are natural background obstacles like wind. Windy areas might push the player softly around and of course influence his speed.
+	
+	\subsubsection{Gadgets}
+	The borders from the obstacles-section can also be doors or gates. During the first phase the player should not only concentrate on the goal itself since the straight path to it might not be necessarily the correct one. Possible gadgets are keys that open gates. Further gadgets are grappling hooks to get to platforms that are not reachable otherwise. In the manipulation phase-section was mentioned that the player can place walls to run on. But to be able to do that one needs to collect special boots first which are positioned somewhere in the terrain. This again depends on the terrain consistency. Metallic grounds give metallic walls. In this case the player needs to collect magnetic boots. Each wall type provides running in each direction.
+	
+	\subsection{Technical Achievement}
+	Our focus on technical achievement is the manipulation of the terrain or level in real time by the player to manipulate the speed he is gaining or losing constantly.
+	To achieve that from the development point of view we get access to the heightmap and modify it. Then the terrain geometry and respective textures can be updated when the player changes the terrain. Changing is done easily as the ingame tool has very few parameters such as radius, amount and changing the +y-value of the terrain for raising and -y-value for lowering.
+	As mentioned at the very beginning of the game description-section modifiable or restricted areas of terrain are highlighted. For example a sound effect starts, the area is colored when hovering the mouse over it or the area blinks.
+	
+	\newpage
+	\subsection{Big Idea Bullseye}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.7]{images/bigIdeaBullseye}
+		\caption{Big Idea Bullseye Image}
+		\label{bigIdeaBullseye}
+	\end{figure}
+	
+	\subsection{Tasks}
+	
+	\subsubsection{Development Schedule}
+	The exploded development schedule for the project can be seen in Figure \ref{developmentSchedule} or in the attached image.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[height=\textheight]{images/GamesLab2017SS}
+			\caption{Development Schedule}
+			\label{developmentSchedule}
+		\end{figure}
+		
+	\subsubsection{High Target}
+	\begin{itemize}
+		\setlength\itemsep{0.1pt}
+		\item sound effects: rocket, death, goal, taking damage, sliding
+		\item time based obstacles
+		\item different turrets: impulse, plasma
+		\item grappling hook, flying objects
+		\item more levels
+	\end{itemize}
+	
+	\subsubsection{Extras}
+	\begin{itemize}
+		\setlength\itemsep{0.1pt}
+		\item background music
+		\item level designer for player
+		\item target shooting
+		\item manipulation of terrain during action phase (slowmotion)
+		\item other gadgets
+	\end{itemize}
+	
+	\subsection{Assessment}
+	The game is a strategic puzzle game with action elements. The main strength will be the interaction between the manipulation and the action phase. In the manipulation phase you can change the height of several areas of the map in a way that benefits you in the second phase. In the action phase you can slide along hills and use different gadgets to get to your destination and solve the puzzle. The big challenge will be to manipulate the map in a way where you can slide with the right amount of speed to get to your destination.
+	This kind of game will most likely appeal to a puzzle games liking or strategic thinking audience. But casual players could also be interested in such a game because of the fast paced action phase.
+	An important part will be to make interesting puzzles which will be challenging to solve. So that the player has to think about which terrains to manipulate and how. But also be very careful at which point in time he/she uses the available gadgets.
+	
+	\newpage
+	\newpage
+	\section{Game Prototype}
+	\subsection{Introduction}
+	Our idea is to create a game where the player needs to deform a terrain in order to gain speed due to physical laws. The game consists of two phases: The manipulation and the action phase.
+	In the first phase, the manipulation phase, the player has to deform the terrain to his advantage. He can create hills or place gadgets like fuel tanks. When he raises the terrain at a certain point he gets hills. And the hills again provides certain slopes which are important for the next phase. 
+	In the action phase the player has to slide along the hills that he has created in the previous phase. The slopes of the hills have an important influence on the speed and cause a momentum that the player needs to reach the goal. If the speed is not high enough a helpful gadget like fuel tanks can help the player to compensate deviations or losses.
+	So during manipulation phase the players needs to consider his steps very well and think strategically. And during the action phase his movements are based on physical laws so he needs to slide and move correctly along.
+	
+	\subsection{Game Rules}
+	During the manipulation phase the player can not deform the terrain as much as he wants. He gets a certain amount of charges. E.g. five charges mean, that the player has five possibilities to deform the terrain. 
+	Besides the charges he has also a certain amount of fuel tanks that he is allowed to use. For example two fuel tanks simply mean that he can place two fuel tanks all over the terrain except for the restricted areas. Using a fuel tank meant to be able to move about 5 cm in each direction.
+	Turning this idea into a prototype we decided to make a sandbox. We crafted a box made out of wood and filled it with sand.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=.2]{images/prototype/prototypeOverview}
+		\caption{Prototype Overview}
+		\label{prototypeOverview}
+	\end{figure}
+	During the manipulation phase we shaped the sand and made some hills. For fuel tanks we just cut some papers.
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{cc}
+			\subfloat[Example Hill]{\includegraphics[scale=0.2]{images/prototype/prototypeHill}}&
+			\subfloat[Fuel Tanks]{\includegraphics[scale=0.2]{images//prototype/prototypeFuelTanks}}
+		\end{tabular}
+		\caption{Prototype Explanation}
+	\end{figure}
+	The character is represented by a marble. In the first step we start at an arbitrary point and then roll down towards the first point that we decided to deform. Sliding along the hill gives us speed to overcome the deadly valley.
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{ccc}
+			\subfloat[Timestep 1]{\includegraphics[scale=0.13]{images/prototype/prototypePlaythrough_1_1}}&
+			\subfloat[Timestep 2]{\includegraphics[scale=0.13]{images/prototype/prototypePlaythrough_1_2}}&
+			\subfloat[Timestep 3]{\includegraphics[scale=0.13]{images//prototype/prototypePlaythrough_1_3}}
+		\end{tabular}
+		\caption{First Level}
+	\end{figure}
+	It was hard to simulate the acceleration since sand was not an optimal ground due to high friction. But still sand was a good decision when one wanted to deform the terrain.
+	
+	\subsection{Experience}
+	Level design won't be easy since we will need quite a lot time to invent some good levels. It was a challenge to create a puzzle that was fair balanced between easy and hard. One of the remarkable experiences was the fact that the player needed a lot more time to solve the puzzle than we needed to create it. For comparison we needed about five to at most ten minutes to create a simple puzzle. But the player needed about twenty minutes to find a way to reach the goal. This tells us how different the chains of thought between the level designer and the player can be. 
+	
+	Three of us designed the level while the other person left for a while. One side of the terrain was lower than the other side. Unfortunately this is not identifiable on the pictures. On the higher area we put a wall. Almost one half of the wall soared above the lower area. At this point the player wouldn't be able to jump. The pencil marks the start point and the ball pen marks the goal. 
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=.2]{images/prototype/prototypeTerrain2}
+		\caption{Second Terrain}
+	\end{figure}
+	Then the player came and started to play. We allowed him to have two charges and one fuel tank. 
+	Entering the manipulation phase he firstly placed the fuel tank.
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{cc}
+			\subfloat[Experimenting]{\includegraphics[scale=0.25]{images/prototype/prototypeFuelPlacements1}}&
+			\subfloat[Final Location]{\includegraphics[scale=0.25]{images//prototype/prototypeFuelPlacements2}}
+		\end{tabular}
+		\caption{Fuel Tank Placement}
+	\end{figure}
+	Then after some deliberations he picked a spot for the hill. One of us, representing the CPU, built the hill for him.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=.2]{images/prototype/prototypeHill1}
+		\caption{First Hill}
+	\end{figure}
+	But the player also decided to raise the same hill once gain because of the idea to gain more speed at the end by sliding along a higher hill.
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{ccc}
+			\subfloat[Step 1]{\includegraphics[scale=0.13]{images/prototype/prototypeHill2}}&
+			\subfloat[Step 2]{\includegraphics[scale=0.13]{images/prototype/prototypeHill3}}&
+			\subfloat[Step 3]{\includegraphics[scale=0.13]{images//prototype/prototypeHill4}}
+		\end{tabular}
+		\caption{Second Hill}
+	\end{figure}
+	When he was finished he initialized the action phase. He moved the marble to the fuel tank right onto the double hill. That made him get a high position from where he used the fuel tank. That made him fast enough to slide along the hill where the goal was set.
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{cccc}
+			\subfloat[Timestep 1]{\includegraphics[scale=0.11]{images/prototype/prototypePlaythrough_2_1}}&
+			\subfloat[Timestep 2]{\includegraphics[scale=0.11]{images/prototype/prototypePlaythrough_2_2}}&
+			\subfloat[Timestep 3]{\includegraphics[scale=0.11]{images/prototype/prototypePlaythrough_2_3}}&
+			\subfloat[Timestep 4]{\includegraphics[scale=0.11]{images//prototype/prototypePlaythrough_2_4}}
+		\end{tabular}
+		\caption{Second Level}
+	\end{figure}
+	The player needed a few times to solve this problem. We will give the player infinite trials in the future as well.
+	
+	\subsection{What We Learned}
+	Making a prototype means to make the game idea real and touchable. This helps us to get a better imagination and overview of what is in our mind. Deforming the hills with our hand made us better aware of good level designing. By actually touching the world we get a better idea of what could possibly be not logical or what could work. This also has the effect that we can share our imaginations better with other group members since everyone can see what is in our mind. This works better than just talking to the others. And during the discussion everyone can interact with one's imagination by touching our thoughts.
+	
+	And as already mentioned in the experience-section a further fact that we have learned is that the player needed a lot more time to solve the puzzle than we needed to create it. Having realized this time difference will help us to prevent avoidable mistakes.
+	
+\end{document}
