@@ -9,12 +9,13 @@ public class EgoCamera : MonoBehaviour {
     public Camera egoCamera;
 
     void Update() {
-            float rotationX = egoCamera.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationY = Mathf.Clamp(rotationY, -90, 90);
 
-            egoCamera.transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+            egoCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+            transform.localEulerAngles = new Vector3(0, rotationX, 0);
     }
 
     void Start() {
