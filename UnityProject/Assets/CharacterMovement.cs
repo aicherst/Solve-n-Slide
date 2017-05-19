@@ -13,6 +13,8 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement {
     private Vector2 input;
 
     public GroudAttributes groudAttributes;
+    public Vector2 airSpeed = new Vector2(0.15f, 0.15f);
+    public Vector2 floorSpeed = new Vector2(0.05f, 0);
 
     private void Awake() {
         characterController = GetComponent<CharacterController>();
@@ -25,12 +27,17 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement {
     void FixedUpdate() {
         velocity += Physics.gravity * Time.deltaTime;
 
+
         if (characterController.isGrounded) {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, -transform.up, out hit)) {
                 Vector3 projectedVelocity = Vector3.ProjectOnPlane(velocity, hit.normal);
                 velocity = projectedVelocity;
             }
+
+            velocity += transform.TransformDirection(new Vector3(input.x * floorSpeed.x, 0, input.y * floorSpeed.y));
+        } else {
+            velocity += transform.TransformDirection(new Vector3(input.x * airSpeed.x, 0, input.y * airSpeed.y));
         }
     }
 
