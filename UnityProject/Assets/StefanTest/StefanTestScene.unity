@@ -140,7 +140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -75}
+  m_AnchoredPosition: {x: 125, y: -15}
   m_SizeDelta: {x: 250, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &335132361
@@ -175,7 +175,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Test Charges: 3/5'
+  m_Text: 'Test Charges: 5/5'
 --- !u!222 &335132362
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -213,8 +213,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 595243759}
+  healthBackground: {fileID: 1448096162}
   fuelText: {fileID: 1386556784}
+  fuelBackground: {fileID: 990555017}
   chargesText: {fileID: 335132361}
+  chargesBackground: {fileID: 1852628518}
   character: {fileID: 1810454719}
 --- !u!114 &423436180
 MonoBehaviour:
@@ -876,7 +879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  charges: 3
+  charges: 5
   maxCharges: 5
 --- !u!114 &1810454720
 MonoBehaviour:
@@ -889,7 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04908e474e2fb0e4aae80c47f348a219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 1
+  strength: 0.3
   _maxFuel: 100
   fuelConsumptionRate: 10
 --- !u!114 &1810454721
@@ -905,6 +908,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groudAttributes:
     friction: 0
+  airSpeed: {x: 0.15, y: 0.15}
+  floorSpeed: {x: 0.05, y: 0}
 --- !u!1 &1852628516
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,7 +942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -75}
+  m_AnchoredPosition: {x: 125, y: -15}
   m_SizeDelta: {x: 250, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1852628518
