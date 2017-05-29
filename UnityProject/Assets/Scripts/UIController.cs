@@ -10,7 +10,8 @@ public class UIController : MonoBehaviour {
     public Image fuelBackground;
     public Text chargesText;
     public Image chargesBackground;
-    public Character character;
+    //public ActionCharacter character;
+    public Player player;
 
     // Use this for initialization
     void Start() {
@@ -18,17 +19,29 @@ public class UIController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        healthText.enabled = character.getCurrentPhase() == Character.Phase.ACTION_PHASE;
-        healthBackground.enabled = character.getCurrentPhase() == Character.Phase.ACTION_PHASE;
-        healthText.text = "Test Health: " + makeThreeChars(character.getHealth()) + "/" + makeThreeChars(character.getMaxHealth());
+        if (player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE) {
+            healthText.enabled = false;
+            healthBackground.enabled = false;
+            fuelText.enabled = false;
+            fuelBackground.enabled = false;
 
-        fuelText.enabled = character.getCurrentPhase() == Character.Phase.ACTION_PHASE;
-        fuelBackground.enabled = character.getCurrentPhase() == Character.Phase.ACTION_PHASE;
-        fuelText.text = "Test Fuel: " + makeThreeChars(Mathf.RoundToInt(character.getFuel())) + "/" + makeThreeChars(Mathf.RoundToInt(character.getMaxFuel()));
+            chargesText.enabled = true;
+            chargesBackground.enabled = true;
+            chargesText.text = "Test Charges: " + player.getManipulationCharacter().getCharges() + "/" + player.getManipulationCharacter().getMaxCharges();
+        } else if (player.getCurrentPhase() == Player.Phase.ACTION_PHASE) {
+            healthText.enabled = true;
+            healthBackground.enabled = true;
+            healthText.text = "Test Health: " + makeThreeChars(player.getActionCharacter().getHealth()) + "/" 
+                + makeThreeChars(player.getActionCharacter().getMaxHealth());
 
-        chargesText.enabled = character.getCurrentPhase() == Character.Phase.MANIPULATION_PHASE;
-        chargesBackground.enabled = character.getCurrentPhase() == Character.Phase.MANIPULATION_PHASE;
-        chargesText.text = "Test Charges: " + character.getCharges() + "/" + character.getMaxCharges();
+            fuelText.enabled = true;
+            fuelBackground.enabled = true;
+            fuelText.text = "Test Fuel: " + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getFuel())) + "/" 
+                + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getMaxFuel()));
+
+            chargesText.enabled = false;
+            chargesBackground.enabled = false;
+        }
     }
 
     private string makeThreeChars(int value) {

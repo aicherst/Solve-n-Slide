@@ -149,7 +149,7 @@ MonoBehaviour:
   fuelBackground: {fileID: 114904429979562880}
   chargesText: {fileID: 114969777592497974}
   chargesBackground: {fileID: 114959653698694430}
-  character: {fileID: 0}
+  player: {fileID: 114008344634208334, guid: 05b328bd699f6624db6d44dbf8116a33, type: 2}
 --- !u!114 &114522331459864952
 MonoBehaviour:
   m_ObjectHideFlags: 1
