@@ -26,23 +26,28 @@ public class CharacterMovement : MonoBehaviour {
 
     void FixedUpdate() {
 
+        velocity += Physics.gravity * Time.deltaTime;
+
         RaycastHit hit;
         if (Physics.SphereCast(transform.position + Vector3.up * characterController.radius, characterController.radius, -Vector3.up, out hit)) {
-            bool newGrounded = hit.distance < 0.1f + characterController.radius;
+            wasGrounded = hit.distance < 0.1f + characterController.radius;
 
             terrainNormal = hit.normal;
 
-            if (!wasGrounded && newGrounded) {
+            float num = Vector3.Dot(terrainNormal, terrainNormal);
+            float direction = Vector3.Dot(velocity, terrainNormal) / num;
+
+            Debug.Log(direction);
+
+            if (direction < 0 && wasGrounded) {
                 Vector3 projectedVelocity = Vector3.ProjectOnPlane(velocity, terrainNormal);
                 velocity = projectedVelocity;
             }
-
-            wasGrounded = newGrounded;
         } else {
             wasGrounded = false;
         }
 
-        ApplyGravity();
+        //ApplyGravity();
     }
 
     private void ApplyGravity() {
