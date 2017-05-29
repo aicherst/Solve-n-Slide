@@ -6,7 +6,7 @@ public class Character : MonoBehaviour {
     public int health = 100, maxHealth = 100;
     public int charges = 5, maxCharges = 5;
     IJetpack jetpack;
-    ICharacterMovement characterMovement;
+    CharacterMovement characterMovement;
     public enum Phase {
         MANIPULATION_PHASE, ACTION_PHASE
     }
@@ -17,7 +17,7 @@ public class Character : MonoBehaviour {
 
     void Awake() {
         jetpack = GetComponent<IJetpack>();
-        characterMovement = GetComponent<ICharacterMovement>();
+        characterMovement = GetComponent<CharacterMovement>();
     }
 
     // Use this for initialization
@@ -54,7 +54,7 @@ public class Character : MonoBehaviour {
 
         jetpack.Thrust(Input.GetButton("Jetpack"));
         Vector2 movementAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        characterMovement.MovementInput(movementAxis);
+        jetpack.MovementInput(movementAxis);
     }
 
     public int getHealth() { return health; }

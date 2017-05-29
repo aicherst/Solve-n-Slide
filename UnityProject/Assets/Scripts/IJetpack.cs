@@ -5,6 +5,8 @@ using UnityEngine;
 public interface IJetpack {
     void Thrust(bool enable);
 
+    void MovementInput(Vector2 input);
+
     float maxFuel {
         get;
     }

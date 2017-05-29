@@ -4,40 +4,58 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class CharacterMovement : MonoBehaviour, ICharacterMovement {
+public class CharacterMovement : MonoBehaviour {
     private CharacterController characterController;
     private Vector3 velocity;
 
+    public GroudAttributes groudAttributes;
+
     private bool wasGrounded;
 
-    private Vector2 input;
-
-    public GroudAttributes groudAttributes;
-    public Vector2 airSpeed = new Vector2(0.15f, 0.15f);
-    public Vector2 floorSpeed = new Vector2(0.05f, 0);
 
     private void Awake() {
         characterController = GetComponent<CharacterController>();
     }
 
+
     // Use this for initialization
     void Start() {
     }
 
+    private Vector3 terrainNormal;
+
     void FixedUpdate() {
-        velocity += Physics.gravity * Time.deltaTime;
 
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position + Vector3.up * characterController.radius, characterController.radius, -Vector3.up, out hit)) {
+            bool newGrounded = hit.distance < 0.1f + characterController.radius;
 
-        if (characterController.isGrounded) {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, -transform.up, out hit)) {
-                Vector3 projectedVelocity = Vector3.ProjectOnPlane(velocity, hit.normal);
+            terrainNormal = hit.normal;
+
+            if (!wasGrounded && newGrounded) {
+                Vector3 projectedVelocity = Vector3.ProjectOnPlane(velocity, terrainNormal);
                 velocity = projectedVelocity;
             }
 
-            velocity += transform.TransformDirection(new Vector3(input.x * floorSpeed.x, 0, input.y * floorSpeed.y));
+            wasGrounded = newGrounded;
         } else {
-            velocity += transform.TransformDirection(new Vector3(input.x * airSpeed.x, 0, input.y * airSpeed.y));
+            wasGrounded = false;
+        }
+
+        ApplyGravity();
+    }
+
+    private void ApplyGravity() {
+        if(grounded) {
+            velocity += Vector3.ProjectOnPlane(Physics.gravity * Time.deltaTime, terrainNormal);
+        } else {
+            velocity += Physics.gravity * Time.deltaTime;
+        }
+    }
+
+    public bool grounded {
+        get {
+            return wasGrounded;
         }
     }
 
@@ -54,9 +72,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement {
         Gizmos.DrawRay(transform.position, velocity);
     }
 
-    public void MovementInput(Vector2 input) {
-        this.input = input; 
-    }
 }
 
 [Serializable]
