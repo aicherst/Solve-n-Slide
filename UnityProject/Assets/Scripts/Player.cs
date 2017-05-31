@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
     public enum Phase {
@@ -31,10 +32,19 @@ public class Player : MonoBehaviour {
                 Destroy(manipulationCharacterInstance);
                 actionCharacterInstance = Instantiate(actionCharacterPrefab, startPosition, Quaternion.identity);
             } else {
-                currentPhase = Phase.MANIPULATION_PHASE;
-                Destroy(actionCharacterInstance);
-                manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, manipulationPosition, Quaternion.identity);
+                if (getActionCharacter().getLevelFinished()) {
+                    SceneManager.LoadScene(0);
+                } else if (getActionCharacter().getDead()) {
+                    SceneManager.LoadScene(0);
+                } else {
+                    currentPhase = Phase.MANIPULATION_PHASE;
+                    Destroy(actionCharacterInstance);
+                    manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, manipulationPosition, Quaternion.identity);
+                }
             }
+        }
+        if (Input.GetKey("escape")) {
+            Application.Quit();
         }
     }
 

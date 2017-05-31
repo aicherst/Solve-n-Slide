@@ -6,6 +6,7 @@ using UnityEngine;
 public class ActionCharacter : MonoBehaviour, ICharacterCollision {
     public int health = 100, maxHealth = 100;
     IJetpack jetpack;
+    bool levelFinished, dead;
 
     void Awake() {
         jetpack = GetComponent<IJetpack>();
@@ -23,7 +24,13 @@ public class ActionCharacter : MonoBehaviour, ICharacterCollision {
     }
 
     void OnTriggerEnter(Collider other) {
-        //Debug.Log("Trigger: "+other.tag);
+        Debug.Log("Trigger: "+other.tag);
+        if(other.tag == "Finish") {
+            GetComponent<CharacterMovement>().enabled = false;
+            GetComponent<EgoCamera>().enabled = false;
+            levelFinished = true;
+        }
+
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -35,6 +42,9 @@ public class ActionCharacter : MonoBehaviour, ICharacterCollision {
 
     public float getFuel() { return jetpack.fuel; }
     public float getMaxFuel() { return jetpack.maxFuel; }
+
+    public bool getLevelFinished() { return levelFinished; }
+    public bool getDead() { return dead; }
 
     public void collision(float strength) {
         //Debug.Log("collision: " + strength);

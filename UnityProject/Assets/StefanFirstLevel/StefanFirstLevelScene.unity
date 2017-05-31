@@ -207,11 +207,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114440990519428494, guid: 251105bfb103cac4fb1d9b08e24f9c6d,
         type: 2}
-      propertyPath: character
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114440990519428494, guid: 251105bfb103cac4fb1d9b08e24f9c6d,
-        type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1130775850}

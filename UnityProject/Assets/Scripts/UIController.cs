@@ -10,7 +10,10 @@ public class UIController : MonoBehaviour {
     public Image fuelBackground;
     public Text chargesText;
     public Image chargesBackground;
-    //public ActionCharacter character;
+    public Text levelFinishText;
+    public Image levelFinishBackground;
+    public Text deathText;
+    public Image deathBackground;
     public Player player;
 
     // Use this for initialization
@@ -19,28 +22,39 @@ public class UIController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE) {
-            healthText.enabled = false;
-            healthBackground.enabled = false;
-            fuelText.enabled = false;
-            fuelBackground.enabled = false;
+        healthText.enabled = false;
+        healthBackground.enabled = false;
+        fuelText.enabled = false;
+        fuelBackground.enabled = false;
+        chargesText.enabled = false;
+        chargesBackground.enabled = false;
+        levelFinishText.enabled = false;
+        levelFinishBackground.enabled = false;
+        deathText.enabled = false;
+        deathBackground.enabled = false;
 
+        if (player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE) {
             chargesText.enabled = true;
             chargesBackground.enabled = true;
             chargesText.text = "Test Charges: " + player.getManipulationCharacter().getCharges() + "/" + player.getManipulationCharacter().getMaxCharges();
         } else if (player.getCurrentPhase() == Player.Phase.ACTION_PHASE) {
-            healthText.enabled = true;
-            healthBackground.enabled = true;
-            healthText.text = "Test Health: " + makeThreeChars(player.getActionCharacter().getHealth()) + "/" 
-                + makeThreeChars(player.getActionCharacter().getMaxHealth());
+            if (player.getActionCharacter().getLevelFinished()) {
+                levelFinishBackground.enabled = true;
+                levelFinishText.enabled = true;
+            } else if (player.getActionCharacter().getDead()) {
+                deathBackground.enabled = true;
+                deathText.enabled = true;
+            } else {
+                healthText.enabled = true;
+                healthBackground.enabled = true;
+                healthText.text = "Test Health: " + makeThreeChars(player.getActionCharacter().getHealth()) + "/"
+                    + makeThreeChars(player.getActionCharacter().getMaxHealth());
 
-            fuelText.enabled = true;
-            fuelBackground.enabled = true;
-            fuelText.text = "Test Fuel: " + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getFuel())) + "/" 
-                + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getMaxFuel()));
-
-            chargesText.enabled = false;
-            chargesBackground.enabled = false;
+                fuelText.enabled = true;
+                fuelBackground.enabled = true;
+                fuelText.text = "Test Fuel: " + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getFuel())) + "/"
+                    + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getMaxFuel()));
+            }
         }
     }
 
