@@ -38,9 +38,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4921443973257702}
-  - component: {fileID: 114661075746672826}
-  - component: {fileID: 114239206066532572}
-  - component: {fileID: 114020213810564718}
+  - component: {fileID: 114455061102757518}
+  - component: {fileID: 114005516529288150}
   m_Layer: 0
   m_Name: ManipulationCharacter
   m_TagString: Player
@@ -195,18 +194,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102473601556976}
   m_Enabled: 1
---- !u!114 &114020213810564718
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1400250264984802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da91f077f678d634cb7331b1035eabfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114239206066532572
+--- !u!114 &114005516529288150
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -219,7 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charges: 5
   maxCharges: 5
---- !u!114 &114661075746672826
+--- !u!114 &114455061102757518
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -227,11 +215,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1400250264984802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8adc9c6c35f83c4bb7269a57fc61d10, type: 3}
+  m_Script: {fileID: 11500000, guid: 21c3657dc6b40bc43ab5ae3e931341b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 10
-  sensitivityY: 10
+  sensitivityX: 15
+  sensitivityY: 15
   egoCamera: {fileID: 20445967719525262}
 --- !u!124 &124961682931994918
 Behaviour:
