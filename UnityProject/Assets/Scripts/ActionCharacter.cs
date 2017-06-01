@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionCharacter : MonoBehaviour, ICharacterCollision {
+public class ActionCharacter : MonoBehaviour, ICharacter {
     public int health = 100, maxHealth = 100;
     IJetpack jetpack;
     bool levelFinished, dead;
@@ -48,5 +48,13 @@ public class ActionCharacter : MonoBehaviour, ICharacterCollision {
 
     public void collision(float strength) {
         //Debug.Log("collision: " + strength);
+    }
+
+    public void damage(float amount) {
+        //Debug.Log("Damage: " + amount);
+    }
+
+    public void addForce(Vector3 force) {
+        //Debug.Log("Add force");
     }
 }

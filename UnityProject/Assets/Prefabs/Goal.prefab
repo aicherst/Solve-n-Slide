@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4707947739567450}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4801989871776944}
   - component: {fileID: 135806073910047550}
   - component: {fileID: 114392519727969604}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Goal
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4325444322336730}
   - component: {fileID: 120472761185068704}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SkyPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 33616800941953898}
   - component: {fileID: 136612239425950730}
   - component: {fileID: 23195076944138180}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 33860422114054010}
   - component: {fileID: 65070610082103746}
   - component: {fileID: 23034375732237454}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4079759508488200}
   - component: {fileID: 119348309488066762}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BlobLightProjector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

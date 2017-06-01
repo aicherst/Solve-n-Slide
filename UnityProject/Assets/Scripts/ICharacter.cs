@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICharacterCollision {
+public interface ICharacter {
     void collision(float strength);
+    void damage(float amount);
+    void addForce(Vector3 force);
 }
