@@ -70,6 +70,8 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
         Destroy(gameObject);
 
         Destroy(gExplosion, 3);
+
+        target.GetComponent<ICharacter>().damage(damage);
     }
 
     public void SetTarget(Transform target) {

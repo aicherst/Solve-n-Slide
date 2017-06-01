@@ -12,9 +12,12 @@ public class CharacterMovement : MonoBehaviour {
 
     private bool wasGrounded;
 
+    private ICharacter character;
+
 
     private void Awake() {
         characterController = GetComponent<CharacterController>();
+        character = GetComponent<ICharacter>();
     }
 
 
@@ -39,6 +42,10 @@ public class CharacterMovement : MonoBehaviour {
 
             if (direction < 0 && wasGrounded) {
                 Vector3 projectedVelocity = Vector3.ProjectOnPlane(velocity, terrainNormal);
+
+                Vector3 difference = projectedVelocity - velocity;
+                character.collision(difference.magnitude);
+
                 velocity = projectedVelocity;
             }
         } else {
