@@ -14,6 +14,8 @@ public class UIController : MonoBehaviour {
     public Image levelFinishBackground;
     public Text deathText;
     public Image deathBackground;
+    public Image crosshair;
+    public Text infoText;
     public Player player;
 
     // Use this for initialization
@@ -32,11 +34,16 @@ public class UIController : MonoBehaviour {
         levelFinishBackground.enabled = false;
         deathText.enabled = false;
         deathBackground.enabled = false;
+        crosshair.enabled = false;
+        infoText.enabled = false;
 
         if (player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE) {
             chargesText.enabled = true;
             chargesBackground.enabled = true;
             chargesText.text = "Test Charges: " + player.getManipulationCharacter().getCharges() + "/" + player.getManipulationCharacter().getMaxCharges();
+            crosshair.enabled = true;
+            infoText.enabled = true;
+            infoText.text = "Press Enter to switch to Action-Phase";
         } else if (player.getCurrentPhase() == Player.Phase.ACTION_PHASE) {
             if (player.getActionCharacter().getLevelFinished()) {
                 levelFinishBackground.enabled = true;
@@ -54,6 +61,9 @@ public class UIController : MonoBehaviour {
                 fuelBackground.enabled = true;
                 fuelText.text = "Test Fuel: " + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getFuel())) + "/"
                     + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getMaxFuel()));
+
+                infoText.enabled = true;
+                infoText.text = "Press Enter to switch to Manipulation-Phase";
             }
         }
     }
