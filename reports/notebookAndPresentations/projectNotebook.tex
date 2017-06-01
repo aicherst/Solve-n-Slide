@@ -6,6 +6,21 @@
 \usepackage{subfig}
 \usepackage{float}
 
+\usepackage{scalerel,amssymb}
+
+\newcommand\equalhat{%
+	\let\savearraystretch\arraystretch
+	\renewcommand\arraystretch{0.3}
+	\begin{array}{c}
+		\stretchto{
+			\scalerel*[\widthof{=}]{\wedge}
+			{\rule{1ex}{3ex}}%
+		}{0.5ex}\\ 
+		=%
+	\end{array}
+	\let\arraystretch\savearraystretch
+}
+
 \pagestyle{fancy}
 %\fancyhf{}
 %\rhead{Share\LaTeX}
@@ -247,5 +262,97 @@
 	A sandbox mode was asked, and we will make it in the form of a level editor, but it is set as an extra target.
 	
 	We will still keep a health bar, because that way we can make more turrets, also the player is able to make some mistakes without dying straight away.
+	
+	\section{Interims Report}
+	\subsection{Functional Minimum}
+	\label{sec:functionalMinimum}
+	The focus of our functional minimum milestone was mainly on the most basic gameplay mechanics of our game and essential features that are need for it to be called a game. This meant both phases needed to be implemented, the Manipulation- as well as the Action-Phase. The Manipulation-Phase consisted of a controllable, floating top-down camera and the actual manipulation of our terrain. The Action-Phase contained the sliding movement and jetpack mechanic. Another very basic feature was some kind of user interface, which was realized by some text with numbers.
+	
+	\subsubsection{Basic Character Implementation}
+	For both the functional minimum, as well as the low target, the character was represented by a capsule model which was provided by Unity itself. This enabled collision detection and shadow casting and will be easily replaceable with a real and animated model in the desired target. Also part of the basic character was a first person camera, which was a breeze to implement. Another essential aspect of the character script was handling keyboard and mouse input from the player. The basic control scheme is using the mouse to look around in first- and third person view, pressing “WASD” for slightly moving on the ground and in the air, holding down the spacebar to activate the jetpack and pressing enter to switch between both phases.
+	
+	\subsubsection{User Interface}
+	As mentioned in Section \ref{sec:functionalMinimum} the user interface only consists of text with numbers for now (see figure \ref{someScreenschot}). The displayed information changes depending on the current phase the player is in. In the Manipulation-Phase he can see the amount of charges he has left and in the Action-Phase he can see his current health and remaining fuel.
+	
+	\subsubsection{Character Movement}
+	Our target for the Functional Minimum was implementing the slide and jet-pack mechanics. The CharacterMovement script handles gravity, velocity slope interactions and is open for other external forces. The Jetpack script receives state messages from the Character script. As long as enough fuel is available and the script is in an "on" state the CharacterMovement script receives an upward motion. Since the basic character and the character movement implementation was split between two different persons, we used multiple interfaces in order to render a smooth development phase possible.
+	The CharacterMovement script contains already important parts for the interaction with different terrains planned for the Desirable Target.
+	
+	\subsection{Low Target}
+	Having finished the core mechanics of our game in the Functional Minimum milestone, the focus of the Low Target milestone was making our game actually playable by designing the first level (in this case even the first few levels) and implementing some important gameplay elements like the first turret. Even though the plan was to implement further features regarding the terrain (marking areas as not manipulatable, different surfaces), we did not have enough time for them due to the fact that the implementation of the manipulation itself took longer than expected.
+	
+	\subsubsection{Level Design}
+	
+	\subsubsection{Homing Rocket (Turret)}
+	The initial design for the homing rocket envisaged a projectile flying at a certain distance over the ground following the player till either a self-destruction timer triggers or its target. However, always keeping distance to the terrain proved to be more difficult than anticipated. Because of a lack of time the rocket design transformed to a simpler design: It just follows the player and explodes when it collides with the ground.
+	Since rockets are triggered whenever the player is too close to a turret, an initial velocity ramp up phase is implemented. This prevents a frustrating experience for the player where has no time to dodge the head-on incoming rocket. The acceleration curve is easily adjusted since it is based on Unity's in-built AnimationCurve.
+	
+	\subsection{Desirable Target}
+	
+	\subsubsection{Modeling and Arts}
+	We are now in the Low Target. The models are needed for the desirable target but I started with them now. 
+	
+	For modeling I use Blender. I started with modeling two different defense towers. As a reference image I used a typical turbolaser tower from Star Wars.
+	One has dual laser guns shooting two lasers at the same time. The other has got one gun shooting rockets. The are suppose to follow the character later on where the dual lasers are shot straight to an old position of the character. With old I mean a few milliseconds after the new position since the character is moving all the time. But the dual laser tower shoots lasers every third seconds so the character has got a chance to avoid a blow. The rockets are shot every 5 or 10 seconds.
+	
+	The tower, the head (with the wheels) and the guns are all separated meshes.
+	
+	The lasers are simple stretched capsules also made with Blender like the rockets.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.7]{images//interim/turrets}
+		\caption{Rocket- and Laser-turret models}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.5]{images//interim/rocket}
+		\caption{Rocket model}
+	\end{figure}
+	
+	During the cooldown the head of the towers aim the character by moving their heads around the z-axis. At the same time the guns aiming the character rotate planar around the x to y-axis. The guns are attached to the heads. Once the guns shoot they undergo a kickback. The rotations are calculated via scripting using C\# in Unity. The kickback is a simple animation also done in Unity where the gun just go a bit backwards within a very short amount of time to make the kickback fast and then go more slowly to the initial position within a longer amount of time. This is still in process.
+	
+	The most difficult part is to let the gun rotate around the x and y-axis correctly. The guns are children of the heads so the rotate along the z-axis correctly. But the guns are also attached to a gameObject that is used as a reference point. This game object is placed somewhere under the gun. And if it rotates, the guns rotate around the gameObject to let the player think the gund move along the wheels. Correct setting up this game object as a parent and scripting this special behavior takes the most time.
+	
+	The textures were made with Gimp where I imported the UV-layout of the guns and drew some lines and dirt effects onto the texture patches. Having done that I created a heightmap and a normal map also with Gimp. These textures are put on the standard shader that is provided by Unity and then applied onto the towers.
+	
+	Then I modeled the character. I started with helmet and went down to the hands and feet. As a reference image I used a stormtrooper from Star Wars. Then I modeled the jetpack that will be attached to the character as a separate mesh. The visor is a separate mesh too since the material of it will get a glowing effect in the future.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[]{images//interim/character}
+		\caption{Character model}
+	\end{figure}
+	
+	The first version of the mesh had more than 50000 triangle. I used the decimated modifier that is provided in Blender to get around 13000 triangles in total. Having a high poly version in the first place makes it easier to model the character.
+	It was the first time for me to create a texture of characters. I used to use the "Smart Projecting"-function to unfold a mesh. For this function one does not need to mark seams so it is good for towers for example. At least it is easier for me. But one won't get around of marking seams when texturing a mesh like character. I went through some tutorials and then could create a good UV-layout. I painted it with Gimp then.
+	
+	In Unity I used again the standard shader with no further special effects to render the textures.
+	
+	The next new and still a bit difficult part is the animation of the character. I do this also for the first time. I animated all states the character can enter in Blender. Then I imported it in Unity.
+	First I got the issue that the each bodypart moved alone without having an effect on the adjacent body parts. This caused the mesh to stretch its neighbors and it looked really bad. This is still in process.
+	
+	\subsection{Additional Project}
+	This section contains a project that can not be classified into one of the layers since it reaches across multiples because of its scope.
+	
+	\subsubsection{Terrain River}
+	The real time river simulation is only dependent on the heightmap of the terrain. It creates rivers by following the path of least resistance till it hits a local minima. Lakes, on the other hand, are created through the filling of a sink. These two phases alternate until a certain min height is reached ($\equalhat$ sea level). 
+	The original idea for the path of the river included calculating the current velocity of the stream.  However, this increased the complexity of the algorithm by a large margin and was therefore scrapped. 
+	Figure \ref{fig:river1} shows the result of a simulation. In Figure \ref{fig:river2} the player created a dam and rerouted the path of the river.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{images//interim/river1}
+		\caption{Terrain with river}
+		\label{fig:river1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{images//interim/river2}
+		\caption{Terrain with dam}
+		\label{fig:river2}
+	\end{figure}
 	
 \end{document}
