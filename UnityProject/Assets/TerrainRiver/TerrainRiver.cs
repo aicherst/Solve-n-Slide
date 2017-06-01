@@ -18,7 +18,7 @@ namespace RiverSimulation {
 
         private int lastStartX, lastStartY;
 
-        private List<TerrainChangeData> terrainChanges;
+        private float[,] originalHeightmap;
 
         private TerrainTransform terrainTransform;
 
@@ -58,11 +58,10 @@ namespace RiverSimulation {
         }
 
         private void ResetTerrain() {
-            if (terrainChanges != null) {
-                foreach (TerrainChangeData terrainChangeData in terrainChanges) {
-                    terrainData.SetHeights(terrainChangeData.terrainX, terrainChangeData.terrainY, terrainChangeData.oldHeights);
-                }
-            }
+            if (originalHeightmap == null)
+                return;
+
+            terrainData.SetHeights(0, 0, originalHeightmap);
         }
 
         void OnDestroy() {
@@ -87,10 +86,14 @@ namespace RiverSimulation {
                 CreateWaterBody(meshData);
             }
 
-            terrainChanges = terrainRiverChangeData.riverSink;
 
-            foreach (TerrainChangeData terrainChangeData in terrainChanges) {
-                terrainData.SetHeights(terrainChangeData.terrainX, terrainChangeData.terrainY, terrainChangeData.newHeights);
+            originalHeightmap = terrainData.GetHeights(0, 0, terrainData.heightmapWidth, terrainData.heightmapHeight);
+
+
+            Dictionary<IntVector2, float> terrainChanges = terrainRiverChangeData.terrainChangeData;
+
+            foreach (IntVector2 pos in terrainChanges.Keys) {
+                terrainData.SetHeights(pos.x, pos.y, new float[,]{{terrainChanges[pos]} });
             }
         }
 
@@ -102,6 +105,7 @@ namespace RiverSimulation {
             mesh.name = "Water Body";
             mesh.vertices = meshData.verticies;
             mesh.triangles = meshData.triangles;
+            mesh.RecalculateNormals();
             gWaterBody.GetComponent<MeshFilter>().mesh = mesh;
         }
 

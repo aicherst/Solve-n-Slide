@@ -10,28 +10,22 @@ namespace RiverSimulation {
         public int[] triangles;
     }
 
-    public struct TerrainChangeData {
-        public int terrainX, terrainY;
-        public float[,] newHeights;
-        public float[,] oldHeights;
-
-        public TerrainChangeData(int terrainX, int terrainY, float[,] newHeights, float[,] oldHeights) {
-            this.terrainX = terrainX;
-            this.terrainY = terrainY;
-            this.newHeights = newHeights;
-            this.oldHeights = oldHeights;
-        }
-    }
-
     public class TerrainRiverChangeData {
         public List<MeshData> waterBodies;
-        public List<TerrainChangeData> riverSink;
+        public Dictionary<IntVector2, float> terrainChangeData;
         public List<MeshData> rivers;
 
         public TerrainRiverChangeData() {
             waterBodies = new List<MeshData>();
-            riverSink = new List<TerrainChangeData>();
+            terrainChangeData = new Dictionary<IntVector2, float>();
             rivers = new List<MeshData>();
+        }
+
+        public void AddMinHeightChange(IntVector2 pos, float newHeight) {
+            float oldHeight;
+            if (!terrainChangeData.TryGetValue(pos, out oldHeight) || newHeight < oldHeight) {
+                terrainChangeData[pos] = newHeight;
+            }
         }
     }
 
@@ -76,8 +70,11 @@ namespace RiverSimulation {
 
                     pointToWaterHeight[pos] = waterHeight;
 
-                    TerrainChangeData terrainChangeData = new TerrainChangeData(pos.x, pos.y, new float[,] { { waterHeight - 0.1f } }, new float[,] { { originalHeight } });
-                    calculationData.riverSink.Add(terrainChangeData);
+                    calculationData.AddMinHeightChange(pos, waterHeight - 0.1f);
+
+                    //foreach (Neighbour neighbour in augementedCalculations.neighbours) {
+                    //    calculationData.AddMinHeightChange(pos + neighbour.direction, waterHeight + 0.01f);
+                    //}
                 }
             }
 
@@ -90,34 +87,6 @@ namespace RiverSimulation {
             }
 
             calculationData.waterBodies.Add(CreateRiver(pointToWaterHeight));
-
-
-            //for (int i = 0; i < waterbodies.Count; i++) {
-            //    Func<IntVector2, Vector3> convertPos = pos => ConvertPos(new Vector3(pos.x, waterbodies[i].absoluteHeight, pos.y));
-            //    HashSet<IntVector2> points = InflatePoints(waterbodies[i].points);
-            //    calculationData.waterBodies.Add(CalculateMeshData(points, convertPos));
-            //}
-
-            //foreach (List<IntVector2> path in paths) {
-            //    Dictionary<IntVector2, float> posToHeight = new Dictionary<IntVector2, float>();
-
-            //    IntVector2 nextPos = -IntVector2.one;
-            //    for (int i = path.Count - 1; i >= 0; i--) {
-            //        IntVector2 pos = path[i];
-            //        float surrondingMinHeight = SurroundingMinHeight(pos, nextPos);
-            //        float height = augementedCalculations.GetHeightOfBasePos(pos);
-
-            //        TerrainChangeData terrainChangeData = new TerrainChangeData(pos.x, pos.y, new float[,] { { surrondingMinHeight - 0.1f } }, new float[,] { { height } });
-            //        calculationData.riverSink.Add(terrainChangeData);
-
-            //        posToHeight.Add(pos, surrondingMinHeight);
-
-
-            //        nextPos = pos;
-            //    }
-
-            //    calculationData.rivers.Add(CreateRiver(posToHeight));
-            //}
 
             return calculationData;
         }
