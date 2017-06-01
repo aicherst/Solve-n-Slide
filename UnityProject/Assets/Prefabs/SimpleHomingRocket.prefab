@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 136576380139019062}
   - component: {fileID: 114041248879670282}
   - component: {fileID: 54997381315867332}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SimpleHomingRocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4883121359987236}
   - component: {fileID: 33068924852208352}
   - component: {fileID: 23833845596052826}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,14 +166,14 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 1
-      inSlope: -0.021978453
-      outSlope: -0.021978453
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
-      inSlope: -1.8296101
-      outSlope: -1.8296101
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

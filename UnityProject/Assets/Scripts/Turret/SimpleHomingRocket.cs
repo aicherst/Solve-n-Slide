@@ -50,7 +50,7 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
 
     private float damage {
         get {
-            return damageFallOffCurve.Evaluate(Vector3.Distance(target.position, transform.position));
+            return damageFallOffCurve.Evaluate(Vector3.Distance(target.position, transform.position)) * maxDamage;
         }
     }
 
