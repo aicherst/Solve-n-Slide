@@ -37,8 +37,6 @@ public class CharacterMovement : MonoBehaviour {
             float num = Vector3.Dot(terrainNormal, terrainNormal);
             float direction = Vector3.Dot(velocity, terrainNormal) / num;
 
-            Debug.Log(direction);
-
             if (direction < 0 && wasGrounded) {
                 Vector3 projectedVelocity = Vector3.ProjectOnPlane(velocity, terrainNormal);
                 velocity = projectedVelocity;

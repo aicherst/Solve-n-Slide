@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleHomingRocket : MonoBehaviour {
+public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
     public float maxSpeed = 1;
     public AnimationCurve accelerationCurve;
     public float rotationSpeed = 10;              // degree per sec
@@ -57,11 +58,21 @@ public class SimpleHomingRocket : MonoBehaviour {
         if (other.tag == Tags.terrain) {
             Explode();
         }
+
+        if (other.tag == Tags.player) {
+            Explode();
+        }
     }
 
     private void Explode() {
         GameObject gExplosion = Instantiate(explosionPrefab);
         gExplosion.transform.position = transform.position;
         Destroy(gameObject);
+
+        Destroy(gExplosion, 3);
+    }
+
+    public void SetTarget(Transform target) {
+        this.target = target;
     }
 }
