@@ -54,8 +54,10 @@ public class Player : MonoBehaviour {
                 actionCharacterInstance = Instantiate(actionCharacterPrefab, startPosition, Quaternion.identity);
             } else {
                 if (getActionCharacter().getLevelFinished()) {
+                    Time.timeScale = 1;
                     SceneManager.LoadScene(0);
                 } else if (getActionCharacter().getDead()) {
+                    Time.timeScale = 1;
                     SceneManager.LoadScene(0);
                 } else {
                     currentPhase = Phase.MANIPULATION_PHASE;

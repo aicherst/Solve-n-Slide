@@ -224,8 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8adc9c6c35f83c4bb7269a57fc61d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 10
-  sensitivityY: 10
+  sensitivityX: 500
+  sensitivityY: 500
   egoCamera: {fileID: 20794254744414368}
 --- !u!114 &114685138722983348
 MonoBehaviour:
@@ -240,8 +240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  charges: 5
-  maxCharges: 5
 --- !u!114 &114912331558901450
 MonoBehaviour:
   m_ObjectHideFlags: 1

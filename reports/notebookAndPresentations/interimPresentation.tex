@@ -38,11 +38,44 @@
 			\end{itemize}
 			\item Input scheme
 			\begin{itemize}
-				\item WASD for movement
-				\item Mouse to look around
+				\item WASD+Space for movement, mouse to look around
 				\item Left MB to raise, right MB to lower terrain
 				\item Enter to switch phases, restart after death and go to next level
 			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Terrain Manipulation}
+		\begin{itemize}
+			\item Player can manipulate terrain through mouse clicks
+			\item Still needs balancing of intensity
+			\item Redo option still needs to be implemented
+			\item Caution: Unity stores terrain changes permanently
+		\end{itemize}
+			\begin{figure}[ht]
+				\begin{tabular}{cc}
+					\includegraphics[scale=0.3]{images/interim/terrainManipulation1}&
+					\includegraphics[scale=0.3]{images/interim/terrainManipulation2}
+				\end{tabular}
+			\end{figure}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Terrain River}
+		\begin{itemize}
+			\item Simulation based on heightmap
+			\item Two repeating steps:
+			\begin{itemize}
+				\item River: path along lowest neighbor
+				\item Lake: fill sink
+			\end{itemize}
+		\end{itemize}
+		\begin{figure}[ht]
+			\includegraphics[scale=0.21]{images/interim/river1}
+		\end{figure}
+		\begin{itemize}
+			\item Original plan: include velocity
 		\end{itemize}
 	\end{frame}
 	
@@ -71,9 +104,9 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{The End}
+		\frametitle{Demo}
 		\centering
 		\Huge
-		Thanks for your attention.
+		Time for a live demo!
 	\end{frame}
 \end{document}

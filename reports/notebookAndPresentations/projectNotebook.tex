@@ -263,6 +263,7 @@
 	
 	We will still keep a health bar, because that way we can make more turrets, also the player is able to make some mistakes without dying straight away.
 	
+	\newpage
 	\section{Interims Report}
 	\subsection{Functional Minimum}
 	\label{sec:functionalMinimum}
@@ -272,16 +273,27 @@
 	For both the functional minimum, as well as the low target, the character was represented by a capsule model which was provided by Unity itself. This enabled collision detection and shadow casting and will be easily replaceable with a real and animated model in the desired target. Also part of the basic character was a first person camera, which was a breeze to implement. Another essential aspect of the character script was handling keyboard and mouse input from the player. The basic control scheme is using the mouse to look around in first- and third person view, pressing “WASD” for slightly moving on the ground and in the air, holding down the spacebar to activate the jetpack and pressing enter to switch between both phases.
 	
 	\subsubsection{User Interface}
-	As mentioned in Section \ref{sec:functionalMinimum} the user interface only consists of text with numbers for now (see figure \ref{someScreenschot}). The displayed information changes depending on the current phase the player is in. In the Manipulation-Phase he can see the amount of charges he has left and in the Action-Phase he can see his current health and remaining fuel.
+	As mentioned in Section \ref{sec:functionalMinimum} the user interface only consists of text with numbers for now (see figure \ref{fig:screenshot}). The displayed information changes depending on the current phase the player is in. In the Manipulation-Phase he can see the amount of charges he has left and in the Action-Phase he can see his current health and remaining fuel.
+	\begin{figure}
+		%\centering
+		\includegraphics[width=\textwidth]{images/interim/screenshot}
+		\caption{Ingame screenshot with UI from Functional Minimum}
+		\label{fig:screenshot}
+	\end{figure}
 	
 	\subsubsection{Character Movement}
 	Our target for the Functional Minimum was implementing the slide and jet-pack mechanics. The CharacterMovement script handles gravity, velocity slope interactions and is open for other external forces. The Jetpack script receives state messages from the Character script. As long as enough fuel is available and the script is in an "on" state the CharacterMovement script receives an upward motion. Since the basic character and the character movement implementation was split between two different persons, we used multiple interfaces in order to render a smooth development phase possible.
 	The CharacterMovement script contains already important parts for the interaction with different terrains planned for the Desirable Target.
 	
+	\subsubsection{Terrain Manipulation}
+	The goal of the manipulation phase was that the player can manipulate the terrain in a way that he/she can raise or lower the terrain at a certain predetermined degree. The player can manipulate the terrain only in the manipulation phase and raises the terrain with a left click, and lowers it with a right click. The manipulation is still not as smooth as it should be and can result in a steeper hill than we would like. But the parameters for the intensity of the manipulation will still need to be checked and adjusted to achieve a balanced gameplay experience. The camera movement was quick and easy to implement. The option to regain charges if the player lowers an already heightened area, is more work than expected and has still to be implemented. An interesting discovery was, that unity saves the changes in the terrain instantly and permanently. To prevent this we must store the unmodified terrain and then use it to reset the terrain after a level is completed or aborted to its original state.
+	
+	
 	\subsection{Low Target}
 	Having finished the core mechanics of our game in the Functional Minimum milestone, the focus of the Low Target milestone was making our game actually playable by designing the first level (in this case even the first few levels) and implementing some important gameplay elements like the first turret. Even though the plan was to implement further features regarding the terrain (marking areas as not manipulatable, different surfaces), we did not have enough time for them due to the fact that the implementation of the manipulation itself took longer than expected.
 	
 	\subsubsection{Level Design}
+	The process of designing our first level was iterative and consisted of multiple steps. First we discussed on how and when all our gameplay mechanics should be introduced to the player. We decided that the first two levels are meant as tutorials, where the first only contained sliding and jetpack use and the second one introduced the terrain manipulation in combination with the movement learned before. The next step was that each of our team members designed a level and we voted on the best ones. After that we made minor changes to the selected levels and integrated them into our game.
 	
 	\subsubsection{Homing Rocket (Turret)}
 	The initial design for the homing rocket envisaged a projectile flying at a certain distance over the ground following the player till either a self-destruction timer triggers or its target. However, always keeping distance to the terrain proved to be more difficult than anticipated. Because of a lack of time the rocket design transformed to a simpler design: It just follows the player and explodes when it collides with the ground.
@@ -301,7 +313,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.7]{images//interim/turrets}
+		\includegraphics[scale=0.6]{images//interim/turrets}
 		\caption{Rocket- and Laser-turret models}
 	\end{figure}
 	
@@ -313,7 +325,7 @@
 	
 	During the cooldown the head of the towers aim the character by moving their heads around the z-axis. At the same time the guns aiming the character rotate planar around the x to y-axis. The guns are attached to the heads. Once the guns shoot they undergo a kickback. The rotations are calculated via scripting using C\# in Unity. The kickback is a simple animation also done in Unity where the gun just go a bit backwards within a very short amount of time to make the kickback fast and then go more slowly to the initial position within a longer amount of time. This is still in process.
 	
-	The most difficult part is to let the gun rotate around the x and y-axis correctly. The guns are children of the heads so the rotate along the z-axis correctly. But the guns are also attached to a gameObject that is used as a reference point. This game object is placed somewhere under the gun. And if it rotates, the guns rotate around the gameObject to let the player think the gund move along the wheels. Correct setting up this game object as a parent and scripting this special behavior takes the most time.
+	The most difficult part is to let the gun rotate around the x and y-axis correctly. The guns are children of the heads so the rotate along the z-axis correctly. But the guns are also attached to a gameObject that is used as a reference point. This game object is placed somewhere under the gun. And if it rotates, the guns rotate around the gameObject to let the player think the gun move along the wheels. Correct setting up this game object as a parent and scripting this special behavior takes the most time.
 	
 	The textures were made with Gimp where I imported the UV-layout of the guns and drew some lines and dirt effects onto the texture patches. Having done that I created a heightmap and a normal map also with Gimp. These textures are put on the standard shader that is provided by Unity and then applied onto the towers.
 	
@@ -321,7 +333,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[]{images//interim/character}
+		\includegraphics[scale=0.9]{images//interim/character}
 		\caption{Character model}
 	\end{figure}
 	
@@ -344,14 +356,14 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{images//interim/river1}
-		\caption{Terrain with river}
+		\caption{Terrain river without manipulation}
 		\label{fig:river1}
 	\end{figure}
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{images//interim/river2}
-		\caption{Terrain with dam}
+		\caption{Terrain river with manipulation}
 		\label{fig:river2}
 	\end{figure}
 	

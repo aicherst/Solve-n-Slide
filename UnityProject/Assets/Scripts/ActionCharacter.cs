@@ -24,10 +24,9 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
     }
 
     void OnTriggerEnter(Collider other) {
-        Debug.Log("Trigger: "+other.tag);
+        //Debug.Log("Trigger: "+other.tag);
         if(other.tag == "Finish") {
-            GetComponent<CharacterMovement>().enabled = false;
-            GetComponent<EgoCamera>().enabled = false;
+            Time.timeScale = 0;
             levelFinished = true;
         }
 
@@ -47,14 +46,31 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
     public bool getDead() { return dead; }
 
     public void collision(float strength) {
-        //Debug.Log("collision: " + strength);
+        if (strength > 25) {
+            //Debug.Log("collision: " + strength);
+            reduceHealth(10);
+        }
+        if (strength > 35) {
+            //Debug.Log("collision: " + strength);
+            reduceHealth(25);
+        }
     }
 
     public void damage(float amount) {
         //Debug.Log("Damage: " + amount);
+        reduceHealth((int)amount);
     }
 
     public void addForce(Vector3 force) {
         //Debug.Log("Add force");
+    }
+
+    private void reduceHealth(int amount) {
+        health -= amount;
+        if(health <= 0) {
+            health = 0;
+            dead = true;
+            Time.timeScale = 0;
+        }
     }
 }
