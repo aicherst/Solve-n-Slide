@@ -21,7 +21,7 @@ public class ManipulationCharacter : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0) && charges >= 1) {
 			charges--;
 			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));//Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit)) {
 				manipulateTerrainArea(hit.point, 50, 50, true); 
 			}
@@ -29,7 +29,7 @@ public class ManipulationCharacter : MonoBehaviour {
 		if (Input.GetMouseButtonDown(1) && charges >= 1) {
 			charges--;
 			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray ray = Camera.main.ViewportPointToRay (new Vector3(0.5f,0.5f,0f));//Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit)) {
 				manipulateTerrainArea(hit.point, 50, 50, false);
 			}
@@ -61,10 +61,10 @@ public class ManipulationCharacter : MonoBehaviour {
 					float intensity = 25 + Mathf.Max(Mathf.Abs(areax - 25), Mathf.Abs(areaz - 25));
 
 					if (raise == true) {
-						heights[areax, areaz] += 0.25f * Mathf.Pow(0.9f, intensity);
+						heights[areax, areaz] += (12.5f / levelTerrain.terrainData.size.y) * Mathf.Pow(0.9f, intensity);
 					}
 					else {
-						heights[areax, areaz] -= 0.25f * Mathf.Pow(0.9f, intensity);
+						heights[areax, areaz] -= (12.5f / levelTerrain.terrainData.size.y) * Mathf.Pow(0.9f, intensity);
 					}
 				}
 			}
