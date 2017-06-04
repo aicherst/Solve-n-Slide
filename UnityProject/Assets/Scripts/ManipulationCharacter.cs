@@ -4,36 +4,102 @@ using UnityEngine;
 
 public class ManipulationCharacter : MonoBehaviour {
     public int charges = 5, maxCharges = 5;
+	private static int fuelTanks = 3, maxFuelTanks = 3;
 
-	private Terrain levelTerrain;
+	private static Terrain levelTerrain;
 	private int xResolution;
 	private int zResolution;
+
+	public enum ManipulationPhase {
+		CHANGE_TERRAIN, UNDO_TERRAIN_CHANGES, FUELTANK_PLACEMENT
+	}
+	private static ManipulationPhase currentManipulationPhase = ManipulationPhase.CHANGE_TERRAIN;
+
+	public GameObject terrainMarker;
+	public GameObject fuelTankObject;
 
 
 	void Start () {
 		levelTerrain = Player.getLevelTerrain();
 		xResolution = levelTerrain.terrainData.heightmapWidth;
 		zResolution = levelTerrain.terrainData.heightmapHeight;
-
 	}
 
 	void Update () {
-		//raise terrain
-		if (Input.GetMouseButtonDown(0) && charges >= 1) {
-			charges--;
-			RaycastHit hit;
-			Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));
-			if (Physics.Raycast(ray, out hit)) {
-				manipulateTerrainArea(hit.point, 25, true); 
+		if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) {
+			currentManipulationPhase = ManipulationPhase.CHANGE_TERRAIN;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) {
+			currentManipulationPhase = ManipulationPhase.UNDO_TERRAIN_CHANGES;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)) {
+			currentManipulationPhase = ManipulationPhase.FUELTANK_PLACEMENT;
+		}
+
+		if (currentManipulationPhase == ManipulationPhase.CHANGE_TERRAIN) {
+			//raise terrain
+			if (Input.GetMouseButtonDown(0) && charges >= 1) {
+				RaycastHit hit;
+				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+				if (Physics.Raycast(ray, out hit)) {
+					if (hit.collider.gameObject.layer == 8) {
+						charges--;
+						manipulateTerrainArea(hit.point, 25, true);
+						GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
+						currentMarker.GetComponent<TerrainMarker>().terrainLowered = false;
+					}
+				}
+			}
+			//lower terrain
+			else if (Input.GetMouseButtonDown(1) && charges >= 1) {
+				RaycastHit hit;
+				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+				if (Physics.Raycast(ray, out hit)) {
+					if (hit.collider.gameObject.layer == 8) {
+						charges--;
+						manipulateTerrainArea(hit.point, 25, false);
+						GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
+						currentMarker.GetComponent<TerrainMarker>().terrainLowered = true;
+						currentMarker.GetComponent<Renderer>().material.color = new Color(0f, 0f, 1f, 0.5f);
+					}
+				}
 			}
 		}
-		//lower terrain
-		if (Input.GetMouseButtonDown(1) && charges >= 1) {
-			charges--;
-			RaycastHit hit;
-			Ray ray = Camera.main.ViewportPointToRay (new Vector3(0.5f,0.5f,0f));
-			if (Physics.Raycast(ray, out hit)) {
-				manipulateTerrainArea(hit.point, 25, false);
+		else if (currentManipulationPhase == ManipulationPhase.UNDO_TERRAIN_CHANGES) {
+			if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
+				RaycastHit hit;
+				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+				if (Physics.Raycast(ray, out hit)) {
+					if (hit.collider.gameObject.layer == 9) {
+						charges++;
+						manipulateTerrainArea(hit.collider.gameObject.transform.position, 25, hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered);
+						Destroy(hit.collider.gameObject);
+					}
+				}
+			}
+		}
+		else if (currentManipulationPhase == ManipulationPhase.FUELTANK_PLACEMENT) {
+			//place fueltank
+			if (Input.GetMouseButtonDown(0) && fuelTanks >= 1) {
+				RaycastHit hit;
+				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+				if (Physics.Raycast(ray, out hit)) {
+					if (hit.collider.gameObject.layer == 8) {
+						fuelTanks--;
+						Instantiate(fuelTankObject, hit.point + new Vector3(0f, 2f, 0f), Quaternion.identity);
+					}
+				}
+			}
+			//remove fueltank
+			else if (Input.GetMouseButtonDown(1)) {
+				RaycastHit hit;
+				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+				if (Physics.Raycast(ray, out hit)) {
+					if (hit.collider.gameObject.layer == 10) {
+						fuelTanks++;
+						Destroy(hit.collider.gameObject);
+					}
+				}
 			}
 		}
 	}
@@ -75,4 +141,8 @@ public class ManipulationCharacter : MonoBehaviour {
 
     public int getCharges() { return charges; }
     public int getMaxCharges() { return maxCharges; }
+	public static int getFuelTanks() { return fuelTanks; }
+	public static int getMaxFuelTanks() { return maxFuelTanks; }
+	public static ManipulationPhase getCurrentManipulationPhase() { return currentManipulationPhase; }
+	public static Terrain getLevelTerrain() { return levelTerrain; }
 }
