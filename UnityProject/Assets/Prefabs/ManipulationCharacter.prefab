@@ -205,9 +205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221406ce86719a941a36e6dd92f0d0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charges: 5
+  maxCharges: 5
   terrainMarker: {fileID: 1505984437630874, guid: e3d677c9a28a573419e75b8bd5537cd4,
     type: 2}
-  fuelTank: {fileID: 0}
+  fuelTankObject: {fileID: 1886974867054986, guid: 3e9eac6e32e32154d89eca88b9e63c04,
+    type: 2}
 --- !u!114 &114455061102757518
 MonoBehaviour:
   m_ObjectHideFlags: 1
