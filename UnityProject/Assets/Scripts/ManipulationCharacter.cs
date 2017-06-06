@@ -54,6 +54,7 @@ public class ManipulationCharacter : MonoBehaviour {
 					else if (hit.collider.gameObject.layer == 9 && hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered==true) {
 						charges++;
 						manipulateTerrainArea(hit.collider.gameObject.transform.position, 25, hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered);
+						TerrainMarker.terrainMarkers.Remove(hit.collider.gameObject);
 						Destroy(hit.collider.gameObject);
 					}
 				}
@@ -76,6 +77,7 @@ public class ManipulationCharacter : MonoBehaviour {
 					else if (hit.collider.gameObject.layer == 9 && hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered==false) {
 						charges++;
 						manipulateTerrainArea(hit.collider.gameObject.transform.position, 25, hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered);
+						TerrainMarker.terrainMarkers.Remove(hit.collider.gameObject);
 						Destroy(hit.collider.gameObject);
 					}
 				}

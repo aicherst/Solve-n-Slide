@@ -40,14 +40,15 @@ public class Player : MonoBehaviour {
 	}
 	
 	void OnApplicationQuit () {
-		levelTerrain.terrainData.SetHeights(0, 0, heightMapBackup);
-		levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
+		resetTerrain();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetButtonDown("PhaseSwitch")) {
-            if (currentPhase == Phase.MANIPULATION_PHASE) {
+			if (currentPhase == Phase.MANIPULATION_PHASE) {
+				ManipulationCharacter.changeUnmodifiableTerrainToNormal();
+				TerrainMarker.deactivateAllMArkers();
                 currentPhase = Phase.ACTION_PHASE;
                 manipulationPosition = manipulationCharacterInstance.transform.position;
                 Destroy(manipulationCharacterInstance);
@@ -55,12 +56,16 @@ public class Player : MonoBehaviour {
             } else {
                 if (getActionCharacter().getLevelFinished()) {
                     Time.timeScale = 1;
+					resetTerrain();
                     SceneManager.LoadScene(0);
                 } else if (getActionCharacter().getDead()) {
                     Time.timeScale = 1;
+					resetTerrain();
                     SceneManager.LoadScene(0);
-                } else {
-                    currentPhase = Phase.MANIPULATION_PHASE;
+				} else {
+					levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
+					TerrainMarker.activateAllMArkers();
+					currentPhase = Phase.MANIPULATION_PHASE;
                     Destroy(actionCharacterInstance);
                     manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, manipulationPosition, Quaternion.identity);
                 }
@@ -70,6 +75,11 @@ public class Player : MonoBehaviour {
             Application.Quit();
         }
     }
+
+	private void resetTerrain() {
+		levelTerrain.terrainData.SetHeights(0, 0, heightMapBackup);
+		levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
+	}
 
     public Phase getCurrentPhase() { return currentPhase; }
     public ActionCharacter getActionCharacter() { return actionCharacterInstance.GetComponent<ActionCharacter>(); }
