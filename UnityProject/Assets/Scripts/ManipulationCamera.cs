@@ -21,7 +21,4 @@ public class ManipulationCamera : MonoBehaviour {
 		transform.Translate(Vector3.forward * Input.GetAxis("Vertical"));
 		transform.Translate(Vector3.up * 25f * Input.GetAxis("Mouse ScrollWheel"));
 	}
-
-	void Start () {
-	}
 }

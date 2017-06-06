@@ -11,7 +11,7 @@ public class ManipulationCharacter : MonoBehaviour {
 	private int zResolution;
 
 	public enum ManipulationPhase {
-		CHANGE_TERRAIN, UNDO_TERRAIN_CHANGES, FUELTANK_PLACEMENT
+		CHANGE_TERRAIN, FUELTANK_PLACEMENT
 	}
 	private static ManipulationPhase currentManipulationPhase = ManipulationPhase.CHANGE_TERRAIN;
 
@@ -23,6 +23,7 @@ public class ManipulationCharacter : MonoBehaviour {
 		levelTerrain = Player.getLevelTerrain();
 		xResolution = levelTerrain.terrainData.heightmapWidth;
 		zResolution = levelTerrain.terrainData.heightmapHeight;
+		TerrainMarker.terrainMarkers = new List<GameObject>();
 	}
 
 	void Update () {
@@ -30,47 +31,43 @@ public class ManipulationCharacter : MonoBehaviour {
 			currentManipulationPhase = ManipulationPhase.CHANGE_TERRAIN;
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) {
-			currentManipulationPhase = ManipulationPhase.UNDO_TERRAIN_CHANGES;
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)) {
 			currentManipulationPhase = ManipulationPhase.FUELTANK_PLACEMENT;
 		}
 
 		if (currentManipulationPhase == ManipulationPhase.CHANGE_TERRAIN) {
 			//raise terrain
-			if (Input.GetMouseButtonDown(0) && charges >= 1) {
+			if (Input.GetMouseButtonDown(0)) {
 				RaycastHit hit;
 				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 				if (Physics.Raycast(ray, out hit)) {
-					if (hit.collider.gameObject.layer == 8) {
+					if (hit.collider.gameObject.layer == 8 && charges >= 1) {
 						charges--;
 						manipulateTerrainArea(hit.point, 25, true);
 						GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
 						currentMarker.GetComponent<TerrainMarker>().terrainLowered = false;
+						TerrainMarker.terrainMarkers.Add(currentMarker);
+					}
+					else if (hit.collider.gameObject.layer == 9 && hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered==true) {
+						charges++;
+						manipulateTerrainArea(hit.collider.gameObject.transform.position, 25, hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered);
+						Destroy(hit.collider.gameObject);
 					}
 				}
 			}
 			//lower terrain
-			else if (Input.GetMouseButtonDown(1) && charges >= 1) {
+			else if (Input.GetMouseButtonDown(1)) {
 				RaycastHit hit;
 				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 				if (Physics.Raycast(ray, out hit)) {
-					if (hit.collider.gameObject.layer == 8) {
+					if (hit.collider.gameObject.layer == 8 && charges >= 1) {
 						charges--;
 						manipulateTerrainArea(hit.point, 25, false);
 						GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
 						currentMarker.GetComponent<TerrainMarker>().terrainLowered = true;
 						currentMarker.GetComponent<Renderer>().material.color = new Color(0f, 0f, 1f, 0.5f);
+						TerrainMarker.terrainMarkers.Add(currentMarker);
 					}
-				}
-			}
-		}
-		else if (currentManipulationPhase == ManipulationPhase.UNDO_TERRAIN_CHANGES) {
-			if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
-				RaycastHit hit;
-				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-				if (Physics.Raycast(ray, out hit)) {
-					if (hit.collider.gameObject.layer == 9) {
+					else if (hit.collider.gameObject.layer == 9 && hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered==false) {
 						charges++;
 						manipulateTerrainArea(hit.collider.gameObject.transform.position, 25, hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered);
 						Destroy(hit.collider.gameObject);
@@ -137,6 +134,10 @@ public class ManipulationCharacter : MonoBehaviour {
 		}
 
 		levelTerrain.terrainData.SetHeights(terX, terZ, heights);
+	}
+
+	public static void changeUnmodifiableTerrainToNormal () {
+		
 	}
 
     public int getCharges() { return charges; }

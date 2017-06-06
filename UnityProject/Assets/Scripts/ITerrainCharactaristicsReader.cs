@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class ITerrainCharactaristicsReader {
+public abstract class ITerrainCharactaristicsReader : MonoBehaviour {
 
 	public struct TerrainCharacteristics {
 		public float friction;
