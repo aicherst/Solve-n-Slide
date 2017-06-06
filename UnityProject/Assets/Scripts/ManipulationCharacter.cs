@@ -10,6 +10,8 @@ public class ManipulationCharacter : MonoBehaviour {
 	private int xResolution;
 	private int zResolution;
 
+	private static string[] unmodifiableTerrainNames = { "GrassHillAlbedoUnmodifiable", "GrassRockyAlbedoUnmodifiable" };
+
 	public enum ManipulationPhase {
 		CHANGE_TERRAIN, FUELTANK_PLACEMENT
 	}
@@ -41,11 +43,13 @@ public class ManipulationCharacter : MonoBehaviour {
 				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 				if (Physics.Raycast(ray, out hit)) {
 					if (hit.collider.gameObject.layer == 8 && charges >= 1) {
-						charges--;
-						manipulateTerrainArea(hit.point, 25, true);
-						GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
-						currentMarker.GetComponent<TerrainMarker>().terrainLowered = false;
-						TerrainMarker.terrainMarkers.Add(currentMarker);
+						if (isTerrainModifiable(levelTerrain.terrainData.splatPrototypes[TerrainCharactaristicsReader.GetMainTexture(hit.point)].texture.name)) {
+							charges--;
+							manipulateTerrainArea(hit.point, 25, true);
+							GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
+							currentMarker.GetComponent<TerrainMarker>().terrainLowered = false;
+							TerrainMarker.terrainMarkers.Add(currentMarker);
+						}
 					}
 					else if (hit.collider.gameObject.layer == 9 && hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered==true) {
 						charges++;
@@ -60,12 +64,14 @@ public class ManipulationCharacter : MonoBehaviour {
 				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 				if (Physics.Raycast(ray, out hit)) {
 					if (hit.collider.gameObject.layer == 8 && charges >= 1) {
-						charges--;
-						manipulateTerrainArea(hit.point, 25, false);
-						GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
-						currentMarker.GetComponent<TerrainMarker>().terrainLowered = true;
-						currentMarker.GetComponent<Renderer>().material.color = new Color(0f, 0f, 1f, 0.5f);
-						TerrainMarker.terrainMarkers.Add(currentMarker);
+						if (isTerrainModifiable(levelTerrain.terrainData.splatPrototypes[TerrainCharactaristicsReader.GetMainTexture(hit.point)].texture.name)) {
+							charges--;
+							manipulateTerrainArea(hit.point, 25, false);
+							GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
+							currentMarker.GetComponent<TerrainMarker>().terrainLowered = true;
+							currentMarker.GetComponent<Renderer>().material.color = new Color(0f, 0f, 1f, 0.5f);
+							TerrainMarker.terrainMarkers.Add(currentMarker);
+						}
 					}
 					else if (hit.collider.gameObject.layer == 9 && hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered==false) {
 						charges++;
@@ -136,8 +142,40 @@ public class ManipulationCharacter : MonoBehaviour {
 		levelTerrain.terrainData.SetHeights(terX, terZ, heights);
 	}
 
+	private bool isTerrainModifiable (string textureName) {
+		bool returnValue = true;
+		for (int i = 0; i < unmodifiableTerrainNames.Length; i++) {
+			if (textureName == unmodifiableTerrainNames[i]) {
+				returnValue = false;
+			}
+		}
+		return returnValue;
+	}
+
 	public static void changeUnmodifiableTerrainToNormal () {
-		
+		float[, ,] alphas = levelTerrain.terrainData.GetAlphamaps(0, 0, levelTerrain.terrainData.alphamapWidth, levelTerrain.terrainData.alphamapHeight);
+
+		for (int i = 0; i < unmodifiableTerrainNames.Length; i++) {
+			int oldTexture = getIndexOfTextureByName(unmodifiableTerrainNames[i]);
+			int newTexture = getIndexOfTextureByName(unmodifiableTerrainNames[i].Substring(0,unmodifiableTerrainNames[i].Length-12)); //-12 kommt wegen dem Wort "Unmodifiable" alle Terrains müssen am Ende dieses Wort haben
+
+			for (int j = 0; j < levelTerrain.terrainData.alphamapWidth; j++) {
+				for (int k = 0; k < levelTerrain.terrainData.alphamapHeight; k++) {
+					alphas[j, k, newTexture] = Mathf.Max(alphas[j, k, oldTexture], alphas[j, k, newTexture]);
+					alphas[j, k, oldTexture] = 0f;
+				}
+			}
+		}
+		levelTerrain.terrainData.SetAlphamaps(0, 0, alphas);
+	}
+
+	private static int getIndexOfTextureByName (string textureName) {
+		for (int i = 0; i < levelTerrain.terrainData.splatPrototypes.Length; i++) {
+			if (textureName == levelTerrain.terrainData.splatPrototypes[i].texture.name) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
     public int getCharges() { return charges; }

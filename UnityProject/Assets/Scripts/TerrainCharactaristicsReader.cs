@@ -3,12 +3,10 @@
 public class TerrainCharactaristicsReader : ITerrainCharactaristicsReader {
 	
 	private static Terrain terrain;
-
-	void Start () {
-		terrain = ManipulationCharacter.getLevelTerrain();
-	}
+	private static TerrainCharacteristics terrainCharacteristics;
 
 	private static float[] GetTextureMix (Vector3 position) {
+		terrain = ManipulationCharacter.getLevelTerrain();
 		int mapX = (int)(((position.x - terrain.transform.position.x) / terrain.terrainData.size.x) * terrain.terrainData.alphamapWidth);
 		int mapZ = (int)(((position.z - terrain.transform.position.z) / terrain.terrainData.size.z) * terrain.terrainData.alphamapHeight);
          
@@ -38,6 +36,19 @@ public class TerrainCharactaristicsReader : ITerrainCharactaristicsReader {
 	}
 
 	public override TerrainCharacteristics GetTerrainCharacteristics (Vector3 position) {
-		return new TerrainCharacteristics();
+		string terrainName = "";
+		terrainName = terrain.terrainData.splatPrototypes[GetMainTexture(position)].texture.name;
+
+		if (terrainName == "GrassHillAlbedo") {
+			terrainCharacteristics = new TerrainCharacteristics(0.2f);
+		}
+		else if (terrainName == "GrassRockyAlbedo") {
+			terrainCharacteristics = new TerrainCharacteristics(0.5f);
+		}
+		else if (terrainName == "sand_color") {
+			terrainCharacteristics = new TerrainCharacteristics(0.1f);
+		}
+			
+		return terrainCharacteristics;
 	}
 }
