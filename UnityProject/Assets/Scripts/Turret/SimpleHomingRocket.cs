@@ -6,7 +6,7 @@ using UnityEngine;
 public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
     public float maxSpeed = 1;
     public AnimationCurve accelerationCurve;
-    public float rotationSpeed = 10;              // degree per sec
+    public float rotationSpeed = 120;              // degree per sec
 
     public float maxLifeLifeTime = 6f;
 
@@ -16,6 +16,8 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
     public GameObject explosionPrefab;
 
     public Transform target;
+
+    public float lockRotationTime = 1;
 
     private float lifeTime;
 
@@ -35,15 +37,16 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
 
         Vector3 targetDirection = (target.position - transform.position).normalized;
 
+        if(lifeTime > lockRotationTime) {
+            //create the rotation we need to be in to look at the target
+            Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
 
-        //create the rotation we need to be in to look at the target
-        Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
-
-        //rotate us over time according to speed until we are in the required rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            //rotate us over time according to speed until we are in the required rotation
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        }
 
 
-        Vector3 veclocity = targetDirection  * accelerationCurve.Evaluate(lifeTime) * maxSpeed;
+        Vector3 veclocity = transform.forward * accelerationCurve.Evaluate(lifeTime) * maxSpeed;
 
         transform.position += veclocity * Time.deltaTime;
     }
@@ -71,7 +74,10 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
 
         Destroy(gExplosion, 3);
 
-        target.GetComponent<ICharacter>().damage(damage);
+        ICharacter character = target.GetComponent<ICharacter>();
+        if(character != null) {
+            character.damage(damage);
+        }
     }
 
     public void SetTarget(Transform target) {
