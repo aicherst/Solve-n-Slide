@@ -9,21 +9,77 @@ ModelImporter:
     100002: Plane_000
     100004: Plane_001
     100006: Plane_002
+    100008: Armature
+    100010: Head
+    100012: Hips
+    100014: jetpack
+    100016: LeftArm
+    100018: LeftFoot
+    100020: LeftForeArm
+    100022: LeftHand
+    100024: LeftLeg
+    100026: LeftShoulder
+    100028: LeftUpLeg
+    100030: main
+    100032: Neck
+    100034: RightArm
+    100036: RightFoot
+    100038: RightForeArm
+    100040: RightHand
+    100042: RightLeg
+    100044: RightShoulder
+    100046: RightUpLeg
+    100048: Spine
+    100050: Spine1
+    100052: visor
     400000: //RootNode
     400002: Plane_000
     400004: Plane_001
     400006: Plane_002
+    400008: Armature
+    400010: Head
+    400012: Hips
+    400014: jetpack
+    400016: LeftArm
+    400018: LeftFoot
+    400020: LeftForeArm
+    400022: LeftHand
+    400024: LeftLeg
+    400026: LeftShoulder
+    400028: LeftUpLeg
+    400030: main
+    400032: Neck
+    400034: RightArm
+    400036: RightFoot
+    400038: RightForeArm
+    400040: RightHand
+    400042: RightLeg
+    400044: RightShoulder
+    400046: RightUpLeg
+    400048: Spine
+    400050: Spine1
+    400052: visor
     2300000: Plane_000
     2300002: Plane_001
     2300004: Plane_002
+    2300006: jetpack
+    2300008: main
+    2300010: visor
     3300000: Plane_000
     3300002: Plane_001
     3300004: Plane_002
+    3300006: jetpack
+    3300008: main
+    3300010: visor
     4300000: Plane_001
     4300002: Plane_002
     4300004: Plane_000
+    4300006: main
+    4300008: jetpack
+    4300010: visor
     7400000: Default Take
     9500000: //RootNode
+    13700000: main
   materials:
     importMaterials: 1
     materialName: 0
