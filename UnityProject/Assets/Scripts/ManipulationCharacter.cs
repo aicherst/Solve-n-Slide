@@ -20,20 +20,34 @@ public class ManipulationCharacter : MonoBehaviour {
 	public GameObject terrainMarker;
 	public GameObject fuelTankObject;
 
+	public GameObject manipulationSelectorPrefab;
+	public static GameObject manipulationSelector;
+
 
 	void Start () {
 		levelTerrain = Player.getLevelTerrain();
 		xResolution = levelTerrain.terrainData.heightmapWidth;
 		zResolution = levelTerrain.terrainData.heightmapHeight;
 		TerrainMarker.terrainMarkers = new List<GameObject>();
+		manipulationSelector = Instantiate(manipulationSelectorPrefab);
 	}
 
 	void Update () {
+		RaycastHit hit2;
+		Ray ray2 = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+		if (Physics.Raycast(ray2, out hit2)) {
+			if (hit2.collider.gameObject.layer == 8) {
+				manipulationSelector.transform.position = hit2.point + Vector3.up;
+			}
+		}
+
 		if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) {
 			currentManipulationPhase = ManipulationPhase.CHANGE_TERRAIN;
+			manipulationSelector.SetActive(true);
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) {
 			currentManipulationPhase = ManipulationPhase.FUELTANK_PLACEMENT;
+			manipulationSelector.SetActive(false);
 		}
 
 		if (currentManipulationPhase == ManipulationPhase.CHANGE_TERRAIN) {
@@ -86,14 +100,8 @@ public class ManipulationCharacter : MonoBehaviour {
 		else if (currentManipulationPhase == ManipulationPhase.FUELTANK_PLACEMENT) {
 			//place fueltank
 			if (Input.GetMouseButtonDown(0) && fuelTanks >= 1) {
-				RaycastHit hit;
-				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-				if (Physics.Raycast(ray, out hit)) {
-					if (hit.collider.gameObject.layer == 8) {
-						fuelTanks--;
-						Instantiate(fuelTankObject, hit.point + new Vector3(0f, 2f, 0f), Quaternion.identity);
-					}
-				}
+				fuelTanks--;
+				Instantiate(fuelTankObject, transform.position + transform.forward * 5f + Vector3.up, Quaternion.identity);
 			}
 			//remove fueltank
 			else if (Input.GetMouseButtonDown(1)) {
