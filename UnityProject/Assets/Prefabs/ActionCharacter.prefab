@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114685138722983348}
   - component: {fileID: 114912331558901450}
   - component: {fileID: 114051028391242228}
+  - component: {fileID: 114678176431625142}
   m_Layer: 0
   m_Name: ActionCharacter
   m_TagString: Player
@@ -227,6 +228,17 @@ MonoBehaviour:
   sensitivityX: 500
   sensitivityY: 500
   egoCamera: {fileID: 20794254744414368}
+--- !u!114 &114678176431625142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1142232056284014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd975420e9380541adec5df415e7f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114685138722983348
 MonoBehaviour:
   m_ObjectHideFlags: 1

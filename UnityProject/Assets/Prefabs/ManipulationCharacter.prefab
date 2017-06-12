@@ -211,6 +211,8 @@ MonoBehaviour:
     type: 2}
   fuelTankObject: {fileID: 1886974867054986, guid: 3e9eac6e32e32154d89eca88b9e63c04,
     type: 2}
+  manipulationSelectorPrefab: {fileID: 1339971732116034, guid: 62155ce2180a7cd4d8f4d44d31f7a476,
+    type: 2}
 --- !u!114 &114455061102757518
 MonoBehaviour:
   m_ObjectHideFlags: 1
