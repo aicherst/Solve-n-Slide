@@ -166,13 +166,23 @@ public class ManipulationCharacter : MonoBehaviour {
 		float[, ,] alphas = levelTerrain.terrainData.GetAlphamaps(0, 0, levelTerrain.terrainData.alphamapWidth, levelTerrain.terrainData.alphamapHeight);
 
 		for (int i = 0; i < unmodifiableTerrainNames.Length; i++) {
-			int oldTexture = getIndexOfTextureByName(unmodifiableTerrainNames[i]);
-			int newTexture = getIndexOfTextureByName(unmodifiableTerrainNames[i].Substring(0,unmodifiableTerrainNames[i].Length-12)); //-12 kommt wegen dem Wort "Unmodifiable" alle Terrains müssen am Ende dieses Wort haben
+			
+			bool isTextureinLevel = false;
+			for (int t = 0; t < levelTerrain.terrainData.splatPrototypes.Length; t++) {
+				if (unmodifiableTerrainNames[i] == levelTerrain.terrainData.splatPrototypes[t].texture.name) {
+					isTextureinLevel = true;
+				}
+			}
 
-			for (int j = 0; j < levelTerrain.terrainData.alphamapWidth; j++) {
-				for (int k = 0; k < levelTerrain.terrainData.alphamapHeight; k++) {
-					alphas[j, k, newTexture] = Mathf.Max(alphas[j, k, oldTexture], alphas[j, k, newTexture]);
-					alphas[j, k, oldTexture] = 0f;
+			if (isTextureinLevel == true) {
+				int oldTexture = getIndexOfTextureByName(unmodifiableTerrainNames[i]);
+				int newTexture = getIndexOfTextureByName(unmodifiableTerrainNames[i].Substring(0, unmodifiableTerrainNames[i].Length - 12)); //-12 kommt wegen dem Wort "Unmodifiable" alle Terrains müssen am Ende dieses Wort haben
+
+				for (int j = 0; j < levelTerrain.terrainData.alphamapWidth; j++) {
+					for (int k = 0; k < levelTerrain.terrainData.alphamapHeight; k++) {
+						alphas[j, k, newTexture] = Mathf.Max(alphas[j, k, oldTexture], alphas[j, k, newTexture]);
+						alphas[j, k, oldTexture] = 0f;
+					}
 				}
 			}
 		}
