@@ -7,9 +7,16 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
     public int health = 100, maxHealth = 100;
     IJetpack jetpack;
     bool levelFinished, dead;
+    private bool active;
+    //private Transform startTransform;
+    private Vector3 startPosition;
+    private Quaternion startRotation;
 
     void Awake() {
         jetpack = GetComponent<IJetpack>();
+        //startTransform = transform;
+        startPosition = transform.position;
+        startRotation = transform.rotation;
     }
 
     // Use this for initialization
@@ -18,9 +25,11 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
 
     // Update is called once per frame
     void Update() {
-        jetpack.Thrust(Input.GetButton("Jetpack"));
-        Vector2 movementAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        jetpack.MovementInput(movementAxis);
+        if (active) {
+            jetpack.Thrust(Input.GetButton("Jetpack"));
+            Vector2 movementAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            jetpack.MovementInput(movementAxis);
+        }
     }
 
     void OnTriggerEnter(Collider other) {
@@ -72,5 +81,21 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
             dead = true;
             Time.timeScale = 0;
         }
+    }
+
+    public void setActive(bool a) {
+        active = a;
+        if (!a) {
+            health = maxHealth;
+            jetpack.fuel = jetpack.maxFuel;
+            transform.position = startPosition;
+            transform.rotation = startRotation;
+        }
+        GetComponentInChildren<Camera>().enabled = a;
+        GetComponentInChildren<AudioListener>().enabled = a;
+        GetComponentInChildren<EgoCamera>().enabled = a;
+        GetComponentInChildren<CharacterController>().enabled = a;
+        GetComponentInChildren<CharacterMovement>().enabled = a;
+        GetComponentInChildren<Jetpack>().enabled = a;
     }
 }

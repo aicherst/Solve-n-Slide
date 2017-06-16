@@ -9,13 +9,10 @@ public class Player : MonoBehaviour {
     }
     Phase currentPhase = Phase.MANIPULATION_PHASE;
 
-    Vector3 startPosition;
-    Vector3 manipulationPosition;
-
     public GameObject actionCharacterPrefab;
-    private GameObject actionCharacterInstance;
+    private ActionCharacter actionCharacterInstance;
     public GameObject manipulationCharacterPrefab;
-    private GameObject manipulationCharacterInstance;
+    private ManipulationCharacter manipulationCharacterInstance;
 	
 	//for the terrain
 	private static Terrain levelTerrain;
@@ -27,8 +24,10 @@ public class Player : MonoBehaviour {
     void Awake() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        startPosition = transform.position;
-        manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, startPosition, Quaternion.identity);
+        actionCharacterInstance = Instantiate(actionCharacterPrefab, transform.position, transform.rotation).GetComponent<ActionCharacter>();
+        actionCharacterInstance.setActive(false);
+        manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, transform.position, transform.rotation).GetComponent<ManipulationCharacter>();
+        manipulationCharacterInstance.setActive(true);
     }
 
         // Use this for initialization
@@ -54,9 +53,8 @@ public class Player : MonoBehaviour {
 				ManipulationCharacter.changeUnmodifiableTerrainToNormal();
 				TerrainMarker.deactivateAllMArkers();
                 currentPhase = Phase.ACTION_PHASE;
-                manipulationPosition = manipulationCharacterInstance.transform.position;
-                Destroy(manipulationCharacterInstance);
-                actionCharacterInstance = Instantiate(actionCharacterPrefab, startPosition, Quaternion.identity);
+                manipulationCharacterInstance.setActive(false);
+                actionCharacterInstance.setActive(true);
             } else {
                 if (getActionCharacter().getLevelFinished()) {
                     Time.timeScale = 1;
@@ -70,8 +68,8 @@ public class Player : MonoBehaviour {
 					levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
 					TerrainMarker.activateAllMArkers();
 					currentPhase = Phase.MANIPULATION_PHASE;
-                    Destroy(actionCharacterInstance);
-                    manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, manipulationPosition, Quaternion.identity);
+                    actionCharacterInstance.setActive(false);
+                    manipulationCharacterInstance.setActive(true);
                 }
             }
         }

@@ -67,7 +67,7 @@ public class UIController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        bool fuelHealthEnabled = player.getCurrentPhase() == Player.Phase.ACTION_PHASE;
+        bool fuelHealthEnabled = player.getCurrentPhase() == Player.Phase.ACTION_PHASE && !player.getActionCharacter().getDead() && !player.getActionCharacter().getLevelFinished();
         fuelHealthForeground.enabled = fuelHealthEnabled;
         foreach(Image child in fuelHealthForeground.GetComponentsInChildren<Image>()) {
             child.enabled = fuelHealthEnabled;
@@ -76,13 +76,15 @@ public class UIController : MonoBehaviour {
             child.enabled = fuelHealthEnabled;
         }
 
-        bool manipulationUIEnabled = player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE;
+        bool manipulationUIEnabled = player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE && !player.getActionCharacter().getDead() && !player.getActionCharacter().getLevelFinished();
         for (int i = 0; i < chargeIcons.Length; i++) {
             chargeIcons[i].enabled = manipulationUIEnabled;
         }
         for (int i = 0; i < fuelTankIcons.Length; i++) {
             fuelTankIcons[i].enabled = manipulationUIEnabled;
         }
+        crosshair.enabled = manipulationUIEnabled;
+
         if (player.getCurrentPhase() == Player.Phase.ACTION_PHASE) {
             float fuel = player.getActionCharacter().getFuel();
             float maxFuel = player.getActionCharacter().getMaxFuel();
