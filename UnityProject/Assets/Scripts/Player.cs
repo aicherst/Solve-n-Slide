@@ -24,11 +24,15 @@ public class Player : MonoBehaviour {
 	private float[,] heightMapBackup;
 	private float[,,] alphaMapBackup;
 
-    // Use this for initialization
-    void Start () {
+    void Awake() {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         startPosition = transform.position;
         manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, startPosition, Quaternion.identity);
-		
+    }
+
+        // Use this for initialization
+    void Start () {		
 		//for terrain
 		levelTerrain = Terrain.activeTerrain;
 
