@@ -37,7 +37,7 @@ public class ManipulationCharacter : MonoBehaviour {
     }
 
 	void Update () {
-        //if (active) {
+        if (active) {
             RaycastHit hit2;
             Ray ray2 = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             if (Physics.Raycast(ray2, out hit2)) {
@@ -116,7 +116,7 @@ public class ManipulationCharacter : MonoBehaviour {
                     }
                 }
             }
-        //}
+        }
 	}
 
 
