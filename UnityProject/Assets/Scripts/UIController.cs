@@ -4,22 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
-    //public Text healthText;
-    //public Image healthBackground;
-    //public Text fuelText;
-    //public Image fuelBackground;
-    //public Text chargesText;
-    //public Image chargesBackground;
-    //public Text levelFinishText;
-    //public Image levelFinishBackground;
-    //public Text deathText;
-    //public Image deathBackground;
-    //public Text infoText;
     public Player player;
 
     public Image crosshair;
 
-    public Image fuelHealthForeground;
+    public GameObject fuelHealth;
     public Image fuelBarLeft, fuelBarRight, healthBarLeft, healthBarRight;
     private float fuelBarLeftOffset, fuelBarRightOffset, healthBarLeftOffset, healthBarRightOffset;
     public Text fuelText, healthText;
@@ -31,6 +20,8 @@ public class UIController : MonoBehaviour {
 
     private Image[] chargeIcons;
     public Sprite chargeIconSprite, chargeIconSpriteBW;
+
+    public GameObject loseScreen, winScreen;
 
     // Use this for initialization
     void Start() {
@@ -68,13 +59,7 @@ public class UIController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         bool fuelHealthEnabled = player.getCurrentPhase() == Player.Phase.ACTION_PHASE && !player.getActionCharacter().getDead() && !player.getActionCharacter().getLevelFinished();
-        fuelHealthForeground.enabled = fuelHealthEnabled;
-        foreach(Image child in fuelHealthForeground.GetComponentsInChildren<Image>()) {
-            child.enabled = fuelHealthEnabled;
-        }
-        foreach (Text child in fuelHealthForeground.GetComponentsInChildren<Text>()) {
-            child.enabled = fuelHealthEnabled;
-        }
+        fuelHealth.SetActive(fuelHealthEnabled);
 
         bool manipulationUIEnabled = player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE && !player.getActionCharacter().getDead() && !player.getActionCharacter().getLevelFinished();
         for (int i = 0; i < chargeIcons.Length; i++) {
@@ -119,49 +104,17 @@ public class UIController : MonoBehaviour {
             }
         }
 
+        if (player.getActionCharacter().getDead()) {
+            loseScreen.SetActive(true);
+        } else {
+            loseScreen.SetActive(false);
+        }
 
-        //healthText.enabled = false;
-        //healthBackground.enabled = false;
-        //fuelText.enabled = false;
-        //fuelBackground.enabled = false;
-        //chargesText.enabled = false;
-        //chargesBackground.enabled = false;
-        //levelFinishText.enabled = false;
-        //levelFinishBackground.enabled = false;
-        //deathText.enabled = false;
-        //deathBackground.enabled = false;
-        //crosshair.enabled = false;
-        //infoText.enabled = false;
-
-        //if (player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE) {
-        //    chargesText.enabled = true;
-        //    chargesBackground.enabled = true;
-        //    chargesText.text = "Test Charges: " + player.getManipulationCharacter().getCharges() + "/" + player.getManipulationCharacter().getMaxCharges();
-        //    crosshair.enabled = true;
-        //    infoText.enabled = true;
-        //    infoText.text = "Press Enter to switch to Action-Phase";
-        //} else if (player.getCurrentPhase() == Player.Phase.ACTION_PHASE) {
-        //    if (player.getActionCharacter().getLevelFinished()) {
-        //        levelFinishBackground.enabled = true;
-        //        levelFinishText.enabled = true;
-        //    } else if (player.getActionCharacter().getDead()) {
-        //        deathBackground.enabled = true;
-        //        deathText.enabled = true;
-        //    } else {
-        //        healthText.enabled = true;
-        //        healthBackground.enabled = true;
-        //        healthText.text = "Test Health: " + makeThreeChars(player.getActionCharacter().getHealth()) + "/"
-        //            + makeThreeChars(player.getActionCharacter().getMaxHealth());
-
-        //        fuelText.enabled = true;
-        //        fuelBackground.enabled = true;
-        //        fuelText.text = "Test Fuel: " + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getFuel())) + "/"
-        //            + makeThreeChars(Mathf.RoundToInt(player.getActionCharacter().getMaxFuel()));
-
-        //        infoText.enabled = true;
-        //        infoText.text = "Press Enter to switch to Manipulation-Phase";
-        //    }
-        //}
+        if (player.getActionCharacter().getLevelFinished()) {
+            winScreen.SetActive(true);
+        } else {
+            winScreen.SetActive(false);
+        }
     }
 
     private string makeThreeChars(int value) {

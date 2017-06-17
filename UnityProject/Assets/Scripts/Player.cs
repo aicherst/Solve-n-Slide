@@ -62,8 +62,7 @@ public class Player : MonoBehaviour {
                     SceneManager.LoadScene(0);
                 } else if (getActionCharacter().getDead()) {
                     Time.timeScale = 1;
-					resetTerrain();
-                    SceneManager.LoadScene(0);
+                    actionCharacterInstance.reset();
 				} else {
 					levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
 					TerrainMarker.activateAllMArkers();
@@ -76,10 +75,17 @@ public class Player : MonoBehaviour {
         if (Input.GetKey("escape")) {
             Application.Quit();
         }
+        if(Input.GetButtonDown("Reload")) {
+            if(currentPhase == Phase.MANIPULATION_PHASE) {
+                resetTerrain();
+                manipulationCharacterInstance.reset();
+            }
+        }
     }
 
 	private void resetTerrain() {
-		levelTerrain.terrainData.SetHeights(0, 0, heightMapBackup);
+        //TODO: reset terrain, pillars and fueltanks
+        levelTerrain.terrainData.SetHeights(0, 0, heightMapBackup);
 		levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
 	}
 

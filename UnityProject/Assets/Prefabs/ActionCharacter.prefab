@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 114912331558901450}
   - component: {fileID: 114051028391242228}
   - component: {fileID: 114678176431625142}
+  - component: {fileID: 114411044448931518}
+  - component: {fileID: 114914154640182966}
   m_Layer: 0
   m_Name: ActionCharacter
   m_TagString: Player
@@ -214,6 +216,17 @@ MonoBehaviour:
   fuelConsumptionRate: 10
   airSpeed: {x: 0.15, y: 0.15}
   floorSpeed: {x: 0.05, y: 0.05}
+--- !u!114 &114411044448931518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1142232056284014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db377dd847aaa8648926ca1d981e4d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114620768526506272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,6 +278,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groudAttributes:
     friction: 0
+--- !u!114 &114914154640182966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1142232056284014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b65eecdf5e26374dbd58a0d907f713f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &124821667510134186
 Behaviour:
   m_ObjectHideFlags: 1

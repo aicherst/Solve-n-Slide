@@ -220,4 +220,9 @@ public class ManipulationCharacter : MonoBehaviour {
         GetComponentInChildren<ManipulationCamera>().enabled = a;
         manipulationSelector.SetActive(a);
     }
+
+    public void reset() {
+        charges = maxCharges;
+        fuelTanks = maxFuelTanks;
+    }
 }

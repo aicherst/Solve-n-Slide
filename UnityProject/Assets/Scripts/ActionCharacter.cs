@@ -6,6 +6,7 @@ using UnityEngine;
 public class ActionCharacter : MonoBehaviour, ICharacter {
     public int health = 100, maxHealth = 100;
     IJetpack jetpack;
+    CharacterMovement characterMovement;
     bool levelFinished, dead;
     private bool active;
     //private Transform startTransform;
@@ -14,7 +15,7 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
 
     void Awake() {
         jetpack = GetComponent<IJetpack>();
-        //startTransform = transform;
+        characterMovement = GetComponent<CharacterMovement>();
         startPosition = transform.position;
         startRotation = transform.rotation;
     }
@@ -86,10 +87,7 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
     public void setActive(bool a) {
         active = a;
         if (!a) {
-            health = maxHealth;
-            jetpack.fuel = jetpack.maxFuel;
-            transform.position = startPosition;
-            transform.rotation = startRotation;
+            reset();
         }
         GetComponentInChildren<Camera>().enabled = a;
         GetComponentInChildren<AudioListener>().enabled = a;
@@ -97,5 +95,14 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
         GetComponentInChildren<CharacterController>().enabled = a;
         GetComponentInChildren<CharacterMovement>().enabled = a;
         GetComponentInChildren<Jetpack>().enabled = a;
+    }
+
+    public void reset() {
+        health = maxHealth;
+        jetpack.fuel = jetpack.maxFuel;
+        transform.position = startPosition;
+        transform.rotation = startRotation;
+        dead = false;
+        characterMovement.Reset();
     }
 }
