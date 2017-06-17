@@ -63,6 +63,7 @@ public class ManipulationCharacter : MonoBehaviour {
                         if (hit.collider.gameObject.layer == 8 && charges >= 1) {
                             if (isTerrainModifiable(levelTerrain.terrainData.splatPrototypes[TerrainCharactaristicsReader.GetMainTexture(hit.point)].texture.name)) {
                                 charges--;
+								Audiocontroller.playRaiseHillSound(gameObject.transform.position);
                                 manipulateTerrainArea(hit.point, 25, true);
                                 GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
                                 currentMarker.GetComponent<TerrainMarker>().terrainLowered = false;
@@ -71,6 +72,7 @@ public class ManipulationCharacter : MonoBehaviour {
                         } else if (hit.collider.gameObject.layer == 9 && hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered == true) {
                             charges++;
                             manipulateTerrainArea(hit.collider.gameObject.transform.position, 25, hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered);
+							Audiocontroller.playLowerHillSound(gameObject.transform.position);
                             TerrainMarker.terrainMarkers.Remove(hit.collider.gameObject);
                             Destroy(hit.collider.gameObject);
                         }
@@ -84,6 +86,7 @@ public class ManipulationCharacter : MonoBehaviour {
                         if (hit.collider.gameObject.layer == 8 && charges >= 1) {
                             if (isTerrainModifiable(levelTerrain.terrainData.splatPrototypes[TerrainCharactaristicsReader.GetMainTexture(hit.point)].texture.name)) {
                                 charges--;
+								Audiocontroller.playLowerHillSound(gameObject.transform.position);
                                 manipulateTerrainArea(hit.point, 25, false);
                                 GameObject currentMarker = Instantiate(terrainMarker, hit.point, Quaternion.identity);
                                 currentMarker.GetComponent<TerrainMarker>().terrainLowered = true;
@@ -93,6 +96,7 @@ public class ManipulationCharacter : MonoBehaviour {
                         } else if (hit.collider.gameObject.layer == 9 && hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered == false) {
                             charges++;
                             manipulateTerrainArea(hit.collider.gameObject.transform.position, 25, hit.collider.gameObject.GetComponent<TerrainMarker>().terrainLowered);
+							Audiocontroller.playRaiseHillSound(gameObject.transform.position);
                             TerrainMarker.terrainMarkers.Remove(hit.collider.gameObject);
                             Destroy(hit.collider.gameObject);
                         }
@@ -103,6 +107,7 @@ public class ManipulationCharacter : MonoBehaviour {
                 if (Input.GetMouseButtonDown(0) && fuelTanks >= 1) {
                     fuelTanks--;
                     Instantiate(fuelTankObject, transform.position + transform.forward * 5f + Vector3.up, Quaternion.identity);
+					Audiocontroller.playFuelTankPlacementSound(gameObject.transform.position);
                 }
                 //remove fueltank
                 else if (Input.GetMouseButtonDown(1)) {
@@ -111,7 +116,8 @@ public class ManipulationCharacter : MonoBehaviour {
                     if (Physics.Raycast(ray, out hit)) {
                         if (hit.collider.gameObject.layer == 10) {
                             fuelTanks++;
-                            Destroy(hit.collider.gameObject);
+							Destroy(hit.collider.gameObject);
+							Audiocontroller.playFuelTankPickupSound(gameObject.transform.position);
                         }
                     }
                 }

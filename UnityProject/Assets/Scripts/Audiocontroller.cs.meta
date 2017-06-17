@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 2d708115bfc95b944a7d92d9dba6dfb2
+timeCreated: 1497664117
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - jetpackSoundPrefab: {fileID: 8300000, guid: 938b0874af6f803409839028a1554690,
+      type: 3}
+  - raiseHillSoundPrefab: {fileID: 8300000, guid: 494dbf7f10a7f4b4f9fd1f4bca107e38,
+      type: 3}
+  - lowerHillSoundPrefab: {fileID: 8300000, guid: 494dbf7f10a7f4b4f9fd1f4bca107e38,
+      type: 3}
+  - fuelTankPlacementSoundPrefab: {fileID: 8300000, guid: 129f9a3aaf847804d8e85307eebfd033,
+      type: 3}
+  - fuelTankPickupSoundPrefab: {fileID: 8300000, guid: e2bb92e519ca97447ab0c3293cd1acfd,
+      type: 3}
+  - loseHealthSoundPrefab: {fileID: 8300000, guid: bce4cb947b1771d42a231304ed366056,
+      type: 3}
+  - reachedGoalSoundPrefab: {fileID: 8300000, guid: 112484982294ec947a3b0e6f36a90594,
+      type: 3}
+  - deathSoundPrefab: {fileID: 8300000, guid: 522fdb3300177cc4ba349720d5590060, type: 3}
+  - switchPhasesSoundPrefab: {instanceID: 0}
+  - windSoundPrefab: {fileID: 8300000, guid: e1a16cc6faa71a5498fe9f2b0ac66c9c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

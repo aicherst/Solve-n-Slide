@@ -9,6 +9,7 @@ TagManager:
   - TurretRange2
   - Key
   - Door
+  - FuelTank
   layers:
   - Default
   - TransparentFX
