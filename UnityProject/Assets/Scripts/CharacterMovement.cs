@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMovement : MonoBehaviour {
     private CharacterController characterController;
-    private Vector3 velocity;
+    private Vector3 _velocity;
 
     public GroudAttributes groudAttributes;
 
@@ -20,16 +20,10 @@ public class CharacterMovement : MonoBehaviour {
         character = GetComponent<ICharacter>();
     }
 
-
-    // Use this for initialization
-    void Start() {
-    }
-
     private Vector3 terrainNormal;
 
     void FixedUpdate() {
-
-        velocity += Physics.gravity * Time.deltaTime;
+        _velocity += Physics.gravity * Time.deltaTime;
 
         RaycastHit hit;
         if (Physics.SphereCast(transform.position + Vector3.up * characterController.radius, characterController.radius, -Vector3.up, out hit)) {
@@ -38,15 +32,15 @@ public class CharacterMovement : MonoBehaviour {
             terrainNormal = hit.normal;
 
             float num = Vector3.Dot(terrainNormal, terrainNormal);
-            float direction = Vector3.Dot(velocity, terrainNormal) / num;
+            float direction = Vector3.Dot(_velocity, terrainNormal) / num;
 
             if (direction < 0 && wasGrounded) {
-                Vector3 projectedVelocity = Vector3.ProjectOnPlane(velocity, terrainNormal);
+                Vector3 projectedVelocity = Vector3.ProjectOnPlane(_velocity, terrainNormal);
 
-                Vector3 difference = projectedVelocity - velocity;
+                Vector3 difference = projectedVelocity - _velocity;
                 character.collision(difference.magnitude);
 
-                velocity = projectedVelocity;
+                _velocity = projectedVelocity;
             }
         } else {
             wasGrounded = false;
@@ -55,11 +49,21 @@ public class CharacterMovement : MonoBehaviour {
         //ApplyGravity();
     }
 
+    public void Reset() {
+        _velocity = Vector3.zero;
+    }
+
+    public Vector3 velocity {
+        get {
+            return _velocity;
+        }
+    }
+
     private void ApplyGravity() {
         if(grounded) {
-            velocity += Vector3.ProjectOnPlane(Physics.gravity * Time.deltaTime, terrainNormal);
+            _velocity += Vector3.ProjectOnPlane(Physics.gravity * Time.deltaTime, terrainNormal);
         } else {
-            velocity += Physics.gravity * Time.deltaTime;
+            _velocity += Physics.gravity * Time.deltaTime;
         }
     }
 
@@ -70,16 +74,16 @@ public class CharacterMovement : MonoBehaviour {
     }
 
     public void AddVelocity(Vector3 velocity) {
-        this.velocity += velocity;
+        _velocity += velocity;
     }
 
     // Update is called once per frame
     void Update() {
-        characterController.Move(velocity * Time.deltaTime);
+        characterController.Move(_velocity * Time.deltaTime);
     }
 
     void OnDrawGizmos() {
-        Gizmos.DrawRay(transform.position, velocity);
+        Gizmos.DrawRay(transform.position, _velocity);
     }
 
 }
