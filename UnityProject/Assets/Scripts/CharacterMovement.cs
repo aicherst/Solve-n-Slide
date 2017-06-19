@@ -14,16 +14,19 @@ public class CharacterMovement : MonoBehaviour {
 
     private ICharacter character;
 
+    private ITerrainCharactaristicsReader terrainCharactaristicsReader;
 
     private void Awake() {
         characterController = GetComponent<CharacterController>();
         character = GetComponent<ICharacter>();
+        terrainCharactaristicsReader = GetComponent<ITerrainCharactaristicsReader>();
     }
 
     private Vector3 terrainNormal;
 
     void FixedUpdate() {
         _velocity += Physics.gravity * Time.deltaTime;
+
 
         RaycastHit hit;
         if (Physics.SphereCast(transform.position + Vector3.up * characterController.radius, characterController.radius, -Vector3.up, out hit)) {
@@ -44,6 +47,12 @@ public class CharacterMovement : MonoBehaviour {
             }
         } else {
             wasGrounded = false;
+        }
+
+        if(wasGrounded) {
+            ITerrainCharactaristicsReader.TerrainCharacteristics terrainCharacteristics = terrainCharactaristicsReader.GetTerrainCharacteristics(transform.position);
+
+            _velocity *= Mathf.Clamp01(1 - terrainCharacteristics.friction*Time.deltaTime);
         }
 
         //ApplyGravity();
