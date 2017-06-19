@@ -41,6 +41,7 @@ public class Audiocontroller : MonoBehaviour {
 		windSound.clip = windSoundPrefab;
 
 		windSound.loop = true;
+		Audiocontroller.windSound.volume = 0.1f;
 	}
 
 	public static void playJetpackSound (Vector3 v3) {

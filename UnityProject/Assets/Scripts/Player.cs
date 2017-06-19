@@ -54,7 +54,8 @@ public class Player : MonoBehaviour {
 				TerrainMarker.deactivateAllMArkers();
                 currentPhase = Phase.ACTION_PHASE;
                 manipulationCharacterInstance.setActive(false);
-                actionCharacterInstance.setActive(true);
+				actionCharacterInstance.setActive(true);
+				Audiocontroller.windSound.Play();
             } else {
                 if (getActionCharacter().getLevelFinished()) {
                     Time.timeScale = 1;
@@ -68,7 +69,9 @@ public class Player : MonoBehaviour {
 					TerrainMarker.activateAllMArkers();
 					currentPhase = Phase.MANIPULATION_PHASE;
                     actionCharacterInstance.setActive(false);
-                    manipulationCharacterInstance.setActive(true);
+					manipulationCharacterInstance.setActive(true);
+					FuelTankPickup.activateAllFuelTanks();
+					Audiocontroller.windSound.Stop();
                 }
             }
         }
@@ -87,6 +90,8 @@ public class Player : MonoBehaviour {
         //TODO: reset terrain, pillars and fueltanks
         levelTerrain.terrainData.SetHeights(0, 0, heightMapBackup);
 		levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
+		TerrainMarker.resetAllMarkers();
+		FuelTankPickup.resetAllFuelTanks();
 	}
 
     public Phase getCurrentPhase() { return currentPhase; }

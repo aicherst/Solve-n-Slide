@@ -34,6 +34,7 @@ public class ManipulationCharacter : MonoBehaviour {
         xResolution = levelTerrain.terrainData.heightmapWidth;
         zResolution = levelTerrain.terrainData.heightmapHeight;
         TerrainMarker.terrainMarkers = new List<GameObject>();
+		FuelTankPickup.fuelTanks = new List<GameObject>();
     }
 
 	void Update () {
@@ -106,8 +107,9 @@ public class ManipulationCharacter : MonoBehaviour {
                 //place fueltank
                 if (Input.GetMouseButtonDown(0) && fuelTanks >= 1) {
                     fuelTanks--;
-                    Instantiate(fuelTankObject, transform.position + transform.forward * 5f + Vector3.up, Quaternion.identity);
+					GameObject currentFuelTank = Instantiate(fuelTankObject, transform.position + transform.forward * 5f + Vector3.up, Quaternion.identity);
 					Audiocontroller.playFuelTankPlacementSound(gameObject.transform.position);
+					FuelTankPickup.fuelTanks.Add(currentFuelTank);
                 }
                 //remove fueltank
                 else if (Input.GetMouseButtonDown(1)) {
@@ -116,6 +118,7 @@ public class ManipulationCharacter : MonoBehaviour {
                     if (Physics.Raycast(ray, out hit)) {
                         if (hit.collider.gameObject.layer == 10) {
                             fuelTanks++;
+							FuelTankPickup.fuelTanks.Remove(hit.collider.gameObject);
 							Destroy(hit.collider.gameObject);
 							Audiocontroller.playFuelTankPickupSound(gameObject.transform.position);
                         }

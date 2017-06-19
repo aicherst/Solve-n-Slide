@@ -22,4 +22,11 @@ public class TerrainMarker : MonoBehaviour {
 			nextMarker.SetActive(false);
 		}
 	}
+
+	public static void resetAllMarkers () {
+		for (int i = terrainMarkers.Count-1; i >= 0; i--) {
+			Destroy(terrainMarkers[i].gameObject);
+			terrainMarkers.RemoveAt(i);
+		}
+	}
 }
