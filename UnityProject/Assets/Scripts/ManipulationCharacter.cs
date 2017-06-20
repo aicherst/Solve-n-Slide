@@ -43,7 +43,7 @@ public class ManipulationCharacter : MonoBehaviour {
             Ray ray2 = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             if (Physics.Raycast(ray2, out hit2)) {
                 if (hit2.collider.gameObject.layer == 8) {
-                    manipulationSelector.transform.position = hit2.point + Vector3.up;
+                    manipulationSelector.transform.position = hit2.point + Vector3.up * 50;
                 }
             }
 

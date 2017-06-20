@@ -36,6 +36,7 @@ public class TerrainCharactaristicsReader : ITerrainCharactaristicsReader {
 	}
 
 	public override TerrainCharacteristics GetTerrainCharacteristics (Vector3 position) {
+		terrain = ManipulationCharacter.getLevelTerrain();
 		string terrainName = "";
 		terrainName = terrain.terrainData.splatPrototypes[GetMainTexture(position)].texture.name;
 
