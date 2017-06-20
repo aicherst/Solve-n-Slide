@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ActionCharacter : MonoBehaviour, ICharacter {
     public int health = 100, maxHealth = 100;
+    public GameObject finishFirework;
     IJetpack jetpack;
     CharacterMovement characterMovement;
     bool levelFinished, dead;
@@ -36,8 +37,10 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
     void OnTriggerEnter(Collider other) {
         //Debug.Log("Trigger: "+other.tag);
         if(other.tag == "Finish") {
-            Time.timeScale = 0;
+            setActive(false, true);
             levelFinished = true;
+            characterMovement.Reset();
+            Instantiate(finishFirework, transform.position + transform.forward * 30 + Vector3.down, Quaternion.Euler(-90,0,0));
         }
 
     }
@@ -80,21 +83,19 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
         if(health <= 0) {
             health = 0;
             dead = true;
-            Time.timeScale = 0;
+            setActive(false, true);
+            characterMovement.Reset();
         }
     }
 
-    public void setActive(bool a) {
-        active = a;
-        if (!a) {
-            reset();
-        }
-        GetComponentInChildren<Camera>().enabled = a;
-        GetComponentInChildren<AudioListener>().enabled = a;
-        GetComponentInChildren<EgoCamera>().enabled = a;
-        GetComponentInChildren<CharacterController>().enabled = a;
-        GetComponentInChildren<CharacterMovement>().enabled = a;
-        GetComponentInChildren<Jetpack>().enabled = a;
+    public void setActive(bool movement, bool camera) {
+        active = movement;
+        GetComponentInChildren<Camera>().enabled = camera;
+        GetComponentInChildren<AudioListener>().enabled = camera;
+        GetComponentInChildren<EgoCamera>().enabled = camera;
+        GetComponentInChildren<CharacterController>().enabled = movement;
+        GetComponentInChildren<CharacterMovement>().enabled = movement;
+        GetComponentInChildren<Jetpack>().enabled = movement;
     }
 
     public void reset() {

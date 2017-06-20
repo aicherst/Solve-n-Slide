@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         actionCharacterInstance = Instantiate(actionCharacterPrefab, transform.position, transform.rotation).GetComponent<ActionCharacter>();
-        actionCharacterInstance.setActive(false);
+        actionCharacterInstance.setActive(false, false);
         manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, transform.position, transform.rotation).GetComponent<ManipulationCharacter>();
         manipulationCharacterInstance.setActive(true);
     }
@@ -54,21 +54,21 @@ public class Player : MonoBehaviour {
 				TerrainMarker.deactivateAllMArkers();
                 currentPhase = Phase.ACTION_PHASE;
                 manipulationCharacterInstance.setActive(false);
-				actionCharacterInstance.setActive(true);
+				actionCharacterInstance.setActive(true, true);
 				Audiocontroller.windSound.Play();
             } else {
                 if (getActionCharacter().getLevelFinished()) {
-                    Time.timeScale = 1;
 					resetTerrain();
                     SceneManager.LoadScene(0);
                 } else if (getActionCharacter().getDead()) {
-                    Time.timeScale = 1;
+                    actionCharacterInstance.setActive(true, true);
                     actionCharacterInstance.reset();
 				} else {
 					levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
 					TerrainMarker.activateAllMArkers();
 					currentPhase = Phase.MANIPULATION_PHASE;
-                    actionCharacterInstance.setActive(false);
+                    actionCharacterInstance.setActive(false, false);
+                    actionCharacterInstance.reset();
 					manipulationCharacterInstance.setActive(true);
 					FuelTankPickup.activateAllFuelTanks();
 					Audiocontroller.windSound.Stop();
@@ -76,7 +76,8 @@ public class Player : MonoBehaviour {
             }
         }
         if (Input.GetKey("escape")) {
-            Application.Quit();
+            resetTerrain();
+            SceneManager.LoadScene(0);
         }
         if(Input.GetButtonDown("Reload")) {
             if(currentPhase == Phase.MANIPULATION_PHASE) {
