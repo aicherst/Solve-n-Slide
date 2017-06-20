@@ -56,6 +56,7 @@ public class Player : MonoBehaviour {
                 manipulationCharacterInstance.setActive(false);
 				actionCharacterInstance.setActive(true, true);
 				Audiocontroller.windSound.Play();
+                FuelTankPickup.changeAllFuelTanksLayersForActionPhase();
             } else {
                 if (getActionCharacter().getLevelFinished()) {
 					resetTerrain();
@@ -72,6 +73,7 @@ public class Player : MonoBehaviour {
 					manipulationCharacterInstance.setActive(true);
 					FuelTankPickup.activateAllFuelTanks();
 					Audiocontroller.windSound.Stop();
+                    FuelTankPickup.changeAllFuelTanksLayersForManipulationPhase();
                 }
             }
         }
