@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using TerrainUtil;
+
 
 namespace RiverSimulation {
     public class AugementedCalculations : TerrainInterface {

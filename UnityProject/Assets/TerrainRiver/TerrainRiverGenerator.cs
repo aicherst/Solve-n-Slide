@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TerrainUtil;
 
 namespace RiverSimulation {
     public struct MeshData {
@@ -21,9 +22,13 @@ namespace RiverSimulation {
             rivers = new List<MeshData>();
         }
 
-        public void AddMinHeightChange(IntVector2 pos, float newHeight) {
+        public void AddHeightChange(IntVector2 pos, float height) {
+            terrainChangeData[pos] = height;
+        }
+
+        public void AddMaxHeightChange(IntVector2 pos, float newHeight) {
             float oldHeight;
-            if (!terrainChangeData.TryGetValue(pos, out oldHeight) || newHeight < oldHeight) {
+            if (!terrainChangeData.TryGetValue(pos, out oldHeight) || newHeight > oldHeight) {
                 terrainChangeData[pos] = newHeight;
             }
         }
@@ -61,20 +66,36 @@ namespace RiverSimulation {
             Dictionary<IntVector2, float> pointToWaterHeight = new Dictionary<IntVector2, float>();
 
             foreach (List<IntVector2> path in paths) {
+                foreach (IntVector2 pos in path) {
+                    allWaterPoints.Add(pos);
+                }
+            }
+
+
+            foreach (List<IntVector2> path in paths) {
                 IntVector2 nextPos = -IntVector2.one;
+
                 for (int i = path.Count - 1; i >= 0; i--) {
                     IntVector2 pos = path[i];
-                    allWaterPoints.Add(pos);
                     float waterHeight = SurroundingMinHeight(pos, nextPos);
                     float originalHeight = augementedCalculations.GetHeightOfBasePos(pos);
 
                     pointToWaterHeight[pos] = waterHeight;
 
-                    calculationData.AddMinHeightChange(pos, waterHeight - 0.1f);
+                    calculationData.AddHeightChange(pos, waterHeight - 0.02f);
 
-                    //foreach (Neighbour neighbour in augementedCalculations.neighbours) {
-                    //    calculationData.AddMinHeightChange(pos + neighbour.direction, waterHeight + 0.01f);
-                    //}
+                    foreach (Neighbour neighbour in augementedCalculations.neighbours) {
+                        IntVector2 neighbourPos = pos + neighbour.direction;
+                        if (allWaterPoints.Contains(neighbourPos))
+                            continue;
+
+                        float newNeighbourHeight = waterHeight + 0.01f;
+
+                        if (newNeighbourHeight > augementedCalculations.GetHeightOfBasePos(neighbourPos))
+                            continue;
+
+                        calculationData.AddMaxHeightChange(neighbourPos, newNeighbourHeight);
+                    }
                 }
             }
 

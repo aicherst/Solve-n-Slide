@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace RiverSimulation {
+
+namespace TerrainUtil {
     public class TerrainTransform {
         private float realXToTerrainXMultiplier, realZToTerrainYMultiplier;
 
@@ -47,6 +48,10 @@ namespace RiverSimulation {
             return true;
         }
 
+        public Vector3 Rasterize(Vector3 pos) {
+            return new Vector3(TerrainXToRealX(RealXToTerrainX(pos.x)), pos.y, TerrainYToRealZ(RealZToTerrainY(pos.z)));
+        }
+
         // Base functions: real to terrain
 
         public int RealXToTerrainX(float x) {
@@ -60,7 +65,11 @@ namespace RiverSimulation {
         // Base functions: terrain to real
 
         public float TerrainXToRealX(int x) {
-            return x * terrainXToRealXMultiplier + realXYZOffset.x;
+            return TerrainXDistToRealXDist(x) + realXYZOffset.x;
+        }
+
+        public float TerrainXDistToRealXDist(int x) {
+            return x * terrainXToRealXMultiplier;
         }
 
         public float TerrainYToRealZ(int y) {

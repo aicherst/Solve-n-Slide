@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour {
+public class Turret : MonoBehaviour, IDestroyable {
     public Transform muzzle;
     public Transform head;
 
@@ -21,11 +22,18 @@ public class Turret : MonoBehaviour {
 
     private Quaternion baseHeadRotation;
 
-    private void Start() {
+    void Start() {
         baseHeadRotation = Quaternion.Inverse(transform.rotation) * head.rotation;
+
+        ResetTurret();
     }
 
-    private void Update() {
+    public void ResetTurret() {
+        remainingCooldownTime = 0;
+        remainingLockRotationTime = 0;
+    }
+
+    void Update() {
         remainingCooldownTime -= Time.deltaTime;
         remainingLockRotationTime -= Time.deltaTime;
 
@@ -66,15 +74,23 @@ public class Turret : MonoBehaviour {
         return Quaternion.Angle(head.rotation, lookRotation);
     }
 
-    private void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other) {
         if(other.tag == Tags.player) {
             target = other.transform;
         }
     }
 
-    private void OnTriggerExit(Collider other) {
+    void OnTriggerExit(Collider other) {
         if(other.transform == target) {
             target = null;
         }
+    }
+
+    public Vector3 GetPosition() {
+        return transform.position;
+    }
+
+    public void SetDestroyed(bool destroyed) {
+        gameObject.SetActive(!destroyed);
     }
 }

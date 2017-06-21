@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using TerrainUtil;
+using System.Collections.Generic;
 
 namespace RiverSimulation {
     public class TerrainRiverSimulation {

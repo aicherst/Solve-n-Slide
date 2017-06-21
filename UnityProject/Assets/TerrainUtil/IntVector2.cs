@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RiverSimulation {
+namespace TerrainUtil {
     public struct IntVector2 {
         public int x, y;
 

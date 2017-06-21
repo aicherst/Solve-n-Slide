@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TerrainUtil;
 
 namespace RiverSimulation {
     public interface TerrainInterface {
