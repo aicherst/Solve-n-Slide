@@ -23,6 +23,10 @@ public class UIController : MonoBehaviour {
 
     public GameObject loseScreen, winScreen;
 
+    public Sprite keyIconSprite;
+    private Image[] keyIcons;
+    private int lastKeys = 0;
+
     // Use this for initialization
     void Start() {
         fuelBarLeftOffset = fuelBarLeft.transform.position.x;
@@ -54,12 +58,35 @@ public class UIController : MonoBehaviour {
             fuelTankIcons[i].rectTransform.localScale = new Vector3(0.5f, 0.5f);
             fuelTankIcons[i].rectTransform.anchoredPosition = new Vector3(30 - (fuelTankIcons.Length * 60) / 2 + i * 60, 90);
         }
+        keyIcons = new Image[0];
     }
 
     // Update is called once per frame
     void Update() {
         bool fuelHealthEnabled = player.getCurrentPhase() == Player.Phase.ACTION_PHASE && !player.getActionCharacter().getDead() && !player.getActionCharacter().getLevelFinished();
         fuelHealth.SetActive(fuelHealthEnabled);
+
+        if(KeysAndDoors.keys != lastKeys) {
+            lastKeys = KeysAndDoors.keys;
+            for(int i = 0; i < keyIcons.Length; i++) {
+                Destroy(keyIcons[i]);
+            }
+            keyIcons = new Image[KeysAndDoors.keys];
+            for (int i = 0; i < keyIcons.Length; i++) {
+                GameObject go = new GameObject();
+                keyIcons[i] = go.AddComponent<Image>();
+                keyIcons[i].sprite = keyIconSprite;
+                keyIcons[i].rectTransform.anchorMin = new Vector2(0.5f, 0);
+                keyIcons[i].rectTransform.anchorMax = new Vector2(0.5f, 0);
+                keyIcons[i].rectTransform.pivot = new Vector2(0.5f, 0.5f);
+                keyIcons[i].transform.SetParent(GetComponent<Canvas>().transform);
+                keyIcons[i].rectTransform.localScale = new Vector3(0.5f, 0.5f);
+                keyIcons[i].rectTransform.anchoredPosition = new Vector3(30 - (keyIcons.Length * 60) / 2 + i * 60, 120);
+            }
+        }
+        for (int i = 0; i < keyIcons.Length; i++) {
+            keyIcons[i].enabled = fuelHealthEnabled;
+        }
 
         bool manipulationUIEnabled = player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE && !player.getActionCharacter().getDead() && !player.getActionCharacter().getLevelFinished();
         for (int i = 0; i < chargeIcons.Length; i++) {

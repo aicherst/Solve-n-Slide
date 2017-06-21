@@ -1007,6 +1007,7 @@ MonoBehaviour:
   chargeIconSpriteBW: {fileID: 21300000, guid: 8e0bb54a9b4040a4aa9455e7995ba8b1, type: 3}
   loseScreen: {fileID: 1832911474461280}
   winScreen: {fileID: 1378452692660732}
+  keyIconSprite: {fileID: 21300000, guid: 9663412bd36646d468833140a10116cf, type: 3}
 --- !u!114 &114916816681078996
 MonoBehaviour:
   m_ObjectHideFlags: 1
