@@ -10,6 +10,7 @@ TagManager:
   - Key
   - Door
   - FuelTank
+  - Destroyable
   layers:
   - Default
   - TransparentFX
