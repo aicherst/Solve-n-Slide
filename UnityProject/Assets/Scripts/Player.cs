@@ -64,6 +64,7 @@ public class Player : MonoBehaviour {
                 } else if (getActionCharacter().getDead()) {
                     actionCharacterInstance.setActive(true, true);
                     actionCharacterInstance.reset();
+                    Time.timeScale = 1;
 				} else {
 					levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
 					TerrainMarker.activateAllMArkers();

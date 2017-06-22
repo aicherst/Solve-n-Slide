@@ -41,6 +41,7 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
             levelFinished = true;
             characterMovement.Reset();
             Instantiate(finishFirework, transform.position + transform.forward * 30 + Vector3.down, Quaternion.Euler(-90,0,0));
+            Audiocontroller.playReachedGoalSound(transform.position);
         }
 
     }
@@ -81,10 +82,14 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
     private void reduceHealth(int amount) {
         health -= amount;
         if(health <= 0) {
+            Audiocontroller.playDeathSound(transform.position);
             health = 0;
             dead = true;
-            setActive(false, true);
-            characterMovement.Reset();
+            Time.timeScale = 0;
+            //setActive(false, true);
+            //characterMovement.Reset();
+        } else {
+            Audiocontroller.playLoseHealthSound(transform.position);
         }
     }
 
