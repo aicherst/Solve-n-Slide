@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d708115bfc95b944a7d92d9dba6dfb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jetpackSoundPrefab: {fileID: 8300000, guid: 938b0874af6f803409839028a1554690, type: 3}
+  jetpackSoundPrefab: {fileID: 8300000, guid: e30f60663f780f042be61601397f5f4f, type: 3}
   raiseHillSoundPrefab: {fileID: 8300000, guid: 494dbf7f10a7f4b4f9fd1f4bca107e38,
     type: 3}
   lowerHillSoundPrefab: {fileID: 8300000, guid: 494dbf7f10a7f4b4f9fd1f4bca107e38,
@@ -146,4 +146,4 @@ MonoBehaviour:
   reachedGoalSoundPrefab: {fileID: 8300000, guid: 112484982294ec947a3b0e6f36a90594,
     type: 3}
   deathSoundPrefab: {fileID: 8300000, guid: 522fdb3300177cc4ba349720d5590060, type: 3}
-  windSoundPrefab: {fileID: 8300000, guid: e1a16cc6faa71a5498fe9f2b0ac66c9c, type: 3}
+  windSoundPrefab: {fileID: 8300000, guid: 1d5a5006f8af32540937b2d767063cba, type: 3}
