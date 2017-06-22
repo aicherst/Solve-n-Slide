@@ -7,7 +7,7 @@ using UnityEngine;
 public class Jetpack : MonoBehaviour, IJetpack {
     public float strength = 0.25f;
     public float _maxFuel = 100;
-    public float fuelConsumptionRate = 10;
+    public float fuelConsumptionRate = 20;
 
     private float _fuel;
 
