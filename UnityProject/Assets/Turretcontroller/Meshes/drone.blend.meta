@@ -10,15 +10,22 @@ ModelImporter:
     100004: //RootNode
     100006: Sphere
     100008: Rotorblade
+    100010: Bone_001
+    100012: root
+    100014: rotorBlade
     400000: Armature
     400002: Bone
     400004: //RootNode
     400006: Sphere
     400008: Rotorblade
+    400010: Bone_001
+    400012: root
+    400014: rotorBlade
     4300000: Sphere
     7400000: Default Take
     7400002: ArmatureAction
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Sphere
   materials:
     importMaterials: 1
@@ -30,14 +37,13 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: "Avatar creation failed:\n\tCannot find root motion transform
-      'Bone'.\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -49,11 +55,11 @@ ModelImporter:
       takeName: Default Take
       firstFrame: 0
       lastFrame: 4
-      wrapMode: 0
+      wrapMode: 2
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
@@ -85,11 +91,11 @@ ModelImporter:
       takeName: ArmatureAction
       firstFrame: 0
       lastFrame: 4
-      wrapMode: 0
+      wrapMode: 2
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
@@ -157,7 +163,7 @@ ModelImporter:
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
