@@ -75,6 +75,7 @@ public class Player : MonoBehaviour {
 					FuelTankPickup.activateAllFuelTanks();
 					Audiocontroller.windSound.Stop();
                     FuelTankPickup.changeAllFuelTanksLayersForManipulationPhase();
+					KeysAndDoors.activateAllKeysAndDoors();
                 }
             }
         }
