@@ -42,6 +42,10 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
             characterMovement.Reset();
             Instantiate(finishFirework, transform.position + transform.forward * 30 + Vector3.down, Quaternion.Euler(-90,0,0));
             Audiocontroller.playReachedGoalSound(transform.position);
+            SimpleHomingRocket[] rockets = FindObjectsOfType<SimpleHomingRocket>();
+            for (int i = 0; i < rockets.Length; i++) {
+                Destroy(rockets[i].gameObject);
+            }
         }
 
     }
@@ -85,6 +89,10 @@ public class ActionCharacter : MonoBehaviour, ICharacter {
             Audiocontroller.playDeathSound(transform.position);
             health = 0;
             dead = true;
+            SimpleHomingRocket[] rockets = FindObjectsOfType<SimpleHomingRocket>();
+            for (int i = 0; i < rockets.Length; i++) {
+                Destroy(rockets[i].gameObject);
+            }
             Time.timeScale = 0;
             //setActive(false, true);
             //characterMovement.Reset();

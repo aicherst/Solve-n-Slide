@@ -34,5 +34,6 @@ public class KeysAndDoors : MonoBehaviour {
 		for (int i = 0; i < doorObjects.Length; i++) {
 			doorObjects[i].transform.parent.gameObject.SetActive(true);
 		}
+        keys = 0;
 	}
 }

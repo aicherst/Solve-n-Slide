@@ -70,6 +70,8 @@ public class Player : MonoBehaviour {
                 } else if (getActionCharacter().getDead()) {
                     actionCharacterInstance.setActive(true, true);
                     actionCharacterInstance.reset();
+                    FuelTankPickup.activateAllFuelTanks();
+                    KeysAndDoors.activateAllKeysAndDoors();
                     Time.timeScale = 1;
 				} else {
 					levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
@@ -82,6 +84,10 @@ public class Player : MonoBehaviour {
 					Audiocontroller.windSound.Stop();
                     FuelTankPickup.changeAllFuelTanksLayersForManipulationPhase();
 					KeysAndDoors.activateAllKeysAndDoors();
+                    SimpleHomingRocket[] rockets = FindObjectsOfType<SimpleHomingRocket>();
+                    for(int i = 0; i < rockets.Length; i++) {
+                        Destroy(rockets[i].gameObject);
+                    }
                 }
             }
         }
