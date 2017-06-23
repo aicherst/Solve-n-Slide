@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManipulationCharacter : MonoBehaviour {
     public int charges = 5, maxCharges = 5;
-	private static int fuelTanks = 3, maxFuelTanks = 3;
+	public int fuelTanks = 3, maxFuelTanks = 3;
 
 	private static Terrain levelTerrain;
 	private int xResolution;
@@ -211,8 +211,8 @@ public class ManipulationCharacter : MonoBehaviour {
 
     public int getCharges() { return charges; }
     public int getMaxCharges() { return maxCharges; }
-	public static int getFuelTanks() { return fuelTanks; }
-	public static int getMaxFuelTanks() { return maxFuelTanks; }
+	public int getFuelTanks() { return fuelTanks; }
+	public int getMaxFuelTanks() { return maxFuelTanks; }
 	public static ManipulationPhase getCurrentManipulationPhase() { return currentManipulationPhase; }
 	public static Terrain getLevelTerrain() { return levelTerrain; }
 

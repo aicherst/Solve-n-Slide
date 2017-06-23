@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour {
             chargeIcons[i].rectTransform.anchoredPosition = new Vector3(30-(chargeIcons.Length*60)/2+i*60, 35);
         }
 
-        fuelTankIcons = new Image[ManipulationCharacter.getMaxFuelTanks()];
+        fuelTankIcons = new Image[player.getManipulationCharacter().getMaxFuelTanks()];
         for (int i = 0; i < fuelTankIcons.Length; i++) {
             GameObject go = new GameObject();
             fuelTankIcons[i] = go.AddComponent<Image>();
@@ -123,7 +123,7 @@ public class UIController : MonoBehaviour {
                 }
             }
             for (int i = 0; i < fuelTankIcons.Length; i++) {
-                if (i < ManipulationCharacter.getFuelTanks()) {
+                if (i < player.getManipulationCharacter().getFuelTanks()) {
                     fuelTankIcons[i].sprite = fuelTankIconSprite;
                 } else {
                     fuelTankIcons[i].sprite = fuelTankIconSpriteBW;

@@ -22,24 +22,30 @@ public class Player : MonoBehaviour {
 	private float[,,] alphaMapBackup;
 
     void Awake() {
+        levelTerrain = Terrain.activeTerrain;
+
+        alphaMapWidth = levelTerrain.terrainData.alphamapWidth;
+        alphaMapHeight = levelTerrain.terrainData.alphamapHeight;
+
+        heightMapBackup = levelTerrain.terrainData.GetHeights(0, 0, levelTerrain.terrainData.heightmapWidth, levelTerrain.terrainData.heightmapHeight);
+        alphaMapBackup = levelTerrain.terrainData.GetAlphamaps(0, 0, alphaMapWidth, alphaMapHeight);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        actionCharacterInstance = Instantiate(actionCharacterPrefab, transform.position, transform.rotation).GetComponent<ActionCharacter>();
+        actionCharacterInstance = FindObjectOfType<ActionCharacter>();
+        if(actionCharacterInstance == null)
+            actionCharacterInstance = Instantiate(actionCharacterPrefab, transform.position, transform.rotation).GetComponent<ActionCharacter>();
         actionCharacterInstance.setActive(false, false);
-        manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, transform.position, transform.rotation).GetComponent<ManipulationCharacter>();
+
+        manipulationCharacterInstance = FindObjectOfType<ManipulationCharacter>();
+        if(manipulationCharacterInstance == null)
+            manipulationCharacterInstance = Instantiate(manipulationCharacterPrefab, transform.position, transform.rotation).GetComponent<ManipulationCharacter>();
         manipulationCharacterInstance.setActive(true);
     }
 
         // Use this for initialization
     void Start () {		
 		//for terrain
-		levelTerrain = Terrain.activeTerrain;
-
-		alphaMapWidth = levelTerrain.terrainData.alphamapWidth;
-		alphaMapHeight = levelTerrain.terrainData.alphamapHeight;
-
-		heightMapBackup = levelTerrain.terrainData.GetHeights(0, 0, levelTerrain.terrainData.heightmapWidth, levelTerrain.terrainData.heightmapHeight);
-		alphaMapBackup = levelTerrain.terrainData.GetAlphamaps(0, 0, alphaMapWidth, alphaMapHeight);
 	}
 	
 	void OnApplicationQuit () {
