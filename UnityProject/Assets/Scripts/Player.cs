@@ -63,6 +63,11 @@ public class Player : MonoBehaviour {
 				actionCharacterInstance.setActive(true, true);
 				Audiocontroller.windSound.Play();
                 FuelTankPickup.changeAllFuelTanksLayersForActionPhase();
+
+                RiverSimulation.TerrainRiver[] terrainRivers = FindObjectsOfType<RiverSimulation.TerrainRiver>();
+                foreach(RiverSimulation.TerrainRiver terrainRiver in terrainRivers) {
+                    terrainRiver.DestroyIntersectingDestroyables();
+                }
             } else {
                 if (getActionCharacter().getLevelFinished()) {
 					resetTerrain();
@@ -87,6 +92,10 @@ public class Player : MonoBehaviour {
                     SimpleHomingRocket[] rockets = FindObjectsOfType<SimpleHomingRocket>();
                     for(int i = 0; i < rockets.Length; i++) {
                         Destroy(rockets[i].gameObject);
+                    }
+                    RiverSimulation.TerrainRiver[] terrainRivers = FindObjectsOfType<RiverSimulation.TerrainRiver>();
+                    foreach (RiverSimulation.TerrainRiver terrainRiver in terrainRivers) {
+                        terrainRiver.ResetIntersectingDestroyables();
                     }
                 }
             }

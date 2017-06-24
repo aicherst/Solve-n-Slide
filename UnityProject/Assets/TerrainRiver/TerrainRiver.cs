@@ -26,7 +26,7 @@ namespace RiverSimulation {
 
         private GameObject[] destroyables;
 
-        private void Awake() {
+        void Awake() {
             if (terrain == null)
                 terrain = Terrain.activeTerrain;
         }
@@ -43,18 +43,6 @@ namespace RiverSimulation {
             Simulate();
         }
 
-        //void Update() {
-        //    int startX = (int)transform.position.x;
-        //    int startY = (int)transform.position.z;
-
-        //    if (startX != lastStartX || startY != lastStartY) {
-        //        Simulate();
-
-        //        lastStartY = startY;
-        //        lastStartX = startX;
-        //    }
-        //}
-
         public void Simulate() {
             Clear();
 
@@ -67,11 +55,9 @@ namespace RiverSimulation {
             terrainRiverGenerator.SetTargetHeight(targetHeight);
 
             CreateWaterBodies();
-
-            DestroyIntersectingDestroyables();
         }
 
-        private void DestroyIntersectingDestroyables() {
+        public void DestroyIntersectingDestroyables() {
             foreach (GameObject gObject in destroyables) {
                 Vector3 position = gObject.GetComponent<IDestroyable>().GetPosition();
 
@@ -85,14 +71,18 @@ namespace RiverSimulation {
             }
         }
 
-        private void Clear() {
+        public void ResetIntersectingDestroyables() {
+            foreach (GameObject gObject in destroyables) {
+                gObject.GetComponent<IDestroyable>().SetDestroyed(false);
+            }
+        }
+
+        public void Clear() {
             List<GameObject> children = new List<GameObject>();
             foreach (Transform child in gWaterBodyParent.transform) children.Add(child.gameObject);
             children.ForEach(child => Destroy(child));
 
-            foreach (GameObject gObject in destroyables) {
-                gObject.GetComponent<IDestroyable>().SetDestroyed(false);
-            }
+            ResetIntersectingDestroyables();
 
             ResetTerrain();
         }

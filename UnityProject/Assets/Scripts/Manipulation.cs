@@ -49,7 +49,16 @@ public class Manipulation : MonoBehaviour {
 
 
 	private void manipulateTerrainArea (Vector3 point, int lenx, int lenz, bool raise) {
-		int areax;
+        {
+            RiverSimulation.TerrainRiver[] terrainRivers = FindObjectsOfType<RiverSimulation.TerrainRiver>();
+            foreach (RiverSimulation.TerrainRiver terrainRiver in terrainRivers) {
+                terrainRiver.Clear();
+            }
+        }
+
+
+
+        int areax;
 		int areaz;
 		int terX = (int)((point.x / levelTerrain.terrainData.size.x) * xResolution);
 		int terZ = (int)((point.z / levelTerrain.terrainData.size.z) * zResolution);
@@ -81,5 +90,12 @@ public class Manipulation : MonoBehaviour {
 			}
 		}
 		levelTerrain.terrainData.SetHeights(terX, terZ, heights);
-	}
+
+        {
+            RiverSimulation.TerrainRiver[] terrainRivers = FindObjectsOfType<RiverSimulation.TerrainRiver>();
+            foreach (RiverSimulation.TerrainRiver terrainRiver in terrainRivers) {
+                terrainRiver.Simulate();
+            }
+        }
+    }
 }
