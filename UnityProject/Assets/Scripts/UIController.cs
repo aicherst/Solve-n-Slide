@@ -27,6 +27,9 @@ public class UIController : MonoBehaviour {
     private Image[] keyIcons;
     private int lastKeys = 0;
 
+    public GameObject manipulationInfo;
+    public GameObject actionInfo;
+
     // Use this for initialization
     void Start() {
         fuelBarLeftOffset = fuelBarLeft.transform.position.x;
@@ -87,6 +90,7 @@ public class UIController : MonoBehaviour {
         for (int i = 0; i < keyIcons.Length; i++) {
             keyIcons[i].enabled = fuelHealthEnabled;
         }
+        actionInfo.SetActive(fuelHealthEnabled);
 
         bool manipulationUIEnabled = player.getCurrentPhase() == Player.Phase.MANIPULATION_PHASE && !player.getActionCharacter().getDead() && !player.getActionCharacter().getLevelFinished();
         for (int i = 0; i < chargeIcons.Length; i++) {
@@ -96,6 +100,7 @@ public class UIController : MonoBehaviour {
             fuelTankIcons[i].enabled = manipulationUIEnabled;
         }
         crosshair.enabled = manipulationUIEnabled;
+        manipulationInfo.SetActive(manipulationUIEnabled);
 
         if (player.getCurrentPhase() == Player.Phase.ACTION_PHASE) {
             float fuel = player.getActionCharacter().getFuel();
