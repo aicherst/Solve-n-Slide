@@ -450,5 +450,29 @@
 	 	\caption{Fuel- and healthbars}
 	 	\label{fig:fuelAndHealth}
 	 \end{figure}
+	 \subsection{Terrain Manipulation}
+	 \subsubsection{Better Terrain Manipulation}
+	 The terrain manipulation was improved by a better formula. Instead of increasing the terrain like a pyramid, the terrain calculates the change like a half sphere and adds it to the terrain. There is also now a highlighted area with which the player can better determine how much he/she is going to change.
+	 
+	 \subsubsection{Regain Charges (Undo Option)}
+	 To enable an undo option in this type of game, we had to place a marker with the exact position of the change. If the marker is clicked with the opposite terrain modification then the terrain is changed back and one charge is regained. 
+	 
+	 If the player switches from the manipulation phase to the action phase or vice versa. The markers need to be deactivated or reactivated. In order to do this, the markers are stored in an updated list, from which all markers are accessible. 
+	 
+	 \subsubsection{Unmodifiable Terrain}
+	 In order to determine which terrain is modifiable and to make it easy for the developers to create a level, we added unmodifiable textures for each used texture we have. Areas that can't be modified in the manipulation phase are shown with a reddish color. If a player tries to change a piece of terrain, the algorithm checks which texture is hit and if it is one of the unmodifiable terrains then nothing will happen. As the player switches to the action phase the unmodifiable textures are replaced by their respective "normal" textures, for aesthetic reasons. 
+	 
+	 \subsubsection{Terrain Characteristics}
+	 Different terrain textures have different friction which influences the speed of the player. If the player is touching the terrain, it will be determined on which texture the player stands and the appropriate friction will be used for the speed calculation of the player.
+	 
+	 \subsection{Miscellaneous}
+	 \subsubsection{Fuel Tanks}
+	 The player can now place fuel tanks, for him to pick up in the action phase. Fuel tanks can be placed in the manipulation phase, which now has two modes. In the first mode the player can manipulate the terrain and in the second he/she can place the fuel tanks. Fuel tanks can be placed anywhere in the map, they are placed a few meters in front of the player.
+	 
+	 \subsubsection{Doors and Keys}
+	 In the game there are now levels, which use keys and doors. Keys and doors are already placed by the developer and can't be moved by the player in the manipulation phase. The player has to pick up the keys in the action phase in order to open the doors, which are represented as a forcefield and block important areas like the path to the goal.
+	 
+	 \subsubsection{Sound Effects}
+	 Sound effects were added to the game, which are realized by a musicbox object in the game. For the wind sound effect we used a script to determine how fast the player is, to adjust the volume of the sound effect, with which the player gets a better feeling how fast he currently is. 
 	
 \end{document}
