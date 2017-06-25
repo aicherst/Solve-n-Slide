@@ -40,7 +40,7 @@
 \title{Solve'n Slide}
 \subtitle{Project Notebook}
 \author{Hanieh Arjomand-Fard\\Kevin Sawischa\\Markus Ansorge\\Stefan Aicher}
-\date{30. April 2017}
+\date{26. June 2017}
 
 \begin{document}
 	
@@ -366,5 +366,89 @@
 		\caption{Terrain river with manipulation}
 		\label{fig:river2}
 	\end{figure}
+	
+	\newpage
+	\section{Alpha Report}
+	\subsection{Modeling and Animation}
+	I made two new models. A drone and a key. The drone is supposed to be used during the manipulation phase. It can rotate its rotor blades (as one mesh) by having one bone attached to it. The animation is done in Blender goes over 5 frames. The two rotor blades are basically doing two 180 degree rotations around the z-axis. So the there are two keyframes: One is set at 1 and the last at 5 frames.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=.3]{images//alpha/droneBone}
+		\caption{Bone of drone propeller}
+	\end{figure}
+	No script is used for the animation. Since Unity needs a root bone what was new to me I had to add one to get it work.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=.6]{images//alpha/drone}
+		\caption{Textured drone}
+	\end{figure}
+	A further model is the key that the player will need to open certain doors. The texture and the normalmap were done in Gimp.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=.4]{images//alpha/keycardModel}
+		\caption{Keycard}
+	\end{figure}
+	The animation of the character is also done completely in Blender. An amature sticks to the mesh. Certain mesh parts are weight painted so that the correct mesh part refers to the correct bone when moving.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=.5]{images//alpha/boneWeights}
+		\caption{Bone weights}
+	\end{figure}
+	So in this case the bone of the left arm let the left arm of the mesh move smoothly.
+	
+	First the mesh itself was too big for the scene in Unity. Scaling it down along with the armature caused suddenly some issues with the uv-coordinates. The texture coordinates of the mesh were reset for some reason and I had to reassign them again. Due to the "transfer uv-map"-function it was possible to transfer the correct uv-map that was assigned to an old model to the new animated model with the wrong uv-coordinates.
+	
+	The different poses that the model can enter are all done in one whole animation frame. The poses are states, representing: flying forward, neutral, flying backwards, flying sidewards, falling, flying upwards.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=.7]{images//alpha/allAnimations}
+		\caption{All postures}
+	\end{figure}
+	The respective frames will be accessed via script.
+	
+	\subsection{Particle Effects}
+	As a desirable target particle effects were added to game. They were created with the help of the in-built particle system of Unity. Figure \ref{fig:rocketTrail} shows the propulsion fire and a smoke trail that is left behind for a few seconds. The rocket explodes either after a time limit is reach or as soon as it comes in contact with object (Figure \ref{fig:explosion}). 
+	
+	If the player manages to win a level a firework particle system is spawned (Figure \ref{fig:fireworks}). The specific characteristic of the latter is that a shot particle spawns an additional particle system upon death. 
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{ccc}
+			\subfloat[Rocket trail fire FX]{\includegraphics[scale=0.5]{images/alpha/RocketTrailFireFX}\label{fig:rocketTrail}}&
+			\subfloat[Explosion FX]{\includegraphics[scale=0.5]{images/alpha/ExplosionFX}\label{fig:explosion}}&
+			\subfloat[Fireworks FX]{\includegraphics[scale=0.5]{images/alpha/FireworksFX}\label{fig:fireworks}}
+		\end{tabular}
+		\caption{Second Level}
+	\end{figure}
+	
+	\subsection{User Interface}
+	Another important part of our desirable target was a proper UI. This includes both a nice main menu, as well as a fancy display of ingame information like fuel and health.
+	
+	 The concept of the main menu was to have a 3D scene with all available levels arranged around the camera, which is freely controllable by the player. This is a nice way to display the variety of different terrains and our player models. Furthermore the are basic buttons like \textit{Options} and \textit{Exit}. A first draft of the main menu can be seen in Figure \ref{fig:mainMenu}.
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[scale=.17]{images//alpha/mainMenu}
+	 	\caption{First draft of main menu}
+	 	\label{fig:mainMenu}
+	 \end{figure}
+	 
+	 For our ingame UI we needed three different icons representing the number of terrain manipulation charges, the amount of placeable fueltanks and the collected keys. These can be seen in Figure \ref{fig:icons}. The charge and fueltank icons turn black and white once the player used one of them.
+	 \begin{figure}[H]
+	 	\centering
+	 	\begin{tabular}{ccc}
+	 		\subfloat[Charge icon]{\includegraphics[]{images/alpha/chargeIcon}\label{fig:chargeIcon}}&
+	 		\subfloat[Fueltank icon]{\includegraphics[]{images/alpha/fuelTankIcon}\label{fig:fuelTankIcon}}&
+	 		\subfloat[Key icon]{\includegraphics[]{images/alpha/keyIcon}\label{fig:keyIcon}}
+	 	\end{tabular}
+	 	\caption{Ingame UI icons}
+	 	\label{fig:icons}
+	 \end{figure}
+	 
+	 The last part of the ingame UI is to display fuel- and healthbars. These can be seen in Figure \ref{fig:fuelAndHealth}. In Unity the obvious solution for these would be to have filled sprites, but the problem with this method is the vertical edge, which looks wrong for this layout. Instead the individual bars were moved left and right and then masked to only show the visible are and prevent them from overlapping.
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[scale=.8]{images//alpha/fuelHealthBar}
+	 	\caption{Fuel- and healthbars}
+	 	\label{fig:fuelAndHealth}
+	 \end{figure}
 	
 \end{document}
