@@ -68,6 +68,10 @@ public class Player : MonoBehaviour {
                 foreach(RiverSimulation.TerrainRiver terrainRiver in terrainRivers) {
                     terrainRiver.DestroyIntersectingDestroyables();
                 }
+                Turret[] turrets = FindObjectsOfType<Turret>();
+                foreach (Turret turret in turrets) {
+                    turret.ResetTurret();
+                }
             } else {
                 if (getActionCharacter().getLevelFinished()) {
 					resetTerrain();
@@ -97,6 +101,7 @@ public class Player : MonoBehaviour {
                     foreach (RiverSimulation.TerrainRiver terrainRiver in terrainRivers) {
                         terrainRiver.ResetIntersectingDestroyables();
                     }
+
                 }
             }
         }

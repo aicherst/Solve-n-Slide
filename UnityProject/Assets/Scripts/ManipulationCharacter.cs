@@ -22,11 +22,14 @@ public class ManipulationCharacter : MonoBehaviour {
 
 	public GameObject manipulationSelectorPrefab;
 	public static GameObject manipulationSelector;
+	public GameObject fuelTankSelectorPrefab;
+	public static GameObject fuelTankSelector;
 
     private bool active;
 
     void Awake() {
-        manipulationSelector = Instantiate(manipulationSelectorPrefab);
+		manipulationSelector = Instantiate(manipulationSelectorPrefab);
+		fuelTankSelector = Instantiate(fuelTankSelectorPrefab);
     }
 
 	void Start () {
@@ -39,20 +42,33 @@ public class ManipulationCharacter : MonoBehaviour {
 
 	void Update () {
         if (active) {
-            RaycastHit hit2;
-            Ray ray2 = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            if (Physics.Raycast(ray2, out hit2)) {
-                if (hit2.collider.gameObject.layer == 8) {
-                    manipulationSelector.transform.position = hit2.point + Vector3.up * 50;
-                }
-            }
+			if (currentManipulationPhase == ManipulationPhase.CHANGE_TERRAIN) {
+				RaycastHit hit2;
+				Ray ray2 = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+				if (Physics.Raycast(ray2, out hit2)) {
+					if (hit2.collider.gameObject.layer == 8) {
+						manipulationSelector.transform.position = hit2.point + Vector3.up * 50;
+					}
+				}
+			}
+			else if (currentManipulationPhase == ManipulationPhase.FUELTANK_PLACEMENT) {
+				fuelTankSelector.transform.position = transform.position + transform.Find("EgoCamera").transform.forward * 5f;
+				if (fuelTanks == 0) {
+					fuelTankSelector.transform.Find("fueltank").GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.5f);
+				}
+				else {
+					fuelTankSelector.transform.Find("fueltank").GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.5f);
+				}
+			}
 
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) {
                 currentManipulationPhase = ManipulationPhase.CHANGE_TERRAIN;
-                manipulationSelector.SetActive(true);
+				manipulationSelector.SetActive(true);
+				fuelTankSelector.SetActive(false);
             } else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) {
                 currentManipulationPhase = ManipulationPhase.FUELTANK_PLACEMENT;
-                manipulationSelector.SetActive(false);
+				manipulationSelector.SetActive(false);
+				fuelTankSelector.SetActive(true);
             }
 
             if (currentManipulationPhase == ManipulationPhase.CHANGE_TERRAIN) {
@@ -107,7 +123,7 @@ public class ManipulationCharacter : MonoBehaviour {
                 //place fueltank
                 if (Input.GetMouseButtonDown(0) && fuelTanks >= 1) {
                     fuelTanks--;
-					GameObject currentFuelTank = Instantiate(fuelTankObject, transform.position + transform.forward * 5f + Vector3.up, Quaternion.identity);
+					GameObject currentFuelTank = Instantiate(fuelTankObject, transform.position + transform.Find("EgoCamera").transform.forward * 5f, Quaternion.identity);
 					Audiocontroller.playFuelTankPlacementSound(gameObject.transform.position);
 					FuelTankPickup.fuelTanks.Add(currentFuelTank);
                 }
