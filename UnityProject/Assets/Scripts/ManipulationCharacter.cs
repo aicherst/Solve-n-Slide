@@ -10,7 +10,7 @@ public class ManipulationCharacter : MonoBehaviour {
 	private int xResolution;
 	private int zResolution;
 
-	private static string[] unmodifiableTerrainNames = { "GrassHillAlbedoUnmodifiable", "GrassRockyAlbedoUnmodifiable" };
+	private static string[] unmodifiableTerrainNames = { "GrassHillAlbedoUnmodifiable", "GrassRockyAlbedoUnmodifiable", "sand_colorUnmodifiable" };
 
 	public enum ManipulationPhase {
 		CHANGE_TERRAIN, FUELTANK_PLACEMENT

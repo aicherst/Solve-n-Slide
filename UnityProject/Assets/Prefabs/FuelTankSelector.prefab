@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33784917542997798}
   - component: {fileID: 23307505105270702}
   - component: {fileID: 95221123994872842}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: fueltank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,9 +39,9 @@ GameObject:
   - component: {fileID: 4631666174178950}
   - component: {fileID: 136214917294446330}
   - component: {fileID: 23688346155638574}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: FuelTank
-  m_TagString: FuelTank
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
