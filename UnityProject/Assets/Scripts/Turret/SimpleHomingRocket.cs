@@ -51,10 +51,8 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
         transform.position += veclocity * Time.deltaTime;
     }
 
-    private float damage {
-        get {
-            return damageFallOffCurve.Evaluate(Vector3.Distance(target.position, transform.position)) * maxDamage;
-        }
+    private float CalculateDamage() {
+        return damageFallOffCurve.Evaluate(Vector3.Distance(target.position, transform.position)) * maxDamage;
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -75,7 +73,10 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
         Destroy(gExplosion, 3);
 
         ICharacter character = target.GetComponent<ICharacter>();
-        if(character != null) {
+
+        float damage = CalculateDamage();
+
+        if (character != null || damage <= 0) {
             character.damage(damage);
         }
     }

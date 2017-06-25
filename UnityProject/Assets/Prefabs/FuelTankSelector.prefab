@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 136214917294446330}
   - component: {fileID: 23688346155638574}
   m_Layer: 2
-  m_Name: FuelTank
+  m_Name: FuelTankSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

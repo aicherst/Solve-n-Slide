@@ -82,7 +82,12 @@ public class Player : MonoBehaviour {
                     FuelTankPickup.activateAllFuelTanks();
                     KeysAndDoors.activateAllKeysAndDoors();
                     Time.timeScale = 1;
-				} else {
+
+                    Turret[] turrets = FindObjectsOfType<Turret>();
+                    foreach (Turret turret in turrets) {
+                        turret.ResetTurret();
+                    }
+                } else {
 					levelTerrain.terrainData.SetAlphamaps(0, 0, alphaMapBackup);
 					TerrainMarker.activateAllMArkers();
 					currentPhase = Phase.MANIPULATION_PHASE;

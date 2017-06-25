@@ -22,7 +22,11 @@ public class Turret : MonoBehaviour, IDestroyable {
 
     private Quaternion baseHeadRotation;
 
+    private Quaternion initalRotation;
+
     void Start() {
+        initalRotation = head.rotation;
+
         baseHeadRotation = Quaternion.Inverse(transform.rotation) * head.rotation;
 
         ResetTurret();
@@ -31,6 +35,9 @@ public class Turret : MonoBehaviour, IDestroyable {
     public void ResetTurret() {
         remainingCooldownTime = 0;
         remainingLockRotationTime = 0;
+        target = null;
+
+        head.rotation = initalRotation;
     }
 
     void Update() {
