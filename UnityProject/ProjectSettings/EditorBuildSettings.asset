@@ -13,4 +13,13 @@ EditorBuildSettings:
     guid: 5c55279ba2c7ad640a048c898819ee18
   - enabled: 1
     path: Assets/KevinsFirstLevel/KevinsFirstLevel.unity
+    guid: ec96035872b6257458b4d3e5041ab86c
+  - enabled: 1
+    path: Assets/Scenes/StefanNewLevel/StefanNewLevel.unity
+    guid: 12572c9741cc6cd49ae68f5f3cd6f144
+  - enabled: 1
+    path: Assets/Scenes/MarkusLevel/MarkusLevel.unity
+    guid: fbdde69fa30ff0f4292a45f42fe6212c
+  - enabled: 1
+    path: Assets/Scenes/KevinsThirdLevel/KevinsThirdLevel.unity
     guid: 00000000000000000000000000000000

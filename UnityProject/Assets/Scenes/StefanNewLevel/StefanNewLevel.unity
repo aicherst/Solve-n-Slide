@@ -334,6 +334,16 @@ Prefab:
       propertyPath: maxFuelTanks
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114455061102757518, guid: 1925d9a2db79eea4fb41fcd00d001fcb,
+        type: 2}
+      propertyPath: sensitivityX
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114455061102757518, guid: 1925d9a2db79eea4fb41fcd00d001fcb,
+        type: 2}
+      propertyPath: sensitivityY
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1925d9a2db79eea4fb41fcd00d001fcb, type: 2}
   m_IsPrefabParent: 0
