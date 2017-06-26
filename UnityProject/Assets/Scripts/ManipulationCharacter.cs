@@ -238,6 +238,7 @@ public class ManipulationCharacter : MonoBehaviour {
         GetComponentInChildren<AudioListener>().enabled = a;
         GetComponentInChildren<ManipulationCamera>().enabled = a;
         manipulationSelector.SetActive(a);
+		fuelTankSelector.SetActive(a);
     }
 
     public void reset() {
