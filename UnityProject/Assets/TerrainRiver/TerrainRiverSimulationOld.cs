@@ -57,6 +57,9 @@ namespace RiverSimulation {
 
                 int endPos = path.Count - 1;
 
+                if (endPos == 0)
+                    continue;
+
                 WaterBody startWaterBody;
                 if (posToWaterBody.TryGetValue(path[0], out startWaterBody)) {
                     WaterBody endWaterBody;
