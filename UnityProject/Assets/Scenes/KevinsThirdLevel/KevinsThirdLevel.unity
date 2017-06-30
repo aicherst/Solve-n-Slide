@@ -502,6 +502,12 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114059246587389854, guid: fd29306f6c42c7d42a5a20fa04355832,
+        type: 2}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 1424532136811378, guid: d83d352744565c7439f0b603dea2e56b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd29306f6c42c7d42a5a20fa04355832, type: 2}
   m_IsPrefabParent: 0
@@ -658,6 +664,12 @@ Prefab:
       propertyPath: m_Name
       value: RocketTurret (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114059246587389854, guid: fd29306f6c42c7d42a5a20fa04355832,
+        type: 2}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 1424532136811378, guid: d83d352744565c7439f0b603dea2e56b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd29306f6c42c7d42a5a20fa04355832, type: 2}
   m_IsPrefabParent: 0
@@ -762,6 +774,12 @@ Prefab:
       propertyPath: m_Name
       value: RocketTurret (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114059246587389854, guid: fd29306f6c42c7d42a5a20fa04355832,
+        type: 2}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 1424532136811378, guid: d83d352744565c7439f0b603dea2e56b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd29306f6c42c7d42a5a20fa04355832, type: 2}
   m_IsPrefabParent: 0
@@ -862,6 +880,12 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -115.324005
       objectReference: {fileID: 0}
+    - target: {fileID: 114059246587389854, guid: fd29306f6c42c7d42a5a20fa04355832,
+        type: 2}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 1424532136811378, guid: d83d352744565c7439f0b603dea2e56b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd29306f6c42c7d42a5a20fa04355832, type: 2}
   m_IsPrefabParent: 0
@@ -1120,6 +1144,12 @@ Prefab:
       propertyPath: m_Name
       value: RocketTurret (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114059246587389854, guid: fd29306f6c42c7d42a5a20fa04355832,
+        type: 2}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 1424532136811378, guid: d83d352744565c7439f0b603dea2e56b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd29306f6c42c7d42a5a20fa04355832, type: 2}
   m_IsPrefabParent: 0
@@ -1270,6 +1300,12 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114059246587389854, guid: fd29306f6c42c7d42a5a20fa04355832,
+        type: 2}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 1424532136811378, guid: d83d352744565c7439f0b603dea2e56b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd29306f6c42c7d42a5a20fa04355832, type: 2}
   m_IsPrefabParent: 0
