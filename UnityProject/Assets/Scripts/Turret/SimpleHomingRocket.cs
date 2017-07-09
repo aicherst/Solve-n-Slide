@@ -77,7 +77,7 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
         float damage = CalculateDamage();
 
         if (character != null || damage <= 0) {
-            character.damage(damage);
+            character.Damage(damage);
         }
     }
 
