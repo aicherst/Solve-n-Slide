@@ -516,6 +516,68 @@
 	 \subsection{Controls}
 	 For people familiar with computer games controlled by keyboard and mouse the inputs for the action phase were very intuitive. Only complaints were that the movement on the ground was too sluggish and there wasn't enough control, so we might have to rethink the way our movement works. One tester wished there was a way to restart the action phase with one button press (e.g. 'R') instead of switching to the manipulation phase and back again, which can be easily implemented.
 	 
-	 Since some information regarding key bindings were not mentioned in the info text, we had to explain some of them to our testers. Once they knew all the bindings, the control for the manipulation phase was quite clear for them. They were not as intuitive as the ones in the action phase, but the were manageable. Some people would prefer to control the height of the character either with a combination of shift/ctrl/space or by moving in the direction you are looking at. Furthermore most testers had troubles undoing terrain manipulations or placed fuel tanks so there is the need of fine tuning.
+	 Since some information regarding key bindings for the manipulation phase were not mentioned in the info text, we had to explain some of them to our testers. Once they knew all the bindings, the control for the manipulation phase was quite clear for them. They were not as intuitive as the ones in the action phase, but they were still manageable. Some people would prefer to control the height of the character either with a combination of shift/ctrl/space or by moving in the direction you are looking at. Furthermore most testers had troubles undoing terrain manipulations or placed fuel tanks so there is the need of fine tuning, which already happened to a certain degree.
+	 
+	 \subsection{Gameplay}
+	 There were some issues that occurred during the game.
+	 One is that the main part of scripting was done within the Update function instead of FixedUpdate. So it happed on very fast computers that the character or the camera moved too fast due to high fps.
+	 Before starting the actual game one has the choice between several screen resolutions and graphics qualities. It happened sometimes that the game crashed when having selected the fastest setting or even in the opposite case when the game crashed on anything but "fantastic".
+	 The drone's height-value is constant but some mountains are higher and so the drone just flies through the mountain without letting the player look at that mountain. It can also happen that some fuel tanks can land under the terrain or outside map when placing them.
+	 An obvious bug is the fact that one can bury the character during the manipulation phase. When switching to the action phase the character falls through the ground. The goal can be buried aswell and thus the level is not completable. Some thought it is a bug that one can bury the turrets too but it can also be seen as a possibility to reach the goal in this certain way. When the turret is buried the rockets can not go fly through. When pressing "2" to place a fuel tank the fuel tank appears every time when starting a level until the player presses "1".
+	 
+	 \subsection{Leveldesign}
+	 \textbf{First level:}
+	 The manipulation phase was too short since one couldn't really do anything. The player is some kind of cursed with dissipation of time by having tried a lot of different buttons (except of enter to switch the phase) without getting any further. This level also felt a bit "lonely" due to a lack of decoration, for example missing trees. Since the first level is a tutorial there should be definitely be the hint that says to press enter to switch the phase.
+	 Then entering the action phase the player was a bit surprised that he is suddenly starting to fly around. Some also got reminded of the game Tribes.
+	 The character's initial position is too deep into the ground. So to start moving the player had to press the moving button a while. This loaded the momentum really high and gave the character all of a sudden really high velocities.
+	 At the end the players were able to complete the level successfully. Some didn't like the design of the goal marker.
+	 
+	 \textbf{Second Level:}
+	 Some players had some problems with the second level and also said it was the hardest level, which needs to be adjusted since it is also a tutorial level.
+	 
+	 \textbf{Third Level:}
+	 The idea of the key design was to design some kind of a futuristic key. But it wasn't recognized as this and the players got confused. They thought it is a chip or even a mini drawn map. At the first glance some even considered the key to be the goal.
+	 We planned that one has to collect the key and then be able to fly through the blue wall in order to reach the goal. But after flying randomly along the map the players got to the goal without having collected the key.
+	 Most players were a bit overwhelmed. They felt left alone with the whole terrain. The blue wall was a mystery, icons were too. When flying they didn't realize that they are out of fuel.
+	 
+	 \textbf{Fourth Level:}
+	 Because of the bug that on fast computers the character moved too fast, this level was solved too easily and on slow computers this level was way harder than it was intended.
+	 
+	 \textbf{Fifth Level:}
+	 Some wished the level to have better light effects light better ambient lighting.
+	 
+	 \textbf{All in all:}
+	 In each level the amount of jetpacks is different. Some thought that this was a bug. But we did it on purpose as we wanted to adjust the balancing. The player liked that there were different ways to reach the goal in each level. But still each level was too easy to solve.
+	 
+	 \subsection{Balancing}
+	 The overall average balancing and difficulty of the game is alright, but it still needs a lot of work, because it has a wide range of different opinions. Like some levels are too easy and some are too hard. We need to work on these to get to a better average result of opinions.
+	 We also still have a lot of inconsistency in our levels, like different amounts of fuel in the jetpack, different settings for the turrets, etc. which need to be equated or to be shown properly to the player so that he has a better understanding for the map.
+	 Another important issue was the fact that the collision box of the fuel tanks and the keys were not really big enough. That is because the player doesn't have an absolute control where he is sliding/flying and often just flies a few meters by the fuel tank / key. Which is why the collision box needs to be much bigger than the mesh object itself.
+	 Our goal for balancing will be, that the player has a good time and the game will not be too hard, but still has enough challenges so that he/she still has to think about the problems and doesn't get bored too easily.
+	 
+	 \subsection{Sound effects}
+	 As seen in Figure \ref{fig:sound}, the testers were not impressed by the sound effects, but still think that overall it was alright, and was also clear which sound was produced by which action.
+	 
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[width=\textwidth]{images/playtesting/sound}
+	 	\caption{How did you like the sound effects?}
+	 	\label{fig:sound}
+	 \end{figure}
+	 
+	 The key issues, which need to be fixed, were the following: The sound effects were in some cases too loud, like when the player places the fuel tank in the manipulation phase. There were no sound effects when the turrets shot, when the rockets exploded or when the fuel tank was picked up. And also in enough cases the wind sound was mistaken for the jetpack sound, because the jetpack sound was not playing, and also because the wind sound is not clear enough for some speakers.
+	 
+	 \subsection{Wishes and Suggestions}
+	 We got a lot of different wishes and suggestion in which way we could improve our game. Most of them were for the improvement of the visual/graphical look of the game, to make the game more intuitive/understandable for the player and to add more options for the player and level designer to use so that the game will become more complex.
+	 \bigbreak
+	 The most wished changes were the following:
+	 \begin{itemize}
+	 \item Different difficulties for the game, so that the players don't have a boring or frustrating experience.	
+	 \item A proper tutorial or at least texts with complete explanation what is possible in the game and what the player needs to be aware of.
+	 \item More manipulation options, like the form in which the terrain is changing, or the gadgets you can place around the map.
+	 \item Sound effects which were missing in some cases, as explained in section "Sound effects”.
+	 \item To have an option/mode with which you can place the fuel tank always on the point of the ground which the player is looking.
+	 \end{itemize}
+	 
 	 
 \end{document}
