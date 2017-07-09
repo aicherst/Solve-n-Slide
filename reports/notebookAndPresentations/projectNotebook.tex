@@ -474,5 +474,48 @@
 	 
 	 \subsubsection{Sound Effects}
 	 Sound effects were added to the game, which are realized by a musicbox object in the game. For the wind sound effect we used a script to determine how fast the player is, to adjust the volume of the sound effect, with which the player gets a better feeling how fast he currently is. 
-	
+	 
+	 \section{Playtesting}
+	 After our successful alpha release we temporarily froze the development of our game to build a standalone version of the current status that all of our team members used for playtesting. To summarize the most important aspect of playtesting, which is how much fun the game was, the survey resulted in a solid 3.9/5 for fun and a 4.3/5 for the concept.
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[width=\textwidth]{images/playtesting/fun}
+	 	\caption{How much fun was the game?}
+	 	\label{fig:fun}
+	 \end{figure}
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[width=\textwidth]{images/playtesting/concept}
+	 	\caption{How did you like the concept? }
+	 	\label{fig:concept}
+	 \end{figure}
+	 
+	 \subsection{Testing procedure}
+	 The first goal of our playtesting phase was to find good questions to ask our testers after they played our game. Once we had a good selection of varying questions we created a Google Forms survey which our testers could fill out after playing. In the next step all team members approached friends and families to ask them to participate in the tests. These were conducted in three different ways. 
+	 
+	 The first and best one was to be with the tester in one room in front of a computer running the game (7 times). The advantage of this approach was that we could see exactly what the tester was doing, what his reactions were and if he had trouble with the controls. Furthermore we could, in case of bigger troubles, demonstrate how things work, which gladly only occurred with parents that never played a computer game in their life. The second way was to use Skype with screen sharing (6 times). This still enabled us to see what the tester is doing ingame, however we had to rely on comments from him to determine his emotions and problems. The last way also used Skype but with screen sharing turned off. With this approach we had to completely rely on comments from the testers, which is why we tried to avoid using it (2 times).
+	 
+	 Overall we had 15 participants with 12 of them completing our survey. There were 10 males and only two females, ranging in age from 16 to 27 (see Figure \ref{fig:ageDistribution}) of which all of them considered themselves as relatively good gamers. Even though the survey contains 25 questions we will only cover the ones with an interesting and meaningful result in the following sections. 
+	 
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[width=\textwidth]{images/playtesting/ageDistribution}
+	 	\caption{Age distribution}
+	 	\label{fig:ageDistribution}
+	 \end{figure}
+	 
+	 \subsection{Graphics}
+	 The first part of the game that the player gets to see, the main menu, was one of the most controversial topics of the survey, with at least one vote for each of the five options ranging from \textit{"Did not like at all"} to \textit{"Liked it a lot"}. However on average people tended to rather like it than dislike it with an rating of 3.3/5. The reasons for disliking it were mostly that the level preview images looked strange and that the options button did not work. The strange looking images have already been fixed and the options button will be removed since Unity offers these in the launcher by default.
+	 
+	 The next graphical aspect was the user interface. On average it got a rating of 3.5/5 with the biggest complaint being a inconsistent display of the fuel amount, meaning that a full bar is showing the maximum per level and not a global maximum with different starting amounts per level. Hopefully this won't be a problem once players are more familiar with the game and automatically check the displayed number in the fuel bar UI. Another complaint was not knowing how much fuel you have in the manipulation phase, which resulted in changing to the action phase just to see the amount of available fuel.
+	 
+	 Another aspect regarding graphics were the 3D models. They were generally liked, with only one person mentioning that the manipulation character model does not look like a drone or camera. 
+	 
+	 The most disliked thing about the graphics was the environment. The levels looked empty, so we plan to implement grass and trees and the water and forcefields were not really recognized as what they should be which we will fix by introducing some animated textures and shaders.
+	 
+	 \subsection{Controls}
+	 For people familiar with computer games controlled by keyboard and mouse the inputs for the action phase were very intuitive. Only complaints were that the movement on the ground was too sluggish and there wasn't enough control, so we might have to rethink the way our movement works. One tester wished there was a way to restart the action phase with one button press (e.g. 'R') instead of switching to the manipulation phase and back again, which can be easily implemented.
+	 
+	 Since some information regarding key bindings were not mentioned in the info text, we had to explain some of them to our testers. Once they knew all the bindings, the control for the manipulation phase was quite clear for them. They were not as intuitive as the ones in the action phase, but the were manageable. Some people would prefer to control the height of the character either with a combination of shift/ctrl/space or by moving in the direction you are looking at. Furthermore most testers had troubles undoing terrain manipulations or placed fuel tanks so there is the need of fine tuning.
+	 
 \end{document}
