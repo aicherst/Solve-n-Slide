@@ -373,7 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jetpackSound: {fileID: 8300000, guid: e30f60663f780f042be61601397f5f4f, type: 3}
   raiseHillSound: {fileID: 8300000, guid: 494dbf7f10a7f4b4f9fd1f4bca107e38, type: 3}
-  lowerHillSound: {fileID: 0}
+  lowerHillSound: {fileID: 8300000, guid: 494dbf7f10a7f4b4f9fd1f4bca107e38, type: 3}
   fuelTankPlacementSound: {fileID: 8300000, guid: 129f9a3aaf847804d8e85307eebfd033,
     type: 3}
   fuelTankPickupSound: {fileID: 8300000, guid: e2bb92e519ca97447ab0c3293cd1acfd, type: 3}
