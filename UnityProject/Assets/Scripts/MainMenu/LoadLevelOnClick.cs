@@ -9,6 +9,9 @@ public class LoadLevelOnClick : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (GameStateManager.instance.inputLock.data == InputLock.PauseMenu)
+            return;
+
 		if(Input.GetMouseButtonDown(0) && MouseInput.mouseOver.data == gameObject) {
             SceneManager.LoadScene(sceneName);
         }

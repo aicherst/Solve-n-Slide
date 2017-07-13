@@ -10,6 +10,10 @@ public class Player : MonoBehaviour {
 
     private static Property<Player> _mainPlayer = new Property<Player>();
 
+    private void Awake() {
+        GameStateManager.instance.gamePhase.SetData(GamePhase.Manipulation);
+    }
+
     public static Property<Player> mainPlayer {
         get {
             return _mainPlayer;

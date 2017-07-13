@@ -361,7 +361,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267891762450994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 765.6, y: 69.11788, z: 606}
+  m_LocalPosition: {x: 505.1, y: 109.87861, z: 500.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4325444322336730}
@@ -653,7 +653,7 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.000030517578, y: 0, z: 0}
+    m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 4.9999995, y: 0.00000044703484, z: 5}
   m_DirtyAABB: 0
 --- !u!183 &183191243635051586
@@ -6484,9 +6484,6 @@ ParticleSystem:
       type: 0
       properties: 0
     - emitter: {fileID: 198607793419839590}
-      type: 2
-      properties: 0
-    - emitter: {fileID: 198430382007315796}
       type: 2
       properties: 0
   LightsModule:

@@ -31,7 +31,10 @@ public class LevelCubeSpawner : MonoBehaviour {
     }
 
     private void Update() {
-        if(Input.GetMouseButtonDown(0)) {
+        if (GameStateManager.instance.inputLock.data == InputLock.PauseMenu)
+            return;
+
+        if (Input.GetMouseButtonDown(0)) {
             RaycastHit hit;
             if(Physics.Raycast(MouseInput.CameraRay(Camera.main), out hit)) {
                 LevelCube levelCube = hit.collider.GetComponent<LevelCube>();
