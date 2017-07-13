@@ -137,7 +137,7 @@ half4 frag( v2f i ) : SV_Target
 	
 	#if defined(WATER_REFRACTIVE)
 	half fresnel = UNITY_SAMPLE_1CHANNEL( _Fresnel, float2(fresnelFac,fresnelFac) );
-	color = lerp( refr, refl, fresnel );
+	color = lerp( refr, refl, fresnel )  + half4(0, 0, 0.1f, 0);
 	#endif
 	
 	#if defined(WATER_REFLECTIVE)
@@ -148,7 +148,7 @@ half4 frag( v2f i ) : SV_Target
 	
 	#if defined(WATER_SIMPLE)
 	half4 water = tex2D( _ReflectiveColor, float2(fresnelFac,fresnelFac) );
-	color.rgb = lerp( water.rgb, _HorizonColor.rgb, water.a );
+	color.rgb = lerp( water.rgb , _HorizonColor.rgb, water.a );
 	color.a = _HorizonColor.a;
 	#endif
 

@@ -7,8 +7,6 @@ public class MouseInputMono : MonoBehaviour {
 
     // Use this for initialization
     void Awake() {
-        Cursor.lockState = CursorLockMode.Locked;
-
         if(cursorIcon != null) {
             Cursor.SetCursor(cursorIcon, new Vector2(cursorIcon.width, cursorIcon.height) * 0.5f, CursorMode.Auto);
         }
@@ -30,11 +28,21 @@ public class MouseInputMono : MonoBehaviour {
         }
     }
 
+    private void OnDestroy() {
+        GameStateManager.instance.inputLock.RemoveListener(OnInputLockChange);
+    }
+
     // Update is called once per frame
     void Update() {
+
+        if(ActiveCamera.camera.data == null) {
+            MouseInput.mouseOver.SetData(null);
+            return;
+        }
+
         RaycastHit hit;
         Ray ray = MouseInput.CameraRay(ActiveCamera.camera.data);
-        if (Physics.Raycast(ray, out hit)) {
+        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, Layers.water.Inverse())) {
             MouseInput.mouseOver.SetData(hit.collider.gameObject);
         } else {
             MouseInput.mouseOver.SetData(null);

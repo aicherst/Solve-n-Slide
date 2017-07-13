@@ -17,6 +17,8 @@ ModelImporter:
     100018: Bone
     100020: Bone_001
     100022: Bone_002
+    100024: gun
+    100026: gunbase
     400000: //RootNode
     400002: rocketturret_gun
     400004: rocketturret_gunbase
@@ -29,6 +31,8 @@ ModelImporter:
     400018: Bone
     400020: Bone_001
     400022: Bone_002
+    400024: gun
+    400026: gunbase
     2300000: rocketturret_gun
     2300002: rocketturret_gunbase
     2300004: rocketturret_head

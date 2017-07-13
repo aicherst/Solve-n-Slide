@@ -157,11 +157,11 @@ namespace ManipulationPhase {
                 ResetManipulation();
             }
 
-            UpdateTerrainManipulation();
+            TerrainManipulationUpdate();
         }
 
 
-        private void UpdateTerrainManipulation() {
+        private void TerrainManipulationUpdate() {
             Vector3 hitPoint = Vector3.zero;
             Terrain terrain = null;
 
@@ -198,11 +198,15 @@ namespace ManipulationPhase {
                     terrainManipulation.Revert(markerHeightmapChangeData);
 
                     heightmapChangeToMarker[markerHeightmapChangeData].SetActive(false);
+
+                    AudioManager.PlayTerrainManipulationSound(mCamera.transform.position, raise);
                 } else if (_charges > 0) {                                                                        // Raise / lower terrain and create marker
                     _charges--;
 
                     HeightmapChangeData heightmapChangeData = terrainManipulation.Manipulate(terrainData, hitPoint - terrain.transform.position, brush, raise);
                     CreateTerrainMarker(heightmapChangeData, terrainTransform, terrain, hitPoint, raise);
+
+                    AudioManager.PlayTerrainManipulationSound(mCamera.transform.position, raise);
                 }
             }
         }
@@ -210,7 +214,7 @@ namespace ManipulationPhase {
         private HeightmapChangeData TryGetMarkerHeightmapChange() {
             RaycastHit hit;
             Ray ray = MouseInput.CameraRay(mCamera);
-            if (Physics.Raycast(ray, out hit, float.PositiveInfinity) && hit.collider.CompareTag(Tags.manipulationMarker)) {        // If mouse over manipulation marker
+            if (Physics.Raycast(ray, out hit, float.PositiveInfinity, Layers.water.Inverse()) && hit.collider.CompareTag(Tags.manipulationMarker)) {        // If mouse over manipulation marker
                 return hit.collider.GetComponent<TerrainManipulationMarker>().heightmapChangeData;
             }
             return null;
@@ -249,6 +253,8 @@ namespace ManipulationPhase {
 
         private void OnDestroy() {
             ResetToFailSafeOriginalTerrainHeights();
+
+            ManipulationStateManager.instance.manipulationState.RemoveListener(OnManipulationStateChange);
         }
     }
 

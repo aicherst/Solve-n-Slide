@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveCamera {
+public static class ActiveCamera {
     private static Property<Camera> _camera = new Property<Camera>();
 
     public static Property<Camera> camera {

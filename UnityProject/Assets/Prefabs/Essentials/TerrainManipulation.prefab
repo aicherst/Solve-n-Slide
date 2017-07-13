@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 4833924928870440}
   - component: {fileID: 54046764385973876}
   - component: {fileID: 114102794086394554}
+  - component: {fileID: 135222234857569116}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -283,7 +284,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749688415781502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 114.1, y: 50, z: 39.3}
+  m_LocalPosition: {x: 531.9, y: 161.9, z: 272.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4406349412272956}
@@ -371,7 +372,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294966783
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -435,7 +436,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!81 &81221424019475484
 AudioListener:
@@ -599,6 +600,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516543868230672}
   m_Enabled: 1
+--- !u!135 &135222234857569116
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1528671681632476}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137356250573566428
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

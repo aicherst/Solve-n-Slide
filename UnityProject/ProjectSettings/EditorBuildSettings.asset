@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: 250582b9149a7ae4597dff4ed9b30ca0
   - enabled: 1
-    path: Assets/Tests/MarkusTest/MarkusTestScene.unity
-    guid: d2406d0019328fd44818a2833afeb349
+    path: Assets/Scenes/Tutorial/Tutorial1.unity
+    guid: d09ba16b39776c349b962c6d2ff64507
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Tutorial2.unity
+    guid: fbece3e8e39f8e442bf9e13e3adc2f79
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Tutorial3.unity
+    guid: ac7b1f613891a4f469cbe5515da9b3a0

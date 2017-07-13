@@ -15,6 +15,9 @@ public class Turret : MonoBehaviour, IDestroyable {
 
     public float shootAngleThreshold = 5;
 
+    [SerializeField]
+    private float _range = 50;
+
     private float remainingCooldownTime;
     private float remainingLockRotationTime;
 
@@ -25,11 +28,36 @@ public class Turret : MonoBehaviour, IDestroyable {
     private Quaternion initalRotation;
 
     void Start() {
+        CreateTriggerCollider();
+
         initalRotation = head.rotation;
 
         baseHeadRotation = Quaternion.Inverse(transform.rotation) * head.rotation;
 
-        ResetTurret();
+        GameStateManager.instance.gamePhase.AddListener(OnGamePhaseChange);
+    }
+
+    public float range {
+        get {
+            return _range;
+        }
+    }
+
+    private void CreateTriggerCollider() {
+        CapsuleCollider capsuleCollider = gameObject.AddComponent<CapsuleCollider>();
+        capsuleCollider.height = 1000;
+        capsuleCollider.radius = _range;
+        capsuleCollider.isTrigger = true;
+    }
+
+
+    // Use this for
+    public void OnGamePhaseChange(ReadOnlyProperty<GamePhase> changedProperty, GamePhase newData, GamePhase oldData) {
+        switch (newData) {
+            case GamePhase.Manipulation:
+                ResetTurret();
+                break;
+        }
     }
 
     public void ResetTurret() {
@@ -41,6 +69,14 @@ public class Turret : MonoBehaviour, IDestroyable {
     }
 
     void Update() {
+        GameStateManager gameStateManager = GameStateManager.instance;
+
+        if (gameStateManager.inputLock.data == InputLock.PauseMenu)
+            return;
+
+        if (gameStateManager.gamePhase.data != GamePhase.Action)
+            return;
+
         remainingCooldownTime -= Time.deltaTime;
         remainingLockRotationTime -= Time.deltaTime;
 
@@ -82,13 +118,13 @@ public class Turret : MonoBehaviour, IDestroyable {
     }
 
     void OnTriggerEnter(Collider other) {
-        if(other.tag == Tags.player) {
+        if (other.CompareTag(Tags.player)) {
             target = other.transform;
         }
     }
 
     void OnTriggerExit(Collider other) {
-        if(other.transform == target) {
+        if (other.transform == target) {
             target = null;
         }
     }

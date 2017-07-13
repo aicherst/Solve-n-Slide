@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace ManipulationPhase {
     public class FuelTankPlacer : MonoBehaviour, IChargeBasedManipulation {
+        private static readonly float MAX_SCROLL = 2.5f;
+
         [SerializeField]
         private Camera mCamera;
 
@@ -18,6 +20,7 @@ namespace ManipulationPhase {
         private float scroll = 1;
 
         private int _fuelTanks;
+
 
         private Color fuelTankPreviewColor;
         private Color fuelTankPreviewColorInvalid;
@@ -77,10 +80,21 @@ namespace ManipulationPhase {
             if (ManipulationStateManager.instance.manipulationState.data != ManipulationState.FuelTankPlacement)
                 return;
 
-            Ray mouseRay = mCamera.ScreenPointToRay(Input.mousePosition);
+            Ray mouseRay = MouseInput.CameraRay(mCamera);
 
-            scroll = Mathf.Clamp(scroll + Input.GetAxis("Mouse ScrollWheel"), 0, 2.5f);
-            fuelTankPreview.transform.position = mouseRay.GetPoint(distance);
+            scroll = Mathf.Clamp(scroll + Input.GetAxis("Mouse ScrollWheel"), 0, MAX_SCROLL);
+
+
+            {
+                RaycastHit hit;
+                if (scroll == MAX_SCROLL && Physics.Raycast(mouseRay, out hit, float.PositiveInfinity, Layers.terrain)) {
+                    fuelTankPreview.transform.position = hit.point + fuelTankPreview.GetComponentInChildren<MeshRenderer>().bounds.extents.y * Vector3.up;
+                } else {
+                    fuelTankPreview.transform.position = mouseRay.GetPoint(distance);
+                }
+            }
+
+            fuelTankPreview.transform.LookAt(new Vector3(mCamera.transform.position.x, fuelTankPreview.transform.position.y, mCamera.transform.position.z));
 
             GameObject mouseOverFuelTank = null;
 
@@ -94,7 +108,7 @@ namespace ManipulationPhase {
                 }
             }
 
-            if(Input.GetMouseButton(1) && mouseOverFuelTank != null) {
+            if (Input.GetMouseButton(1) && mouseOverFuelTank != null) {
                 Destroy(mouseOverFuelTank);
                 _fuelTanks++;
             }
@@ -115,10 +129,15 @@ namespace ManipulationPhase {
             GameObject gFuelTank = Instantiate(fuelTankPrefab);
             gFuelTank.transform.SetParent(transform);
             gFuelTank.transform.position = fuelTankPreview.transform.position;
+            gFuelTank.transform.rotation = fuelTankPreview.transform.rotation;
 
             gFuelTank.AddComponent<MouseOverHighlight>().hightlightStrengthColor = 0.4f;
 
             _fuelTanks--;
+        }
+
+        private void OnDestroy() {
+            ManipulationStateManager.instance.manipulationState.RemoveListener(OnManipulationStateChange);
         }
     }
 }

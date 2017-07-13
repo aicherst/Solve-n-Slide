@@ -6,7 +6,7 @@ namespace ManipulationPhase {
         public Texture2D brush;
         public float scale = 1;
         public float heightDifference = 1;
-        public bool smooth = true;
+        public int smooth = 1;
 
         private float[,] lastScaledBrushHeightmap;
 
@@ -30,7 +30,7 @@ namespace ManipulationPhase {
                 }
             }
 
-            if (smooth) {
+            for (int i = 0; i < smooth; i++) {
                 Smooth(lastScaledBrushHeightmap);
             }
         }

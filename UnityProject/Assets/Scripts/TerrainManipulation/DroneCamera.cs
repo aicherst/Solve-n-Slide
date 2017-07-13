@@ -47,4 +47,8 @@ public class DroneCamera : MonoBehaviour {
 
         mCamera.transform.localRotation = Quaternion.Euler(0, yaw, 0) * Quaternion.Euler(-pitch, 0, 0);
     }
+
+    private void OnDestroy() {
+        GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
+    }
 }

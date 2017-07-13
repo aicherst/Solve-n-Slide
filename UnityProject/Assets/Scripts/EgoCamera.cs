@@ -33,7 +33,7 @@ public class EgoCamera : MonoBehaviour {
         if (gameStateManager.inputLock.data == InputLock.PauseMenu)
             return;
 
-        if (gameStateManager.gamePhase.data != GamePhase.Action)
+        if (gameStateManager.gamePhase.data != GamePhase.Action && gameStateManager.gamePhase.data != GamePhase.Finished)
             return;
 
         float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity.x * Time.deltaTime;
@@ -45,5 +45,9 @@ public class EgoCamera : MonoBehaviour {
         transform.localEulerAngles = new Vector3(0, rotationX, 0);
 
         _camera.transform.position = eyes.position; 
+    }
+
+    private void OnDestroy() {
+        GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
     }
 }

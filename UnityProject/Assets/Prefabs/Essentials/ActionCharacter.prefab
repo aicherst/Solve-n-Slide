@@ -920,7 +920,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294966783
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1025,9 +1025,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 0.25
   _maxFuel: 100
-  fuelConsumptionRate: 20
-  airSpeed: {x: 0.15, y: 0.15}
-  floorSpeed: {x: 0.05, y: 0}
+  jetpackConsumptionRate: 20
+  moveConsumptionRate: 10
 --- !u!124 &124599574927673136
 Behaviour:
   m_ObjectHideFlags: 1

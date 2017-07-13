@@ -50,4 +50,9 @@ public class HUDManager : MonoBehaviour {
                 break;
         }
     }
+
+    private void OnDestroy() {
+        GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
+        GameStateManager.instance.inputLock.RemoveListener(OnInputLockChange);
+    }
 }

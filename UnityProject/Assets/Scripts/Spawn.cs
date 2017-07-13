@@ -41,4 +41,8 @@ public class Spawn : MonoBehaviour {
             gActionCharacter.transform.rotation = spawnPoint.rotation;
         }
     }
+
+    private void OnDestroy() {
+        GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
+    }
 }

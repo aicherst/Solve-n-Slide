@@ -44,13 +44,13 @@ public class AudioManager : MonoBehaviour {
 		AudioSource.PlayClipAtPoint(instance.jetpackSound, v3);
 	}
 
-	public static void playRaiseHillSound (Vector3 v3) {
-		AudioSource.PlayClipAtPoint(instance.raiseHillSound, v3);
-	}
-
-	public static void playLowerHillSound (Vector3 v3) {
-		AudioSource.PlayClipAtPoint(instance.lowerHillSound, v3);
-	}
+	public static void PlayTerrainManipulationSound (Vector3 v3, bool raise) {
+        if(raise) {
+            AudioSource.PlayClipAtPoint(instance.raiseHillSound, v3);
+        } else {
+            AudioSource.PlayClipAtPoint(instance.lowerHillSound, v3);
+        }
+    }
 
 	public static void playFuelTankPlacementSound (Vector3 v3) {
 		AudioSource.PlayClipAtPoint(instance.fuelTankPlacementSound, v3);
@@ -60,11 +60,11 @@ public class AudioManager : MonoBehaviour {
 		AudioSource.PlayClipAtPoint(instance.fuelTankPickupSound, v3);
 	}
 
-	public static void playLoseHealthSound (Vector3 v3) {
-		AudioSource.PlayClipAtPoint(instance.loseHealthSound, v3);
+	public static void PlayLoseHealthSound (Vector3 v3, float volume = 1) {
+		AudioSource.PlayClipAtPoint(instance.loseHealthSound, v3, volume);
 	}
 
-	public static void playReachedGoalSound (Vector3 v3) {
+	public static void PlayReachedGoalSound (Vector3 v3) {
 		AudioSource.PlayClipAtPoint(instance.reachedGoalSound,v3);
 	}
 

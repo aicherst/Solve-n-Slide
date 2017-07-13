@@ -25,6 +25,10 @@ public class BackgroundCamera : MonoBehaviour {
         }
     }
 
+    private void OnDestroy() {
+        ActiveCamera.camera.RemoveListener(OnActiveCameraChange);
+    }
+
     // Update is called once per frame
     void LateUpdate () {
         if(activeCamera != null) {

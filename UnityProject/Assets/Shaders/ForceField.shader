@@ -1,11 +1,10 @@
 ﻿// Upgrade NOTE: replaced 'PositionFog()' with transforming position into clip space.
 // Upgrade NOTE: replaced 'V2F_POS_FOG' with 'float4 pos : SV_POSITION'
 
-Shader "FX/Forest Force Field" {
+Shader "FX/ForceField" {
    
 Properties {
    _Color ("Color1", Color) = (1,1,1,1)
-   _Color2 ("Color2", Color) = (1,1,1,1)
    _Rate ("Oscillation Rate", Range (5, 200)) = 50
    _Scale ("Scale", Range (0.02, 0.5)) = 0.25
    _Distortion ("Distortion", Range (0.1, 20)) = 1
@@ -19,6 +18,9 @@ SubShader {
    
  
    Pass {
+
+		Cull Off
+
  
 CGPROGRAM
 #pragma vertex vert
@@ -27,7 +29,6 @@ CGPROGRAM
 #include "UnityCG.cginc"
  
 float4 _Color;
-float4 _Color2;
 float _Rate;
 float _Scale;
 float _Distortion;
@@ -58,7 +59,7 @@ half4 frag (v2f i) : COLOR
     float mix = 1 + sin((vert.x - uv.x) + (vert.y - uv.y) + (vert.z - uv.z));
     float mix2 = 1 + sin((vert.x + uv.x) - (vert.y + uv.y) - (vert.z + uv.z)) / _Distortion;
    
-    return half4( (_Color * mix * 0.3) + (_Color2 * mix2 * 0.3));
+    return half4( (_Color * mix * 0.3) + (_Color * mix2 * 0.3));
 }
 ENDCG
  

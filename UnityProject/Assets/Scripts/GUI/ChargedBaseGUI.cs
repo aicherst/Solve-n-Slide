@@ -53,4 +53,8 @@ public abstract class ChargedBaseGUI<T> : MonoBehaviour where T : IChargeBasedMa
             toggleCharges[i].toggle = false;
         }
     }
+
+    private void OnDestroy() {
+        Player.mainPlayer.RemoveListener(OnMainPlayerChange);
+    }
 }
