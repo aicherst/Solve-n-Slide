@@ -49,6 +49,8 @@ public class UnmodifiableTerrainExchanger : MonoBehaviour {
     }
 
     private void OnDestroy() {
+        GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
+
         UndoExchange();
     }
 

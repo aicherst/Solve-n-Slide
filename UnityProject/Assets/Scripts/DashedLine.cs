@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class DahsedLine : MonoBehaviour {
+public class DashedLine : MonoBehaviour {
     public float speed = 1;
     private Material material;
 

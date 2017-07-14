@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour {
     [SerializeField]
-	private AudioClip jetpackSound;
-    [SerializeField]
     private AudioClip raiseHillSound;
     [SerializeField]
     private AudioClip lowerHillSound;
@@ -38,11 +36,11 @@ public class AudioManager : MonoBehaviour {
     void Start () {
         windAudioSource = gameObject.GetComponent<AudioSource>();
         windAudioSource.clip = windSound;
-	}
 
-	public static void playJetpackSound (Vector3 v3) {
-		AudioSource.PlayClipAtPoint(instance.jetpackSound, v3);
-	}
+        windAudioSource.Play();
+
+        AudioListener.volume = 0.2f;
+    }
 
 	public static void PlayTerrainManipulationSound (Vector3 v3, bool raise) {
         if(raise) {

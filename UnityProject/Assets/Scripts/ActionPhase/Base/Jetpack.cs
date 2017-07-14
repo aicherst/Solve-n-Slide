@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterMovement))]
 public class Jetpack : MonoBehaviour {
     [SerializeField]
-    private float strength = 0.25f;
+    private float strength = 0.35f;
 
     [SerializeField]
     private float _maxFuel = 100;
@@ -27,7 +27,11 @@ public class Jetpack : MonoBehaviour {
 
     private float timeSinceLastUse;
 
+    private AudioSource jetpackSound;
+
     void Awake() {
+        jetpackSound = GetComponent<AudioSource>();
+
         characterMovement = GetComponent<CharacterMovement>();
     }
 
@@ -74,13 +78,26 @@ public class Jetpack : MonoBehaviour {
             timeSinceLastUse = 0;
         }
 
-        if(timeSinceLastUse > 2 && _fuel < 30) {
+        HandleJetpackSound(fuelConsumed / jetpackConsumptionRate);
+
+
+        if (timeSinceLastUse > 2 && _fuel < 100) {
             fuel += Time.deltaTime * 10;
         }
 
         fuel -= fuelConsumed * Time.deltaTime;
 
         characterMovement.AddVelocity(velocity);
+    }
+
+    private void HandleJetpackSound(float volume) {
+        jetpackSound.volume = volume;
+
+        if (volume > 0 && !jetpackSound.isPlaying) {
+            jetpackSound.Play();
+        } else if (volume == 0 && jetpackSound.isPlaying) {
+            jetpackSound.Stop();
+        }
     }
 
     public float maxFuel {

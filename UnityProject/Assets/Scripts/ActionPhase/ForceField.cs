@@ -5,12 +5,34 @@ using UnityEngine;
 [ExecuteInEditMode]
 [RequireComponent(typeof(Lock))]
 public class ForceField : MonoBehaviour {
+    private Collider[] colliders;
+
 	// Use this for initialization
 	void Start () {
+        colliders = GetComponentsInChildren<Collider>();
 
-        //color.a = sphereRenderer.material.color.a;
-        //sphereRenderer.material.color = color;
-        //sphereRenderer.material.SetColor("_RimColor", color);
+        GameStateManager.instance.gamePhase.AddListener(OnGamePhaseChange);
+    }
+
+    public void OnGamePhaseChange(ReadOnlyProperty<GamePhase> changedProperty, GamePhase newData, GamePhase oldData) {
+        switch (newData) {
+            case GamePhase.Action:
+                EnableColliders(true);
+                break;
+            case GamePhase.Manipulation:
+                EnableColliders(false);
+                break;
+        }
+    }
+
+    private void OnDestroy() {
+        GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
+    }
+
+    private void EnableColliders(bool enable) {
+        foreach(Collider _collider in colliders) {
+            _collider.enabled = enable;
+        }
     }
 
     private void Update() {

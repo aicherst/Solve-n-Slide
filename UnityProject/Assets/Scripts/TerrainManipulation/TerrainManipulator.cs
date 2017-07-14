@@ -160,6 +160,9 @@ namespace ManipulationPhase {
             TerrainManipulationUpdate();
         }
 
+        private bool IsUnmodifiable(Terrain terrain, Vector3 point) {
+            return TerrainHelpers.GetMainTextureName(terrain, point).Contains("Unmodifiable");
+        }
 
         private void TerrainManipulationUpdate() {
             Vector3 hitPoint = Vector3.zero;
@@ -200,7 +203,7 @@ namespace ManipulationPhase {
                     heightmapChangeToMarker[markerHeightmapChangeData].SetActive(false);
 
                     AudioManager.PlayTerrainManipulationSound(mCamera.transform.position, raise);
-                } else if (_charges > 0) {                                                                        // Raise / lower terrain and create marker
+                } else if (_charges > 0 && !IsUnmodifiable(terrain, hitPoint)) {                        // Raise / lower terrain and create marker
                     _charges--;
 
                     HeightmapChangeData heightmapChangeData = terrainManipulation.Manipulate(terrainData, hitPoint - terrain.transform.position, brush, raise);
