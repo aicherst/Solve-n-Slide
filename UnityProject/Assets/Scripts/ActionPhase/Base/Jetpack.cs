@@ -74,7 +74,7 @@ public class Jetpack : MonoBehaviour {
             timeSinceLastUse = 0;
         }
 
-        if(timeSinceLastUse > 2) {
+        if(timeSinceLastUse > 2 && _fuel < 30) {
             fuel += Time.deltaTime * 10;
         }
 

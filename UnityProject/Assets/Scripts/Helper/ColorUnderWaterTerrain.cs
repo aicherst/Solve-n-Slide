@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR 
+using UnityEditor;
 using UnityEngine;
 
 namespace EditorExtension {
@@ -39,3 +40,4 @@ namespace EditorExtension {
         }
     }
 }
+#endif

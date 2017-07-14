@@ -39,8 +39,6 @@ namespace RiverSimulation {
             gWaterBodyParent.name = "Water Bodies";
 
             destroyables = GameObject.FindGameObjectsWithTag(Tags.destroyable);
-
-            Simulate();
         }
 
         public void Simulate() {

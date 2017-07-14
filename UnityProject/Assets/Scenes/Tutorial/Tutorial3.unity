@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.001
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientSkyColor: {r: 0.7307526, g: 0.78976554, b: 0.8014706, a: 1}
+  m_AmbientEquatorColor: {r: 0.3698097, g: 0.39835638, b: 0.41911763, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -38,19 +38,19 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1747241954}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_TemporalCoherenceThreshold: 1
-    m_EnvironmentLightingMode: 0
+    m_EnvironmentLightingMode: 1
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
@@ -64,7 +64,8 @@ LightmapSettings:
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
     m_Padding: 2
-    m_LightmapParameters: {fileID: 0}
+    m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000,
+      type: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
     m_FinalGather: 0
@@ -177,7 +178,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4157029763484656, guid: 422f69546678f114dadcb0a708439567, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 130.33534
+      value: 130.53534
       objectReference: {fileID: 0}
     - target: {fileID: 4157029763484656, guid: 422f69546678f114dadcb0a708439567, type: 2}
       propertyPath: m_LocalPosition.z
@@ -202,16 +203,6 @@ Prefab:
     - target: {fileID: 4157029763484656, guid: 422f69546678f114dadcb0a708439567, type: 2}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114645376996521068, guid: 422f69546678f114dadcb0a708439567,
-        type: 2}
-      propertyPath: activateInEditMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114645376996521068, guid: 422f69546678f114dadcb0a708439567,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 422f69546678f114dadcb0a708439567, type: 2}

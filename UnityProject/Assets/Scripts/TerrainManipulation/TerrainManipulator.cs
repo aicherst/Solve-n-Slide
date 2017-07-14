@@ -134,24 +134,24 @@ namespace ManipulationPhase {
             if (ManipulationStateManager.instance.manipulationState.data != ManipulationState.TerrainChange)
                 return;
 
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z)) {     // Undo
-                HeightmapChangeData heightmapChangeData = terrainManipulation.Undo();
+            //if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z)) {     // Undo
+            //    HeightmapChangeData heightmapChangeData = terrainManipulation.Undo();
 
-                // Disable Marker
-                GameObject gMarker;
-                if (heightmapChangeData != null && heightmapChangeToMarker.TryGetValue(heightmapChangeData, out gMarker)) {
-                    gMarker.SetActive(!gMarker.activeSelf);
-                }
-            }
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Y)) {     // Redo
-                HeightmapChangeData heightmapChangeData = terrainManipulation.Redo();
+            //    // Disable Marker
+            //    GameObject gMarker;
+            //    if (heightmapChangeData != null && heightmapChangeToMarker.TryGetValue(heightmapChangeData, out gMarker)) {
+            //        gMarker.SetActive(!gMarker.activeSelf);
+            //    }
+            //}
+            //if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Y)) {     // Redo
+            //    HeightmapChangeData heightmapChangeData = terrainManipulation.Redo();
 
-                // Show Marker
-                GameObject gMarker;
-                if (heightmapChangeData != null && heightmapChangeToMarker.TryGetValue(heightmapChangeData, out gMarker)) {
-                    gMarker.SetActive(!gMarker.activeSelf);
-                }
-            }
+            //    // Show Marker
+            //    GameObject gMarker;
+            //    if (heightmapChangeData != null && heightmapChangeToMarker.TryGetValue(heightmapChangeData, out gMarker)) {
+            //        gMarker.SetActive(!gMarker.activeSelf);
+            //    }
+            //}
 
             if (Input.GetButtonDown("TerrainReset")) {     // Reset Terrain Changes
                 ResetManipulation();

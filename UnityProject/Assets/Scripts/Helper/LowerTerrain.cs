@@ -1,4 +1,4 @@
-﻿//C# Example
+﻿#if UNITY_EDITOR 
 using UnityEditor;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace EditorExtension {
 
         void OnGUI() {
             Terrain terrain = null;
-            foreach(GameObject g in Selection.gameObjects) {
+            foreach (GameObject g in Selection.gameObjects) {
                 terrain = g.GetComponent<Terrain>();
                 if (terrain != null)
                     break;
@@ -23,7 +23,7 @@ namespace EditorExtension {
 
             EditorGUILayout.LabelField("Terrain: " + (terrain == null ? "No Terrain Selected" : terrain.name));
 
-            EditorGUILayout.DoubleField("Lower by (m)", amount);
+            amount = EditorGUILayout.FloatField("Lower by (m)", amount);
 
             if (terrain != null && GUILayout.Button("Lower Terrain")) {
                 TerrainFunctions.LowerTerrain(terrain, amount);
@@ -32,3 +32,4 @@ namespace EditorExtension {
 
     }
 }
+#endif
