@@ -627,9 +627,10 @@ Prefab:
 
 
 
-        Use Everything to Reach the Goal on the Other Side'
+        Your Fuel Recharges While Not Using Your Jetpack'
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114742904198227816, guid: c21050fee9933564d97894fff16757c1, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c21050fee9933564d97894fff16757c1, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1619783749

@@ -34,4 +34,8 @@ public class Lock : MonoBehaviour {
             }
         }
     }
+
+    private void OnDestroy() {
+        GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
+    }
 }

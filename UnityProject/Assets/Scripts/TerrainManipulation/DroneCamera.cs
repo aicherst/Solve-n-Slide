@@ -43,7 +43,7 @@ public class DroneCamera : MonoBehaviour {
         yaw += Input.GetAxis("Mouse X") * sensitivity.x * Time.deltaTime;
 
         pitch += Input.GetAxis("Mouse Y") * sensitivity.y * Time.deltaTime;
-        pitch = Mathf.Clamp(pitch, -90, -30);
+        pitch = Mathf.Clamp(pitch, -90, 0);
 
         mCamera.transform.localRotation = Quaternion.Euler(0, yaw, 0) * Quaternion.Euler(-pitch, 0, 0);
     }
