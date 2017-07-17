@@ -25,6 +25,10 @@ public class Key : MonoBehaviour {
         }
     }
 
+    private void OnDestroy() {
+        GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
+    }
+
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             other.GetComponent<ActionCharacter>().AddKey(lockType);

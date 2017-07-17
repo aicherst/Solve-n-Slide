@@ -43,7 +43,13 @@ public class UnmodifiableTerrainExchanger : MonoBehaviour {
     }
 
     private void UndoExchange() {
+        if (terrainsWithBaseAlphas == null)
+            return;
+
         foreach (TerrainWithBaseAlphas terrainWithBaseAlphas in terrainsWithBaseAlphas) {
+            if (terrainWithBaseAlphas == null)
+                continue;
+
             terrainWithBaseAlphas.Undo();
         }
     }

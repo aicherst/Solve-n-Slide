@@ -6,7 +6,7 @@ using UnityEngine;
 public class DroneMovement : MonoBehaviour {
     public Camera mCamera;
 
-    public Vector3 speed = new Vector3(1, 0.5f, 1);
+    private Vector3 speed = new Vector3(2, 1, 2);
 
     private Rigidbody _rigidbody;
 
