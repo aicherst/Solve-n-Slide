@@ -489,6 +489,8 @@ MonoBehaviour:
     levelName: StefanNewLevel
   - preview: {fileID: 2800000, guid: 91965d8af91b21347bcb87fe666b7d13, type: 3}
     levelName: KevinsThirdLevel
+  - preview: {fileID: 2800000, guid: 6996ea51c32cc3c4da91886dba6aa350, type: 3}
+    levelName: RiverLevel
 --- !u!4 &388912486 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4818348199038494, guid: af011dac7d041964687ffb6b5e963d5f,

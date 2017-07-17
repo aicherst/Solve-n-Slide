@@ -77,11 +77,15 @@ namespace ManipulationPhase {
         }
 
         private void ResetToFailSafeOriginalTerrainHeights() {
+            TerrainManipulationController.instance.InformPreChange();
+
             foreach (TerrainDataWithOriginalHeights terrainDataWithOriginalHeights in terrainsDataWithOriginalHeights) {
                 TerrainData terrainData = terrainDataWithOriginalHeights.terrainData;
                 float[,] heights = terrainDataWithOriginalHeights.heights;
                 terrainData.SetHeights(0, 0, heights);
             }
+
+            TerrainManipulationController.instance.InformPostChange();
         }
 
         private struct TerrainDataWithOriginalHeights {
@@ -196,6 +200,8 @@ namespace ManipulationPhase {
 
             if (raise || lower) {                               // Terrain manipulation
                 if (markerHeightmapChangeData != null && raise != markerHeightmapChangeData.raise) {    // Revert the mouse over terrain manipulation
+                    TerrainManipulationController.instance.InformPreChange();
+
                     _charges++;
 
                     terrainManipulation.Revert(markerHeightmapChangeData);
@@ -203,13 +209,19 @@ namespace ManipulationPhase {
                     heightmapChangeToMarker[markerHeightmapChangeData].SetActive(false);
 
                     AudioManager.PlayTerrainManipulationSound(mCamera.transform.position, raise);
+
+                    TerrainManipulationController.instance.InformPostChange();
                 } else if (_charges > 0 && !IsUnmodifiable(terrain, hitPoint)) {                        // Raise / lower terrain and create marker
+                    TerrainManipulationController.instance.InformPreChange();
+
                     _charges--;
 
                     HeightmapChangeData heightmapChangeData = terrainManipulation.Manipulate(terrainData, hitPoint - terrain.transform.position, brush, raise);
                     CreateTerrainMarker(heightmapChangeData, terrainTransform, terrain, hitPoint, raise);
 
                     AudioManager.PlayTerrainManipulationSound(mCamera.transform.position, raise);
+
+                    TerrainManipulationController.instance.InformPostChange();
                 }
             }
         }
@@ -244,6 +256,8 @@ namespace ManipulationPhase {
         }
 
         private void ResetManipulation() {
+            TerrainManipulationController.instance.InformPreChange();
+
             terrainManipulation.Reset();
             _charges = _maxCharges;
 
@@ -252,6 +266,8 @@ namespace ManipulationPhase {
             }
 
             heightmapChangeToMarker.Clear();
+
+            TerrainManipulationController.instance.InformPostChange();
         }
 
         private void OnDestroy() {

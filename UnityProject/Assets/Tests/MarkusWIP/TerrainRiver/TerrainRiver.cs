@@ -29,7 +29,19 @@ namespace RiverSimulation {
         void Awake() {
             if (terrain == null)
                 terrain = Terrain.activeTerrain;
+
+            TerrainManipulationController.instance.preChange += OnManipulationPreChange;
+            TerrainManipulationController.instance.postChange += OnManipulationPostChange;
         }
+
+        private void OnManipulationPreChange() {
+            Clear();
+        }
+
+        private void OnManipulationPostChange() {
+            Simulate();
+        }
+
 
         // Use this for initialization
         void Start() {
@@ -39,11 +51,11 @@ namespace RiverSimulation {
             gWaterBodyParent.name = "Water Bodies";
 
             destroyables = GameObject.FindGameObjectsWithTag(Tags.destroyable);
+
+            Simulate();
         }
 
         public void Simulate() {
-            Clear();
-
             float[,] heightmap = terrainData.GetHeights(0, 0, terrainData.heightmapWidth, terrainData.heightmapHeight);
 
             terrainTransform = new TerrainTransform(terrain);
@@ -90,15 +102,18 @@ namespace RiverSimulation {
                 return;
 
             terrainData.SetHeights(0, 0, originalHeightmap);
+
+            originalHeightmap = null;
         }
 
         void OnDestroy() {
+            TerrainManipulationController.instance.preChange -= OnManipulationPreChange;
+            TerrainManipulationController.instance.postChange -= OnManipulationPostChange;
+
             ResetTerrain();
         }
 
         private void CreateWaterBodies() {
-            Clear();
-
             if (!terrainTransform.ContainsRealXZ(transform.position.x, transform.position.z)) {
                 Debug.LogWarning("River start position out of bounds");
                 return;
