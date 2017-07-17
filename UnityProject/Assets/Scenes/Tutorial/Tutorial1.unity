@@ -487,10 +487,24 @@ Prefab:
     - target: {fileID: 114110754371925436, guid: c21050fee9933564d97894fff16757c1,
         type: 2}
       propertyPath: m_Text
-      value: 'Press Enter to Start
+      value: 'Reach the Flag!
+
+
+
+        Press Enter to Start
 
 
         You Automatically Slide Down Hills'
+      objectReference: {fileID: 0}
+    - target: {fileID: 224003679244593636, guid: c21050fee9933564d97894fff16757c1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224003679244593636, guid: c21050fee9933564d97894fff16757c1,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 434
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c21050fee9933564d97894fff16757c1, type: 2}
@@ -815,8 +829,8 @@ Terrain:
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
+  m_DetailObjectDistance: 120
+  m_DetailObjectDensity: 0.024
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
