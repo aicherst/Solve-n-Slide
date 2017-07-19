@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4707947739567450}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 33125621699796102}
   - component: {fileID: 137554546964755784}
   - component: {fileID: 183191243635051586}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4065233591323246}
   - component: {fileID: 198836773483353142}
   - component: {fileID: 199845892785519798}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Secondary Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4679157512072462}
   - component: {fileID: 198211745902068822}
   - component: {fileID: 199497502959774308}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fireworks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 135806073910047550}
   - component: {fileID: 114392519727969604}
   - component: {fileID: 114617893442925258}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Goal
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4325444322336730}
   - component: {fileID: 120472761185068704}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: SkyPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 33616800941953898}
   - component: {fileID: 136612239425950730}
   - component: {fileID: 23195076944138180}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Flagpole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 4947431984408402}
   - component: {fileID: 198851374693526948}
   - component: {fileID: 199346602212250340}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 4470440598908146}
   - component: {fileID: 198430382007315796}
   - component: {fileID: 199595743238520160}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Explosion SubEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 4878498920224672}
   - component: {fileID: 198607793419839590}
   - component: {fileID: 199703342908010316}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4079759508488200}
   - component: {fileID: 119348309488066762}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: BlobLightProjector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 4174078775066000}
   - component: {fileID: 198671446859663668}
   - component: {fileID: 199036575467313142}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tail Afterglow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 4358493974310214}
   - component: {fileID: 198183124474863492}
   - component: {fileID: 199770880223803014}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Secondary Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -17,6 +17,9 @@ public class Jetpack : MonoBehaviour {
     [SerializeField]
     private float moveConsumptionRate = 10;
 
+    [SerializeField]
+    private float regenerationRate = 5;
+
 
     private float _fuel;
     private Vector2 input;
@@ -80,9 +83,8 @@ public class Jetpack : MonoBehaviour {
 
         HandleJetpackSound(fuelConsumed / jetpackConsumptionRate);
 
-
-        if (timeSinceLastUse > 2 && _fuel < 100) {
-            fuel += Time.deltaTime * 10;
+        if (timeSinceLastUse > 0 && _fuel < 100) {
+            fuel += Time.deltaTime * regenerationRate;
         }
 
         fuel -= fuelConsumed * Time.deltaTime;

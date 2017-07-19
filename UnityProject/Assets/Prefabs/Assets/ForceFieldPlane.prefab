@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114116795072205770}
   - component: {fileID: 65965185012164050}
   - component: {fileID: 23431095857576332}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: ForceFieldPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

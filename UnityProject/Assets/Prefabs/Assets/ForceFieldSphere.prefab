@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114823978418191986}
   - component: {fileID: 23396597625790362}
   - component: {fileID: 135374173682790392}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: ForceFieldSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

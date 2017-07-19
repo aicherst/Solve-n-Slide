@@ -63,7 +63,7 @@ public class CharacterMovement : MonoBehaviour {
         Terrain terrain = null;
 
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position + Vector3.up * characterController.radius, characterController.radius, -Vector3.up, out hit)) {
+        if (Physics.SphereCast(transform.position + Vector3.up * characterController.radius, characterController.radius, -Vector3.up, out hit, float.PositiveInfinity, Layers.pickUp.Inverse())) {
             terrain = hit.collider.GetComponent<Terrain>();
 
             wasGrounded = hit.distance < 0.1f + characterController.radius;

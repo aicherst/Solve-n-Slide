@@ -5,8 +5,8 @@ using UnityEngine;
 public static class Layers {
     public static readonly AugmentedLayer terrain = new AugmentedLayer(LayerMask.NameToLayer("Terrain"));
     public static readonly AugmentedLayer terrainMarker = new AugmentedLayer(LayerMask.NameToLayer("TerrainMarker"));
-    public static readonly AugmentedLayer fuelTank = new AugmentedLayer(LayerMask.NameToLayer("FuelTank"));
     public static readonly AugmentedLayer water = new AugmentedLayer(LayerMask.NameToLayer("Water"));
+    public static readonly AugmentedLayer pickUp = new AugmentedLayer(LayerMask.NameToLayer("PickUp"));
 }
 
 public struct AugmentedLayer {

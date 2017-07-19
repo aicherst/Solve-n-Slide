@@ -271,6 +271,8 @@ namespace ManipulationPhase {
         }
 
         private void OnDestroy() {
+            TerrainManipulationController.instance.InformPreChange();
+
             ResetToFailSafeOriginalTerrainHeights();
 
             ManipulationStateManager.instance.manipulationState.RemoveListener(OnManipulationStateChange);

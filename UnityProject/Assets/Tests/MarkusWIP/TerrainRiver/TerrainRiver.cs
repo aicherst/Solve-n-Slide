@@ -88,9 +88,13 @@ namespace RiverSimulation {
         }
 
         public void Clear() {
-            List<GameObject> children = new List<GameObject>();
-            foreach (Transform child in gWaterBodyParent.transform) children.Add(child.gameObject);
-            children.ForEach(child => Destroy(child));
+            if(gWaterBodyParent != null) {
+                List<GameObject> children = new List<GameObject>();
+                foreach (Transform child in gWaterBodyParent.transform)
+                    children.Add(child.gameObject);
+
+                children.ForEach(child => Destroy(child));
+            }
 
             ResetIntersectingDestroyables();
 
@@ -109,8 +113,6 @@ namespace RiverSimulation {
         void OnDestroy() {
             TerrainManipulationController.instance.preChange -= OnManipulationPreChange;
             TerrainManipulationController.instance.postChange -= OnManipulationPostChange;
-
-            ResetTerrain();
         }
 
         private void CreateWaterBodies() {
