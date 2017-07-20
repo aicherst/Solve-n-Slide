@@ -579,5 +579,96 @@
 	 \item To have an option/mode with which you can place the fuel tank always on the point of the ground which the player is looking.
 	 \end{itemize}
 	 
+	 \newpage
+	 \section{Final Release}
+	 \subsection{Changes}
+	 \subsubsection{Fore Field}
+	 Our idea of a key/lock system was realized with a key card and a force field. However, latter was originally only a transparent box. Therefore we implemented force field shader, that changes over time (Figure \ref{fig:forceField}). Additionally, we introduced a color coding system for the keys and locks which allowed to created more complex levels. The color change of the keys was realized with the help of a rim shaded sphere that also helps visualizing the extent of the collider.
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[width=\textwidth]{images/final/ForceField}
+	 	\caption{Animated, colored force fields and keys (inc. GUI)}
+	 	\label{fig:forceField}
+	 \end{figure}
+	 
+	\subsubsection{Environment}
+	As already mentioned a large point of criticism was the empty-looking environment. We started with improving the sky. With the help of a particle system we archived a reasonable looking clouds which move over time (Figure \ref{fig:movingClouds}). Moving cloud shadows are faked with the help of unity's so-called “light cookie” (Figure \ref{fig:movingShadows}).  We also made use of Unity's lens flare.
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{cc}
+			\subfloat[Timestep 0]{\includegraphics[scale=0.33]{images/final/MovingClouds1}}&
+			\subfloat[Timestep 1]{\includegraphics[scale=0.33]{images/final/MovingClouds2}}
+		\end{tabular}
+		\caption{Moving clouds}
+		\label{fig:movingClouds}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{cc}
+			\subfloat[Timestep 0]{\includegraphics[scale=0.33]{images/final/MovingCloudsShadow1}}&
+			\subfloat[Timestep 1]{\includegraphics[scale=0.33]{images/final/MovingCloudsShadow2}}
+		\end{tabular}
+		\caption{Moving cloud shadows}
+		\label{fig:movingShadows}
+	\end{figure}
+	
+	Another point of improvement was our level boundary: the water plane. First of all, we exchanged the plain opaque shader with a refractive shader provided by Unity. Additionally, we created an editor script that enabled us to created a smooth transition between the terrain and the ocean floor, which is a black plane (Figure \ref{fig:water}). 
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{images/final/Water}
+		\caption{Refractive water and underwater transition}
+		\label{fig:water}
+	\end{figure}
+	
+	\subsubsection{Menus}
+	In order to give our game a more fun, cartoonish look we made the title of our game inside the main menu an overhaul (Figure \ref{fig:title}). First of all it is now written with 3D font. Secondly, the color of every letter changes every time the game is start up. However, they are always saturated. Finally, the letters bounce up and down for a while (Figure \ref{fig:title}).
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{cc}
+			\subfloat[Timestep 0]{\includegraphics[scale=0.4]{images/final/Title1}}&
+			\subfloat[Timestep 1]{\includegraphics[scale=0.4]{images/final/Title2}}
+		\end{tabular}
+		\caption{Title at startup}
+		\label{fig:title}
+	\end{figure}
+	
+	Besides a general look overhaul for the main menu (Figure \ref{fig:mainMenuFinal}) we exchanged the non-functional options button for a credits button and implemented it (Figure \ref{fig:credits}). You can close the window with by pressing any button.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth-1cm]{images/final/MainMenu1}
+		\caption{Partial main menu screenshot}
+		\label{fig:mainMenuFinal}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth-1cm]{images/final/Credits}
+		\caption{Credits screen}
+		\label{fig:credits}
+	\end{figure}
+	We added a menu and a pause functionality during both phases.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[]{images/final/PauseMenu}
+		\caption{Pause menu}
+		\label{fig:pauseMenu}
+	\end{figure}
+	
+	\subsubsection{Drone}
+	Since most testers did not realize at first that you are controlling a drone during the manipulation phase we decided to change things up a bit. First of all, we changed the default camera look rotation to downwards and limited the rotation upwards. Next, we increased the field of view which strongly improved the feeling of looking through a drone camera. With the help of Unity's Post Processing Stack we added a lot of camera effects: Saturation increase (through the color grading system: Academy Color Encoding System), bloom, motion blur, depth of field and anti-aliasing. Figure \ref{fig:sceneWithoutEffects} depicts a scene before all of these changes (and without fog) while Figure \ref{fig:sceneWithEffects} shows the same scene afterwards. Finally, we improved the controls.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth-4cm]{images/final/DroneEffects1}
+		\caption{Scene without most effects}
+		\label{fig:sceneWithoutEffects}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth-4cm]{images/final/DroneEffects2}
+		\caption{Same scene with effects}
+		\label{fig:sceneWithEffects}
+	\end{figure}
+	
+	\subsection{Conclusion}
 	 
 \end{document}
