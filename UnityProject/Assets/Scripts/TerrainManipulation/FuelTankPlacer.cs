@@ -26,6 +26,8 @@ namespace ManipulationPhase {
         private Color fuelTankPreviewColorInvalid;
         private MeshRenderer fuelTankPreviewMeshRenderer;
 
+        private List<GameObject> placedFuelTanks = new List<GameObject>();
+
         public int maxCharges {
             get {
                 return _maxFuelTanks;
@@ -53,6 +55,7 @@ namespace ManipulationPhase {
                 fuelTankPreviewColor.a = fuelTankPreviewColorInvalid.a;
             }
 
+            GameStateManager.instance.gamePhase.AddListener(OnGamePhaseChange);
             ManipulationStateManager.instance.manipulationState.AddListener(OnManipulationStateChange);
         }
 
@@ -63,6 +66,17 @@ namespace ManipulationPhase {
                     break;
                 default:
                     fuelTankPreview.SetActive(false);
+                    break;
+            }
+        }
+
+        public void OnGamePhaseChange(ReadOnlyProperty<GamePhase> changedProperty, GamePhase newData, GamePhase oldData) {
+            switch (newData) {
+                case GamePhase.Action:
+                case GamePhase.Manipulation:
+                    foreach(GameObject fuelTank in placedFuelTanks) {
+                        fuelTank.SetActive(true);
+                    }
                     break;
             }
         }
@@ -133,10 +147,13 @@ namespace ManipulationPhase {
 
             gFuelTank.AddComponent<MouseOverHighlight>().hightlightStrengthColor = 0.4f;
 
+            placedFuelTanks.Add(gFuelTank);
+
             _fuelTanks--;
         }
 
         private void OnDestroy() {
+            GameStateManager.instance.gamePhase.RemoveListener(OnGamePhaseChange);
             ManipulationStateManager.instance.manipulationState.RemoveListener(OnManipulationStateChange);
         }
     }
