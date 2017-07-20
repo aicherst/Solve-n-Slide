@@ -18,6 +18,9 @@ namespace TerrainUtil {
         }
 
         public void Update(Terrain terrain) {
+            if (terrain == null)
+                return;
+
             TerrainData terrainData = terrain.terrainData;
 
             heightmapWidth = terrainData.heightmapWidth;
