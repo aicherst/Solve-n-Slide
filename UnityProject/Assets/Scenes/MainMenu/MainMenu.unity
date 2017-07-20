@@ -2485,7 +2485,7 @@ MonoBehaviour:
     m_LineSpacing: 1.5
   m_Text: "<size=35>Developers</size>\nAicher Stefan\nAnsorge Markus\nArjomand-Fard
     Hanieh \nSawischa Kevin\n\n<size=35>Music</size>\nhttp://www.bensound.com\n\n<size=35>Special
-    Thanks to our Testers:</size>\nJakob, Simon, Felix\n"
+    Thanks to our Testers:</size>\nSimon, Jakob, Adi, Dome, Simon, Felix\n"
 --- !u!222 &1506646826
 CanvasRenderer:
   m_ObjectHideFlags: 0
