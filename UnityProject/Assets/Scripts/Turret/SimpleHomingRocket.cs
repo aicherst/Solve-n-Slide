@@ -93,7 +93,7 @@ public class SimpleHomingRocket : MonoBehaviour, IHomingRocket {
     private void CreateExplosion() {
         GameObject gExplosion = Instantiate(explosionPrefab);
         gExplosion.transform.position = transform.position;
-
+		AudioManager.PlayRocketExplosionSound(transform.position);
         Destroy(gExplosion, 3);
 
     }

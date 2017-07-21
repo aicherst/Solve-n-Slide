@@ -8,7 +8,7 @@ public class FuelTank : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag(Tags.player)) {
             other.GetComponent<Jetpack>().fuel += fuel;
-
+			AudioManager.playFuelTankPickupSound(transform.position);
             gameObject.SetActive(false);
         }
     }

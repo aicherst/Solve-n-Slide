@@ -11,7 +11,11 @@ public class AudioManager : MonoBehaviour {
     [SerializeField]
     private AudioClip fuelTankPlacementSound;
     [SerializeField]
-    private AudioClip fuelTankPickupSound;
+	private AudioClip fuelTankPickupSound;
+	[SerializeField]
+	private AudioClip turretShotSound;
+	[SerializeField]
+	private AudioClip rocketExplosionSound;
     [SerializeField]
     private AudioClip loseHealthSound;
     [SerializeField]
@@ -56,6 +60,14 @@ public class AudioManager : MonoBehaviour {
 
 	public static void playFuelTankPickupSound (Vector3 v3) {
 		AudioSource.PlayClipAtPoint(instance.fuelTankPickupSound, v3);
+	}
+
+	public static void PlayTurretShotSound (Vector3 v3) {
+		AudioSource.PlayClipAtPoint(instance.turretShotSound, v3);
+	}
+
+	public static void PlayRocketExplosionSound (Vector3 v3) {
+		AudioSource.PlayClipAtPoint(instance.rocketExplosionSound, v3);
 	}
 
 	public static void PlayLoseHealthSound (Vector3 v3, float volume = 1) {

@@ -412,12 +412,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d708115bfc95b944a7d92d9dba6dfb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jetpackSound: {fileID: 8300000, guid: e30f60663f780f042be61601397f5f4f, type: 3}
   raiseHillSound: {fileID: 8300000, guid: 494dbf7f10a7f4b4f9fd1f4bca107e38, type: 3}
   lowerHillSound: {fileID: 8300000, guid: 494dbf7f10a7f4b4f9fd1f4bca107e38, type: 3}
   fuelTankPlacementSound: {fileID: 8300000, guid: 129f9a3aaf847804d8e85307eebfd033,
     type: 3}
   fuelTankPickupSound: {fileID: 8300000, guid: e2bb92e519ca97447ab0c3293cd1acfd, type: 3}
+  turretShotSound: {fileID: 8300000, guid: 14aab4669c051f4499dad0c145a609b8, type: 3}
+  rocketExplosionSound: {fileID: 8300000, guid: 53cc028431eb4ef4284c092299128f38,
+    type: 3}
   loseHealthSound: {fileID: 8300000, guid: bce4cb947b1771d42a231304ed366056, type: 3}
   reachedGoalSound: {fileID: 8300000, guid: 112484982294ec947a3b0e6f36a90594, type: 3}
   deathSound: {fileID: 8300000, guid: bce4cb947b1771d42a231304ed366056, type: 3}

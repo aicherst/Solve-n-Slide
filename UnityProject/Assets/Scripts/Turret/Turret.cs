@@ -98,6 +98,7 @@ public class Turret : MonoBehaviour, IDestroyable {
             if (homingRocket != null) {
                 homingRocket.SetTarget(target);
             }
+			AudioManager.PlayTurretShotSound(transform.position);
         }
 
     }

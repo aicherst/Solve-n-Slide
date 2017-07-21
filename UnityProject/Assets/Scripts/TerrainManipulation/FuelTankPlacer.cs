@@ -123,7 +123,9 @@ namespace ManipulationPhase {
             }
 
             if (Input.GetMouseButton(1) && mouseOverFuelTank != null) {
-                Destroy(mouseOverFuelTank);
+				placedFuelTanks.Remove(mouseOverFuelTank);
+				Destroy(mouseOverFuelTank);
+				AudioManager.playFuelTankPickupSound(transform.position);
                 _fuelTanks++;
             }
 
@@ -147,7 +149,8 @@ namespace ManipulationPhase {
 
             gFuelTank.AddComponent<MouseOverHighlight>().hightlightStrengthColor = 0.4f;
 
-            placedFuelTanks.Add(gFuelTank);
+			placedFuelTanks.Add(gFuelTank);
+			AudioManager.playFuelTankPlacementSound(transform.position);
 
             _fuelTanks--;
         }
